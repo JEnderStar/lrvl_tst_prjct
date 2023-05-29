@@ -19,4 +19,7 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Create IPCR Form
+Route::resource('/employee', App\Http\Controllers\IPCRController::class);
+
 Auth::routes();
