@@ -51,16 +51,16 @@
         </div>
 
         <div class="card-header">
-            Strategic Priorities
+            <label> Strategic Priorities </label>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="form-group col-6">
-                    <label for="requested_by" class="form_label"> Strategic Priorities </label>
+                    <p for="requested_by" class="form_label"> Strategic Priorities </p>
                     <input type="text" id="strategic_priorities1" name="strategic_priorities1" class="form-control">
                 </div>
                 <div class="form-group col-6">
-                    <label for="requested_by" class="form_label"> Success Indicator </label>
+                    <p for="requested_by" class="form_label"> Success Indicator </p>
                     <input type="text" id="success_indicator1" name="success_indicator1" class="form-control">
                 </div>
             </div>
@@ -70,16 +70,16 @@
         </div>
 
         <div class="card-header">
-            Core Functions
+            <label> Core Functions </label>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="form-group col-6">
-                    <label for="requested_by" class="form_label"> Core Functions </label>
+                    <p for="requested_by" class="form_label"> Core Functions </p>
                     <input type="text" id="core_functions5" name="core_functions5" class="form-control">
                 </div>
                 <div class="form-group col-6">
-                    <label for="requested_by" class="form_label"> Success Indicator </label>
+                    <p for="requested_by" class="form_label"> Success Indicator </p>
                     <input type="text" id="success_indicator5" name="success_indicator5" class="form-control">
                 </div>
             </div>
@@ -88,16 +88,16 @@
             </div>
         </div>
         <div class="card-header">
-            Support Functions
+            <label> Support Functions </label>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="form-group col-6">
-                    <label for="requested_by" class="form_label"> Support Functions </label>
+                    <p for="requested_by" class="form_label"> Support Functions </p>
                     <input type="text" id="support_functions9" name="support_functions9" class="form-control">
                 </div>
                 <div class="form-group col-6">
-                    <label for="requested_by" class="form_label"> Success Indicator </label>
+                    <p for="requested_by" class="form_label"> Success Indicator </p>
                     <input type="text" id="success_indicator9" name="success_indicator9" class="form-control">
                 </div>
             </div>

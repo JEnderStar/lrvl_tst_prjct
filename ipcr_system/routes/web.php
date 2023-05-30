@@ -21,5 +21,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Create IPCR Form
 Route::resource('/employee', App\Http\Controllers\IPCRController::class);
+Route::post("/deleteform/{id}", [App\Http\Controllers\IPCRController::class, "DeleteForm"])->name("DeleteForm");
 
 Auth::routes();
