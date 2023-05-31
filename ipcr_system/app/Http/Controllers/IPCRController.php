@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ipcrform as Form;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -23,6 +24,8 @@ class IPCRController extends Controller
      */
     public function create()
     {
+        // Place Schedule IPCR controller here, get data here
+
         return view("employee.create");
     }
 

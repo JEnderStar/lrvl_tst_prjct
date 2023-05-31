@@ -19,3 +19,10 @@
         <p>Create IPCR Form</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="/hr/create" class="nav-link {{ Request::is('hr/create') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Set Schedule for IPCR</p>
+    </a>
+</li>

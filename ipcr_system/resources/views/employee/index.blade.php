@@ -35,6 +35,10 @@
                                     <a href="/employee/{{$ipcrform['id']}}" class="dropdown-item">              View </a>
                                     <a href="/employee/{{$ipcrform['id']}}/edit" class="dropdown-item">              Edit </a>
                                     <button type="button" id="delete_form" data-product-id="{{$ipcrform['id']}}" class="dropdown-item">            Delete </button>
+                                    <form action="/printform/{{$ipcrform['id']}}" id="print_form" data-product-id="{{$ipcrform['id']}}" method="POST">
+                                        @CSRF
+                                        <button type="submit" id="print_ipcr" class="dropdown-item">              Print </button>
+                                    </form>
                                 </div>
                             </div>
                         </td>
@@ -117,6 +121,38 @@
                     icon: 'info',
                     confirmButtonText: 'Okay'
                 })
+            }
+        });
+    });
+
+    $('#print_form').on('submit', function(e) {
+        let errorMessages = '';
+        let formData = new FormData($("#print_form")[0]);
+        $.ajax({
+            url: '/printform/' + $(this).attr("data-product-id"),
+            method: "POST",
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: formData,
+            success: function(response) {
+                if (response.success) {
+                    window.location.href = '/printform/' + $(this).attr("data-product-id");
+                } else {
+                    for (let i = 0; i < response.errors.length; i++) {
+                        errorMessages += "-" + response.errors[i] + "\n";
+                    }
+                    Swal.fire({
+                        html: '<pre>' + errorMessages + '</pre>',
+                        customClass: {
+                            popup: 'format-pre'
+                        },
+                        title: 'Error!',
+                        icon: 'error',
+                        confirmButtonText: 'Okay'
+                    })
+                    errorMessages = "";
+                }
             }
         });
     });

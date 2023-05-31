@@ -23,4 +23,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('/employee', App\Http\Controllers\IPCRController::class);
 Route::post("/deleteform/{id}", [App\Http\Controllers\IPCRController::class, "DeleteForm"])->name("DeleteForm");
 
+//print
+Route::post("/printform/{id}", [App\Http\Controllers\PDFController::class, "printform"])->name("printform");
+
+// Set Schedule Form
+Route::resource('/hr', App\Http\Controllers\ScheduleController::class);
+
 Auth::routes();
