@@ -118,6 +118,7 @@
 </div>
 
 <script>
+    let errorMessages = '';
     $("#employee_form").on("submit", function(e) {
         e.preventDefault();
         let formData = new FormData($('#employee_form')[0]);

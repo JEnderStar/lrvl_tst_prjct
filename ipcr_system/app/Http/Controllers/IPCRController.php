@@ -6,6 +6,8 @@ use App\Models\Ipcrform as Form;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class IPCRController extends Controller
 {
@@ -49,10 +51,46 @@ class IPCRController extends Controller
         $ipcr_form->status = "Pending";
         $ipcr_form->strategic_priorities1 = $request->strategic_priorities1;
         $ipcr_form->success_indicator1 = $request->success_indicator1;
+        if($request->strategic_priorities2 != null){
+            $ipcr_form->strategic_priorities2 = $request->strategic_priorities2;
+            $ipcr_form->success_indicator2 = $request->success_indicator2;
+        }
+        if($request->strategic_priorities3 != null){
+            $ipcr_form->strategic_priorities3 = $request->strategic_priorities3;
+            $ipcr_form->success_indicator3 = $request->success_indicator3;
+        }
+        if($request->strategic_priorities4 != null){
+            $ipcr_form->strategic_priorities4 = $request->strategic_priorities4;
+            $ipcr_form->success_indicator4 = $request->success_indicator4;
+        }
         $ipcr_form->core_functions5 = $request->core_functions5;
         $ipcr_form->success_indicator5 = $request->success_indicator5;
+        if($request->core_functions6 != null){
+            $ipcr_form->core_functions6 = $request->core_functions6;
+            $ipcr_form->success_indicator6 = $request->success_indicator6;
+        }
+        if($request->core_functions7 != null){
+            $ipcr_form->core_functions7 = $request->core_functions7;
+            $ipcr_form->success_indicator7 = $request->success_indicator7;
+        }
+        if($request->core_functions8 != null){
+            $ipcr_form->core_functions8 = $request->core_functions8;
+            $ipcr_form->success_indicator8 = $request->success_indicator8;
+        }
         $ipcr_form->support_functions9 = $request->support_functions9;
         $ipcr_form->success_indicator9 = $request->success_indicator9;
+        if($request->support_functions10 != null){
+            $ipcr_form->support_functions10 = $request->support_functions10;
+            $ipcr_form->success_indicator10 = $request->success_indicator10;
+        }
+        if($request->support_functions11 != null){
+            $ipcr_form->support_functions11 = $request->support_functions11;
+            $ipcr_form->success_indicator11 = $request->success_indicator11;
+        }
+        if($request->support_functions12 != null){
+            $ipcr_form->support_functions12 = $request->support_functions12;
+            $ipcr_form->success_indicator12 = $request->success_indicator12;
+        }
         $ipcr_form->save();
 
         return response()->json(["success" => true, "message" => "Successfully created a form!"]);
