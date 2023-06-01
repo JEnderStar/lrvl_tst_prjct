@@ -85,12 +85,12 @@
                 break;
             case "PSD":
                 document.getElementById('existing')?.remove();
-                $('.employee-list').append('<div id="existing"><label> Employees </label><select class="select2 form-control employees" name="employees[]" id="employees" multiple required><optgroup label="PSD"><option value="Febe">Hazel</option><option value="Macky">Rayman</option><option value="CMIO3">Lyka</option></optgroup></select></div>');
+                $('.employee-list').append('<div id="existing"><label> Employees </label><select class="select2 form-control employees" name="employees[]" id="employees" multiple required><optgroup label="PSD"><option value="Hazel">Hazel</option><option value="Rayman">Rayman</option><option value="Lyka">Lyka</option></optgroup></select></div>');
                 $('.select2').select2({});
                 break;
             case "All":
                 document.getElementById('existing')?.remove();
-                $('.employee-list').append('<div id="existing"><label> Employees </label><select class="select2 form-control employees" name="employees[]" id="employees" multiple required><optgroup label="CMIO"><option value="Febe">Febe</option><option value="Macky">Macky</option><option value="CMIO3">CMIO3</option></optgroup><optgroup label="PSD"><option value="Febe">Hazel</option><option value="Macky">Rayman</option><option value="CMIO3">Lyka</option></optgroup></select></div>');
+                $('.employee-list').append('<div id="existing"><label> Employees </label><select class="select2 form-control employees" name="employees[]" id="employees" multiple required><optgroup label="CMIO"><option value="Febe">Febe</option><option value="Macky">Macky</option><option value="CMIO3">CMIO3</option></optgroup><optgroup label="PSD"><option value="Hazel">Hazel</option><option value="Rayman">Rayman</option><option value="Lyka">Lyka</option></optgroup></select></div>');
                 $('.select2').select2({});
                 break;
         }

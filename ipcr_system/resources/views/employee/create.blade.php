@@ -42,11 +42,11 @@
         <div class="row">
             <div class="form-group col-6">
                 <label for="requested_by" class="form_label"> Reviewer </label>
-                <input type="text" id="reviewer" name="reviewer" class="form-control">
+                <input type="text" id="reviewer" name="reviewer" class="form-control" value="{{$schedule['division_chief']}}" readonly>
             </div>
             <div class="form-group col-6">
                 <label for="requested_by" class="form_label"> Approver </label>
-                <input type="text" id="approver" name="approver" class="form-control">
+                <input type="text" id="approver" name="approver" class="form-control" value="{{$schedule['director']}}" readonly>
             </div>
         </div>
 

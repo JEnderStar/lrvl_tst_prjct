@@ -26,3 +26,10 @@
         <p>Set Schedule for IPCR</p>
     </a>
 </li>
+
+<li class="nav-item">
+    <a href="/hr" class="nav-link {{ Request::is('hr') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Verify IPCR List</p>
+    </a>
+</li>

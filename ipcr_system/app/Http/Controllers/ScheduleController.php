@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Ipcrform as Form;
 use App\Models\Schedule;
 use App\Models\Accounts as User;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +16,9 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        //
+        $ipcr_form = Form::get();
+
+        return view("hr.index", compact('ipcr_form'));
     }
 
     /**
