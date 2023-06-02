@@ -6,45 +6,6 @@
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped table-bordered table-mm" id="ipcr_form_table">
-                <thead>
-                    <tr>
-                        <th> ID </th>
-                        <th> First Name </th>
-                        <th> Last Name </th>
-                        <th> MI </th>
-                        <th> Position </th>
-                        <th> Office </th>
-                        <th> Status </th>
-                        <th> Action </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($ipcr_form as $ipcrform)
-                    <tr>
-                        <td> {{$ipcrform["id"]}} </td>
-                        <td> {{$ipcrform["first_name"]}} </td>
-                        <td> {{$ipcrform["last_name"]}} </td>
-                        <td> {{$ipcrform["mi"]}} </td>
-                        <td> {{$ipcrform["position"]}} </td>
-                        <td> {{$ipcrform["office"]}} </td>
-                        <td> {{$ipcrform["status"]}} </td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split dropdown-icon" data-toggle="dropdown"> Action </button>
-                                <div class="dropdown-menu">
-                                    <a href="/employee/{{$ipcrform['id']}}" class="dropdown-item">              View </a>
-                                    <a href="/employee/{{$ipcrform['id']}}/edit" class="dropdown-item">              Edit </a>
-                                    <button type="button" id="delete_form" data-product-id="{{$ipcrform['id']}}" class="dropdown-item">            Delete </button>
-                                    <form action="/printform/{{$ipcrform['id']}}" id="print_form" data-product-id="{{$ipcrform['id']}}" method="POST">
-                                        @CSRF
-                                        <button type="submit" id="print_ipcr" class="dropdown-item">              Print </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
             </table>
         </div>
     </div>
@@ -125,7 +86,7 @@
         });
     });
 
-    $('#print_form').on('submit', function(e) {
+    function printForm() {
         let errorMessages = '';
         let formData = new FormData($("#print_form")[0]);
         $.ajax({
@@ -155,17 +116,81 @@
                 }
             }
         });
-    });
+    };
 
-    $('#ipcr_form_table').DataTable({
-        width: '100%',
-        "paging": true,
-        "lengthChange": false,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true
-    });
+    $(document).ready(function(){
+        $('#ipcr_form_table').DataTable({
+            width: '100%',
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            processing: true,
+            ajax: {
+                url: '/test/create',
+            },
+            columns: [{
+                    title: 'First Name',
+                    'data': 'first_name',
+                    targets: [0]
+                },
+                {
+                    title: 'Last Name',
+                    'data': 'last_name',
+                    targets: [1]
+                },
+                {
+                    title: 'Middle Initial',
+                    'data': 'mi',
+                    targets: [2]
+                },
+                {
+                    title: 'Position',
+                    'data': 'position',
+                    targets: [3]
+                },
+                {
+                    title: 'Office',
+                    'data': 'office',
+                    targets: [4]
+                },
+                {
+                    title: 'Status',
+                    'data': 'status',
+                    targets: [5]
+                },
+                {
+                    title: 'Action',
+                    'data': null,
+                    "defaultContent": "",
+                    targets: [6]
+                }
+            ],
+            createdRow: function(row, data, index) {
+                let divgroup = $('<div class="btn-group"> </div>');
+                let divbtnmenu = $('<div class="dropdown-menu"> </div>');
+                let action = $('<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split dropdown-icon" data-toggle="dropdown"> Action </button>');
+                let view = $('<a href="/employee/' + data.id + '" class="dropdown-item">              View </a>');
+                let deletee = $('<a href="/deleteform/' + data.id + '" id="delete_form" class="dropdown-item" >            Delete </a>');
+                // OnClick inside a
+                let edit = $('<a href="/employee/' + data.id + '/edit" class="dropdown-item">              Edit </a>');
+                let print = $('<button type="submit" id="print_ipcr" class="dropdown-item">              Print </button>');
+                // div.append(data.status);
+                divgroup.append(action);
+                divbtnmenu.append(view);
+                divbtnmenu.append(edit);
+                divbtnmenu.append(deletee);
+                divbtnmenu.append(print);
+                divgroup.append(divbtnmenu);
+
+    
+                // Display Color
+                $('td', row).eq(6).append(divgroup);
+            }
+        });
+    }); // document ready
 </script>
 @endsection

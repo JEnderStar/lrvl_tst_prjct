@@ -50,7 +50,7 @@
 
         <div class="row">
             <div class="employee-list form-group col-6">
-
+                
             </div>
             <div class="form-group col-3">
                 <label> Duration </label>

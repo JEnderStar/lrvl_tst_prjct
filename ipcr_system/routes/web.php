@@ -29,4 +29,6 @@ Route::post("/printform/{id}", [App\Http\Controllers\PDFController::class, "prin
 // Set Schedule Form
 Route::resource('/hr', App\Http\Controllers\ScheduleController::class);
 
+Route::resource("/test", App\Http\Controllers\TestController::class);
+
 Auth::routes();

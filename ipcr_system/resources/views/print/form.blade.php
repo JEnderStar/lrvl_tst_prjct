@@ -23,7 +23,7 @@
             <td colspan="12">
                 <p class="center"> <b> INDIVIDUAL PERFORMANCE COMMITMENT AND REVIEW (IPCR) </b> </p>
                 <p>   </p>
-                <p> I, <b>{{$Form['first_name']}} {{$Form['mi']}} {{$Form['last_name']}}</b>, {{$Form['position']}} of the <b>{{$Form['office']}}</b> of the <b>Central Management Information Office</b> to deliver and agee to be rated on the attainment of the following actual in accordance with the indicated measures for the period {{$Schedule['duration_from']}} to {{$Schedule['duration_to']}}. </p>
+                <p> I, <b>{{$Form['first_name']}} {{$Form['mi']}} {{$Form['last_name']}}</b>, {{$Form['position']}} of the <b>{{$Form['office']}}</b> of the <b>Central Management Information Office</b> to deliver and agree to be rated on the attainment of the following actual in accordance with the indicated measures for the period {{$Schedule['duration_from']}} to {{$Schedule['duration_to']}}. </p>
                 <p>   </p>
                 <p class="right">________________________</p>
                 <p class="right"><b>{{$Form['first_name']}} {{$Form['mi']}} {{$Form['last_name']}}</b></p>
