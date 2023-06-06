@@ -56,13 +56,13 @@
                 <label> Duration </label>
                 <br>
                 <label for="requested_by" class="form_label"> From </label>
-                <input type="date" id="duration_from" name="duration_from" class="form-control" required>
+                <input type="date" id="duration_from" name="duration_from" class="form-control" min="{{date('Y-m-d')}}" required>
             </div>
             <div class="form-group col-3">
                 <label>   </label>
                 <br>
                 <label for="requested_by" class="form_label"> To </label>
-                <input type="date" id="duration_to" name="duration_to" class="form-control" required>
+                <input type="date" id="duration_to" name="duration_to" class="form-control" min="{{date('Y-m-d')}}" required>
             </div>
         </div>
 

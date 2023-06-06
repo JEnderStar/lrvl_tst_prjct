@@ -10,6 +10,17 @@
         @CSRF
 
         <div class="row">
+            <div class="form-group col-2">
+                <label for="requested_by" class="form_label"> Covered Period </label>
+                <input type="text" id="covered_period" name="covered_period" class="form-control" value="{{$schedule['covered_period']}}" readonly>
+            </div>
+            <div class="form-group col-2">
+                <label for="requested_by" class="form_label"> Year </label>
+                <input type="text" id="year" name="year" class="form-control" value="2023" readonly>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="form-group col-5">
                 <label for="requested_by" class="form_label"> First Name </label>
                 <input type="text" id="first_name" name="first_name" class="form-control" value="{{ Auth::user()->first_name }}" readonly>
@@ -57,11 +68,11 @@
             <div class="row">
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                    <input type="text" id="strategic_priorities1" name="strategic_priorities1" class="form-control">
+                    <input type="text" id="functions_sp0" name="functions_sp0" class="form-control">
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <input type="text" id="success_indicator1" name="success_indicator1" class="form-control">
+                    <input type="text" id="success_indicator_sp0" name="success_indicator_sp0" class="form-control">
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
@@ -77,11 +88,11 @@
             <div class="row">
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Core Functions </p>
-                    <input type="text" id="core_functions5" name="core_functions5" class="form-control">
+                    <input type="text" id="functions_cf0" name="functions_cf0" class="form-control">
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <input type="text" id="success_indicator5" name="success_indicator5" class="form-control">
+                    <input type="text" id="success_indicator_cf0" name="success_indicator_cf0" class="form-control">
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
@@ -96,11 +107,11 @@
             <div class="row">
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Support Functions </p>
-                    <input type="text" id="support_functions9" name="support_functions9" class="form-control">
+                    <input type="text" id="functions_sf0" name="functions_sf0" class="form-control">
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <input type="text" id="success_indicator9" name="success_indicator9" class="form-control">
+                    <input type="text" id="success_indicator_sf0" name="success_indicator_sf0" class="form-control">
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
@@ -179,38 +190,21 @@
 
     var sp = 1;
     $("#addsp").click(function() {
-        ++sp;
-        switch (sp) {
-            case 2:
-                $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="strategic_priorities2" name="strategic_priorities2" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator2" name="success_indicator2" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
-                break;
-            case 3:
-                if ($('#strategic_priorities3').val() == null) {
-                    $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="strategic_priorities3" name="strategic_priorities3" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator3" name="success_indicator3" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
-                } else if ($('#strategic_priorities2').val() == null) {
-                    $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="strategic_priorities2" name="strategic_priorities2" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator2" name="success_indicator2" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
-                } else if ($('#strategic_priorities4').val() == null) {
-                    $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="strategic_priorities4" name="strategic_priorities4" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator4" name="success_indicator4" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
+        var sp1 = sp + 1;
+        for (sp; sp < sp1; sp++) {
+            for (var i = 0; i < sp; i++) {
+                if ($('#functions_sp' + sp).val() == null) {
+                    $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="functions_sp' + sp + '" name="functions_sp' + sp + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_sp' + sp + '" name="success_indicator_sp' + sp + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
+                }else{
+                    for(var sp2 = 1; sp2 < sp; sp2++){
+                        if ($('#functions_sp' + sp2).val() == null) {
+                            $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="functions_sp' + sp2 + '" name="functions_sp' + sp2 + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_sp' + sp2 + '" name="success_indicator_sp' + sp2 + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
+                            break;
+                        }
+                    }
                 }
                 break;
-            case 4:
-                if ($('#strategic_priorities4').val() == null) {
-                    $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="strategic_priorities4" name="strategic_priorities4" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator4" name="success_indicator4" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
-                } else if ($('#strategic_priorities2').val() == null) {
-                    $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="strategic_priorities2" name="strategic_priorities2" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator2" name="success_indicator2" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
-                } else if ($('#strategic_priorities3').val() == null) {
-                    $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="strategic_priorities3" name="strategic_priorities3" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator3" name="success_indicator3" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
-                }
-                break;
-            default:
-                Swal.fire({
-                    title: "Maximum input reached.",
-                    text: "You cannot add more inputs for Strategic Priorities",
-                    icon: "warning",
-                    confirmButtonText: "Okay"
-                });
-                --sp;
-                break;
+            }
         }
     });
     $(document).on('click', '#removesp', function() {
@@ -218,81 +212,48 @@
         --sp;
     });
 
-    var cf = 5;
+    var cf = 1;
     $("#addcf").click(function() {
-        ++cf;
-        switch (cf) {
-            case 6:
-                $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="core_functions6" name="core_functions6" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator6" name="success_indicator6" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
-                break;
-            case 7:
-                if ($('#core_functions7').val() == null) {
-                    $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="core_functions7" name="core_functions7" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator7" name="success_indicator7" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
-                } else if ($('#core_functions6').val() == null) {
-                    $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="core_functions6" name="core_functions6" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator6" name="success_indicator6" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
-                } else if ($('#core_functions8').val() == null) {
-                    $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="core_functions8" name="core_functions8" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator8" name="success_indicator8" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
+        var cf1 = cf + 1;
+        for (cf; cf < cf1; cf++) {
+            for (var i = 0; i < cf; i++) {
+                if ($('#functions_cf' + cf).val() == null) {
+                    $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="functions_cf' + cf + '" name="functions_cf' + cf + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_cf' + cf + '" name="success_indicator_cf' + cf + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
+                }else{
+                    for(var cf2 = 1; cf2 < cf; cf2++){
+                        if ($('#functions_cf' + cf2).val() == null) {
+                            $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="functions_cf' + cf2 + '" name="functions_cf' + cf2 + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_cf' + cf2 + '" name="success_indicator_cf' + cf2 + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
+                            break;
+                        }
+                    }
                 }
                 break;
-            case 8:
-                if ($('#core_functions8').val() == null) {
-                    $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="core_functions8" name="core_functions8" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator8" name="success_indicator8" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
-                } else if ($('#core_functions6').val() == null) {
-                    $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="core_functions6" name="core_functions6" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator6" name="success_indicator6" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
-                } else if ($('#core_functions7').val() == null) {
-                    $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="core_functions7" name="core_functions7" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator7" name="success_indicator7" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
-                }
-                break;
-            default:
-                Swal.fire({
-                    title: "Maximum input reached.",
-                    text: "You cannot add more inputs for Core Functions",
-                    icon: "warning",
-                    confirmButtonText: "Okay"
-                });
-                --cf;
-                break;
+            }
         }
     });
+
     $(document).on('click', '#removecf', function() {
         $(this).parents('.addedcf').remove();
         --cf;
     });
 
-    var sf = 9;
+    var sf = 1;
     $("#addsf").click(function() {
-        ++sf;
-        switch (sf) {
-            case 10:
-                $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Support Functions </p><input type="text" id="support_functions10" name="support_functions10" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator10" name="success_indicator10" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
-                break;
-            case 11:
-                if ($('#support_functions11').val() == null) {
-                    $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Support Functions </p><input type="text" id="support_functions11" name="support_functions11" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator11" name="success_indicator11" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
-                } else if ($('#support_functions10').val() == null) {
-                    $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Support Functions </p><input type="text" id="support_functions10" name="support_functions10" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator10" name="success_indicator10" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
-                } else if ($('#support_functions12').val() == null) {
-                    $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Support Functions </p><input type="text" id="support_functions12" name="support_functions12" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator12" name="success_indicator12" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
+        var sf1 = sf + 1;
+        for (sf; sf < sf1; sf++) {
+            for (var i = 0; i < sf; i++) {
+                if ($('#functions_sf' + sf).val() == null) {
+                    $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="functions_sf' + sf + '" name="functions_sf' + sf + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_sf' + sf + '" name="success_indicator_sf' + sf + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
+                }else{
+                    for(var sf2 = 1; sf2 < sf; sf2++){
+                        if ($('#functions_sf' + sf2).val() == null) {
+                            $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="functions_sf' + sf2 + '" name="functions_sf' + sf2 + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_sf' + sf2 + '" name="success_indicator_sf' + sf2 + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
+                            break;
+                        }
+                    }
                 }
                 break;
-            case 12:
-                if ($('#support_functions12').val() == null) {
-                    $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Support Functions </p><input type="text" id="support_functions12" name="support_functions12" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator12" name="success_indicator12" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
-                } else if ($('#support_functions10').val() == null) {
-                    $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Support Functions </p><input type="text" id="support_functions10" name="support_functions10" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator10" name="success_indicator10" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
-                } else if ($('#support_functions11').val() == null) {
-                    $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Support Functions </p><input type="text" id="support_functions11" name="support_functions11" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator11" name="success_indicator11" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
-                }
-                break;
-            default:
-                Swal.fire({
-                    title: "Maximum input reached.",
-                    text: "You cannot add more inputs for Support Functions",
-                    icon: "warning",
-                    confirmButtonText: "Okay"
-                });
-                --sf;
-                break;
+            }
         }
     });
     $(document).on('click', '#removesf', function() {

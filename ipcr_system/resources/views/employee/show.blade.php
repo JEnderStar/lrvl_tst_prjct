@@ -11,6 +11,17 @@
             </div>
 
             <div class="row">
+                <div class="form-group col-2">
+                    <label for="requested_by" class="form_label"> Covered Period </label>
+                    <input type="text" id="covered_period" name="covered_period" class="form-control" value="{{$ipcr_form['covered_period']}}" readonly>
+                </div>
+                <div class="form-group col-2">
+                    <label for="requested_by" class="form_label"> Year </label>
+                    <input type="text" id="year" name="year" class="form-control" value="{{$ipcr_form['date_created']}}" readonly>
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-5">
                     <label> First Name </label>
                     <input type="text" id="first_name" name="first_name" class="form-control" value="{{$ipcr_form['first_name']}}" disabled>
@@ -55,489 +66,243 @@
                 Strategic Priorities
             </div>
             <div class="card-body">
-                @if($ipcr_form->strategic_priorities1 != null)
                 <div class="row">
                     <div class="col-2">
                         <label> Strategic Priorities </label>
                         <p> </p>
-                        <p> {{$ipcr_form['strategic_priorities1']}} </p>
                     </div>
                     <div class="col-2">
                         <label> Success Indicator </label>
                         <p> </p>
-                        <p> {{$ipcr_form['success_indicator1']}} </p>
                     </div>
                     <div class="col-2">
                         <label> Actual Accomplishments </label>
-                        @if($ipcr_form->actual_accomplishments1 != null)
-                        <p> {{$ipcr_form['actual_accomplishments1']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
+                        <p> </p>
                     </div>
                     <div class="col-1">
                         <label> Q1 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['q1_1']}} </p>
                     </div>
                     <div class="col-1">
                         <label> E2 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['e2_1']}} </p>
                     </div>
                     <div class="col-1">
                         <label> T3 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['t3_1']}} </p>
                     </div>
                     <div class="col-1">
                         <label> A4 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['a4_1']}} </p>
                     </div>
                     <div class="col-1">
                         <label> Remarks </label>
                         <p> </p>
-                        <p> {{$ipcr_form['remarks1']}} </p>
                     </div>
                     <div class="col-1">
                         <label> Graded by </label>
                         <p> </p>
-                        <p> {{$ipcr_form['reviewer1']}} </p>
                     </div>
                 </div>
-                @endif
-                @if($ipcr_form->strategic_priorities2 != null)
+                @foreach($add_input as $addinput)
+                @if($addinput->code == "SP")
                 <div class="row">
                     <div class="col-2">
-                        <p> {{$ipcr_form['strategic_priorities2']}} </p>
+                        <p> {{$addinput['functions']}} </p>
                     </div>
                     <div class="col-2">
-                        <p> {{$ipcr_form['success_indicator2']}} </p>
+                        <p> {{$addinput['success_indicators']}} </p>
                     </div>
                     <div class="col-2">
-                        @if($ipcr_form->actual_accomplishments2 != null)
-                        <p> {{$ipcr_form['actual_accomplishments2']}} </p>
+                        @if($addinput->actual_accomplishments != null)
+                        <p> {{$addinput['actual_accomplishments']}} </p>
                         @else
                         <p style="color:gray;"> Not yet approved </p>
                         @endif
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['q1_2']}} </p>
+                        <p> {{$addinput['q1']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['e2_2']}} </p>
+                        <p> {{$addinput['e2']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['t3_2']}} </p>
+                        <p> {{$addinput['t3']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['a4_2']}} </p>
+                        <p> {{$addinput['a4']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['remarks2']}} </p>
+                        <p> {{$addinput['remarks']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['reviewer2']}} </p>
+                        <p> {{$addinput['graded_by']}} </p>
                     </div>
                 </div>
                 @endif
-                @if($ipcr_form->strategic_priorities3 != null)
-                <div class="row">
-                    <div class="col-2">
-                        <p> {{$ipcr_form['strategic_priorities3']}} </p>
-                    </div>
-                    <div class="col-2">
-                        <p> {{$ipcr_form['success_indicator3']}} </p>
-                    </div>
-                    <div class="col-2">
-                        @if($ipcr_form->actual_accomplishments3 != null)
-                        <p> {{$ipcr_form['actual_accomplishments3']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['q1_3']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['e2_3']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['t3_3']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['a4_3']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['remarks3']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['reviewer3']}} </p>
-                    </div>
-                </div>
-                @endif
-                @if($ipcr_form->strategic_priorities4 != null)
-                <div class="row">
-                    <div class="col-2">
-                        <p> {{$ipcr_form['strategic_priorities4']}} </p>
-                    </div>
-                    <div class="col-2">
-                        <p> {{$ipcr_form['success_indicator4']}} </p>
-                    </div>
-                    <div class="col-2">
-                        @if($ipcr_form->actual_accomplishments4 != null)
-                        <p> {{$ipcr_form['actual_accomplishments4']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['q1_4']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['e2_4']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['t3_4']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['a4_4']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['remarks4']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['reviewer4']}} </p>
-                    </div>
-                </div>
-                @endif
+                @endforeach
             </div>
 
             <div class="card-header">
                 Core Functions
             </div>
             <div class="card-body">
-                @if($ipcr_form->core_functions5 != null)
                 <div class="row">
                     <div class="col-2">
                         <label> Core Functions </label>
                         <p> </p>
-                        <p> {{$ipcr_form['core_functions5']}} </p>
                     </div>
                     <div class="col-2">
                         <label> Success Indicator </label>
                         <p> </p>
-                        <p> {{$ipcr_form['success_indicator5']}} </p>
                     </div>
                     <div class="col-2">
                         <label> Actual Accomplishments </label>
-                        @if($ipcr_form->actual_accomplishments5 != null)
-                        <p> {{$ipcr_form['actual_accomplishments5']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
+                        <p> </p>
                     </div>
                     <div class="col-1">
                         <label> Q1 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['q1_5']}} </p>
                     </div>
                     <div class="col-1">
                         <label> E2 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['e2_5']}} </p>
                     </div>
                     <div class="col-1">
                         <label> T3 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['t3_5']}} </p>
                     </div>
                     <div class="col-1">
                         <label> A4 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['a4_5']}} </p>
                     </div>
                     <div class="col-1">
                         <label> Remarks </label>
                         <p> </p>
-                        <p> {{$ipcr_form['remarks5']}} </p>
                     </div>
                     <div class="col-1">
                         <label> Graded by </label>
                         <p> </p>
-                        <p> {{$ipcr_form['reviewer5']}} </p>
                     </div>
                 </div>
-                @endif
-                @if($ipcr_form->core_functions6 != null)
+                @foreach($add_input as $addinput)
+                @if($addinput->code == "CF")
                 <div class="row">
                     <div class="col-2">
-                        <p> {{$ipcr_form['core_functions6']}} </p>
+                        <p> {{$addinput['functions']}} </p>
                     </div>
                     <div class="col-2">
-                        <p> {{$ipcr_form['success_indicator6']}} </p>
+                        <p> {{$addinput['success_indicators']}} </p>
                     </div>
                     <div class="col-2">
-                        @if($ipcr_form->actual_accomplishments6 != null)
-                        <p> {{$ipcr_form['actual_accomplishments6']}} </p>
+                        @if($addinput->actual_accomplishments != null)
+                        <p> {{$addinput['actual_accomplishments']}} </p>
                         @else
                         <p style="color:gray;"> Not yet approved </p>
                         @endif
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['q1_6']}} </p>
+                        <p> {{$addinput['q1']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['e2_6']}} </p>
+                        <p> {{$addinput['e2']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['t3_6']}} </p>
+                        <p> {{$addinput['t3']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['a4_6']}} </p>
+                        <p> {{$addinput['a4']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['remarks6']}} </p>
+                        <p> {{$addinput['remarks']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['reviewer6']}} </p>
+                        <p> {{$addinput['graded_by']}} </p>
                     </div>
                 </div>
                 @endif
-                @if($ipcr_form->core_functions7 != null)
-                <div class="row">
-                    <div class="col-2">
-                        <p> {{$ipcr_form['core_functions7']}} </p>
-                    </div>
-                    <div class="col-2">
-                        <p> {{$ipcr_form['success_indicator7']}} </p>
-                    </div>
-                    <div class="col-2">
-                        @if($ipcr_form->actual_accomplishments7 != null)
-                        <p> {{$ipcr_form['actual_accomplishments7']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['q1_7']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['e2_7']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['t3_7']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['a4_7']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['remarks7']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['reviewer7']}} </p>
-                    </div>
-                </div>
-                @endif
-                @if($ipcr_form->core_functions8 != null)
-                <div class="row">
-                    <div class="col-2">
-                        <p> {{$ipcr_form['core_functions8']}} </p>
-                    </div>
-                    <div class="col-2">
-                        <p> {{$ipcr_form['success_indicator8']}} </p>
-                    </div>
-                    <div class="col-2">
-                        @if($ipcr_form->actual_accomplishments8 != null)
-                        <p> {{$ipcr_form['actual_accomplishments8']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['q1_8']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['e2_8']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['t3_8']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['a4_8']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['remarks8']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['reviewer8']}} </p>
-                    </div>
-                </div>
-                @endif
+                @endforeach
             </div>
 
             <div class="card-header">
                 Support Functions
             </div>
             <div class="card-body">
-                @if($ipcr_form->support_functions9 != null)
                 <div class="row">
                     <div class="col-2">
                         <label> Support Functions </label>
                         <p> </p>
-                        <p> {{$ipcr_form['support_functions9']}} </p>
                     </div>
                     <div class="col-2">
                         <label> Success Indicator </label>
                         <p> </p>
-                        <p> {{$ipcr_form['success_indicator9']}} </p>
                     </div>
                     <div class="col-2">
                         <label> Actual Accomplishments </label>
-                        @if($ipcr_form->actual_accomplishments9 != null)
-                        <p> {{$ipcr_form['actual_accomplishments9']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
+                        <p> </p>
                     </div>
                     <div class="col-1">
                         <label> Q1 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['q1_9']}} </p>
                     </div>
                     <div class="col-1">
                         <label> E2 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['e2_9']}} </p>
                     </div>
                     <div class="col-1">
                         <label> T3 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['t3_9']}} </p>
                     </div>
                     <div class="col-1">
                         <label> A4 </label>
                         <p> </p>
-                        <p> {{$ipcr_form['a4_9']}} </p>
                     </div>
                     <div class="col-1">
                         <label> Remarks </label>
                         <p> </p>
-                        <p> {{$ipcr_form['remarks9']}} </p>
                     </div>
                     <div class="col-1">
                         <label> Graded by </label>
                         <p> </p>
-                        <p> {{$ipcr_form['reviewer9']}} </p>
                     </div>
                 </div>
-                @endif
-                @if($ipcr_form->support_functions10 != null)
+                @foreach($add_input as $addinput)
+                @if($addinput->code == "SF")
                 <div class="row">
                     <div class="col-2">
-                        <p> {{$ipcr_form['support_functions10']}} </p>
+                        <p> {{$addinput['functions']}} </p>
                     </div>
                     <div class="col-2">
-                        <p> {{$ipcr_form['success_indicator10']}} </p>
+                        <p> {{$addinput['success_indicators']}} </p>
                     </div>
                     <div class="col-2">
-                        @if($ipcr_form->actual_accomplishments10 != null)
-                        <p> {{$ipcr_form['actual_accomplishments10']}} </p>
+                        @if($addinput->actual_accomplishments != null)
+                        <p> {{$addinput['actual_accomplishments']}} </p>
                         @else
                         <p style="color:gray;"> Not yet approved </p>
                         @endif
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['q1_10']}} </p>
+                        <p> {{$addinput['q1']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['e2_10']}} </p>
+                        <p> {{$addinput['e2']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['t3_10']}} </p>
+                        <p> {{$addinput['t3']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['a4_10']}} </p>
+                        <p> {{$addinput['a4']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['remarks10']}} </p>
+                        <p> {{$addinput['remarks']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$ipcr_form['reviewer10']}} </p>
+                        <p> {{$addinput['graded_by']}} </p>
                     </div>
                 </div>
                 @endif
-                @if($ipcr_form->support_functions11 != null)
-                <div class="row">
-                    <div class="col-2">
-                        <p> {{$ipcr_form['support_functions11']}} </p>
-                    </div>
-                    <div class="col-2">
-                        <p> {{$ipcr_form['success_indicator11']}} </p>
-                    </div>
-                    <div class="col-2">
-                        @if($ipcr_form->actual_accomplishments11 != null)
-                        <p> {{$ipcr_form['actual_accomplishments11']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['q1_11']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['e2_11']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['t3_11']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['a4_11']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['remarks11']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['reviewer11']}} </p>
-                    </div>
-                </div>
-                @endif
-                @if($ipcr_form->support_functions12 != null)
-                <div class="row">
-                    <div class="col-2">
-                        <p> {{$ipcr_form['support_functions12']}} </p>
-                    </div>
-                    <div class="col-2">
-                        <p> {{$ipcr_form['success_indicator12']}} </p>
-                    </div>
-                    <div class="col-2">
-                        @if($ipcr_form->actual_accomplishments12 != null)
-                        <p> {{$ipcr_form['actual_accomplishments12']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['q1_12']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['e2_12']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['t3_12']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['a4_12']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['remarks12']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$ipcr_form['reviewer12']}} </p>
-                    </div>
-                </div>
-                @endif
+                @endforeach
             </div>
 
             <div class="row">
@@ -572,7 +337,7 @@
                 <p> {{$ipcr_form['comment']}} </p>
                 @else
                 <p style="color:gray;"> Not reviewed </p>
-                @endif 
+                @endif
             </div>
 
 </div>

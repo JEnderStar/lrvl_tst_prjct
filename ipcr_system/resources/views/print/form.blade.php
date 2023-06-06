@@ -6,6 +6,7 @@
 
     .center {
         text-align: center;
+
     }
 
     .right {
@@ -48,7 +49,7 @@
         <tr>
             <td colspan="4">
                 <br>
-                <p class="center"> <b> {{$Schedule['division_chief']}}</b></p>
+                <p class="center"> <b>{{$Schedule['division_chief']}}</b></p>
                 <p class="center"> Division Chief </p>
             </td>
             <td colspan="2">
@@ -57,7 +58,7 @@
             </td>
             <td colspan="4">
             <br>
-                <p class="center"> <b> {{$Schedule['director']}}</b></p>
+                <p class="center"> <b>{{$Schedule['director']}}</b></p>
                 <p class="center"> Director </p>
             </td>
             <td colspan="2">

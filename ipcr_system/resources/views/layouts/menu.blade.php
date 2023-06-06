@@ -6,6 +6,7 @@
     </a>
 </li> -->
 
+<p style="color:white;"> Employee </p>
 <li class="nav-item">
     <a href="/employee" class="nav-link {{ Request::is('employee') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
@@ -20,6 +21,7 @@
     </a>
 </li>
 
+<p style="color:white;"> HR </p>
 <li class="nav-item">
     <a href="/hr/create" class="nav-link {{ Request::is('hr/create') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
