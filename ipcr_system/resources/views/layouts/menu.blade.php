@@ -6,22 +6,10 @@
     </a>
 </li> -->
 
-<p style="color:white;"> Employee </p>
-<li class="nav-item">
-    <a href="/employee" class="nav-link {{ Request::is('employee') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-home"></i>
-        <p>IPCR List</p>
-    </a>
-</li>
-
-<li class="nav-item">
-    <a href="/employee/create" class="nav-link {{ Request::is('employee/create') ? 'active' : '' }}">
-        <i class="nav-icon fas fa-home"></i>
-        <p>Create IPCR Form</p>
-    </a>
-</li>
-
-<p style="color:white;"> HR </p>
+@role(['hr', 'admin'])
+@role('admin')
+<label style="color:white"> HR </label>
+@endrole
 <li class="nav-item">
     <a href="/hr/create" class="nav-link {{ Request::is('hr/create') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
@@ -35,3 +23,23 @@
         <p>Verify IPCR List</p>
     </a>
 </li>
+@endrole
+
+@role(['employee', 'admin'])
+@role('admin')
+<label style="color:white"> Employee </label>
+@endrole
+<li class="nav-item">
+    <a href="/employee" class="nav-link {{ Request::is('employee') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>IPCR List</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="/employee/create" class="nav-link {{ Request::is('employee/create') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Create IPCR Form</p>
+    </a>
+</li>
+@endrole

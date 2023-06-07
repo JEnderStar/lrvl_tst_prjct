@@ -2,6 +2,7 @@
 
 @section('content')
 
+@role(['employee', 'admin'])
 <div class="card">
     <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
         <h3> CREATE YOUR IPCR FORM </h3>
@@ -127,6 +128,7 @@
         </div>
     </form>
 </div>
+@endrole
 
 <script>
     let errorMessages = '';

@@ -2,13 +2,13 @@
 
 @section('content')
 
-@role(['employee', 'admin'])
+@role(['hr', 'admin'])
 <div class="card">
-    <a href="/employee" style="color:#00B0F0">
+    <a href="/hr" style="color:#00B0F0">
         << Back </a>
             <br>
             <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
-                <h3> VIEW YOUR SUBMITTED IPCR FORM </h3>
+                <h3> VERIFY SUBMITTED IPCR FORM </h3>
             </div>
 
             <div class="row">
@@ -341,7 +341,79 @@
                 @endif
             </div>
 
+            @if($ipcr_form->status == "Approved by Director")
+            <div class="w-100">
+                <div class="float-right">
+                    <form class="require-validation" action="/employee/{{$id}}" data-user-id="{{$id}}" id="verify_form" method="POST">
+                        @CSRF
+                        @METHOD('PUT')
+                        <button type="button" id="verify" class="btn btn-success"> Approve </button>
+                    </form>
+                </div>
+            </div>
+            @endif
 </div>
+
+<script>
+    let errorMessages = '';
+    $("body").on("click", "#verify_form", function(e) {
+        e.preventDefault();
+        let formData = new FormData($('#verify_form')[0]);
+        Swal.fire({
+            title: "Are you sure?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Confirm",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "/hr/" + $('#verify_form').attr("data-user-id"),
+                    method: "POST",
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'Successfully verified the form!',
+                                icon: 'success',
+                                confirmButtonText: 'Okay'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = "/hr";
+                                }
+                            })
+                        } else {
+                            for (let i = 0; i < response.errors.length; i++) {
+                                errorMessages += "-" + response.errors[i] + "\n";
+                            }
+                            Swal.fire({
+                                html: '<pre>' + errorMessages + '</pre>',
+                                customClass: {
+                                    popup: 'format-pre'
+                                },
+                                title: 'Error!',
+                                icon: 'error',
+                                confirmButtonText: 'Okay'
+                            })
+                            errorMessages = "";
+                        }
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: 'Action cancelled!',
+                    text: 'You cancelled the action!',
+                    icon: 'info',
+                    confirmButtonText: 'Okay'
+                })
+            }
+        });
+    });
+</script>
 @endrole
 
 @endsection

@@ -2,6 +2,7 @@
 
 @section('content')
 
+@role(['employee', 'admin'])
 <div class="card">
     <div class="row">
         <div class="col-md-12">
@@ -19,6 +20,37 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @role('employee')
+                    @foreach($ipcr_form as $ipcrform)
+                    @if($ipcrform["first_name"] == Auth::user()->first_name)
+                    <tr>
+                        <td> {{$ipcrform["id"]}} </td>
+                        <td> {{$ipcrform["first_name"]}} </td>
+                        <td> {{$ipcrform["last_name"]}} </td>
+                        <td> {{$ipcrform["mi"]}} </td>
+                        <td> {{$ipcrform["position"]}} </td>
+                        <td> {{$ipcrform["office"]}} </td>
+                        <td> {{$ipcrform["status"]}} </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split dropdown-icon" data-toggle="dropdown"> Action </button>
+                                <div class="dropdown-menu">
+                                    <a href="/employee/{{$ipcrform['id']}}" class="dropdown-item">              View </a>
+                                    <a href="/employee/{{$ipcrform['id']}}/edit" class="dropdown-item">              Edit </a>
+                                    <button type="button" id="delete_form" data-product-id="{{$ipcrform['id']}}" class="dropdown-item">            Delete </button>
+                                    <form action="/printform/{{$ipcrform['id']}}" id="print_form" data-product-id="{{$ipcrform['id']}}" method="POST">
+                                        @CSRF
+                                        <button type="submit" id="print_ipcr" class="dropdown-item">              Print </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    @endif
+                    @endforeach
+                    @endrole
+
+                    @role('admin')
                     @foreach($ipcr_form as $ipcrform)
                     <tr>
                         <td> {{$ipcrform["id"]}} </td>
@@ -44,11 +76,13 @@
                         </td>
                     </tr>
                     @endforeach
+                    @endrole
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+@endrole
 
 <script>
     $("body").on("click", "#delete_form", function(e) {

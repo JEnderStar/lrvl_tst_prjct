@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ipcrform as Form;
 use App\Models\Schedule;
+use App\Models\Input;
 use App\Models\Accounts as User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
@@ -114,7 +115,11 @@ class ScheduleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $ipcr_form = Form::find($id);
+
+        $add_input = Input::where('employee_id', $id)->get();
+
+        return view("hr.edit", compact(['ipcr_form', 'id', 'add_input']));
     }
 
     /**
@@ -122,7 +127,11 @@ class ScheduleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $ipcr_form = Form::find($id);
+        $ipcr_form->status = "Verified";
+        $ipcr_form->save();
+
+        return response()->json(["success" => true, "message" => "Successfully verified the form!"]);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 @section('content')
 
+@role(['employee', 'admin'])
 <div class="card">
     <a href="/employee">
         << Back </a>
@@ -126,6 +127,7 @@
                 </div>
             </form>
 </div>
+@endrole
 
 <script>
     let errorMessages = '';

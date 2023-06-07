@@ -2,6 +2,7 @@
 
 @section('content')
 
+@role(['hr', 'admin'])
 <div class="card">
     <div class="row">
         <div class="col-md-12">
@@ -40,6 +41,7 @@
         </div>
     </div>
 </div>
+@endrole
 
 <script>
     $('#ipcr_form_table').DataTable({
