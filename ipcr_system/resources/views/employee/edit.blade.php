@@ -17,343 +17,106 @@
                 <div class="card-header">
                     <label> Strategic Priorities </label>
                 </div>
-                <div class="card-body">
-                    @if($ipcr_form->strategic_priorities1 != null)
+                <div class="card-body" id="sp_table">
+                    @foreach($add_input as $index => $addinput)
+                    @if($addinput->code == "SP")
                     <div class="row">
                         @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
                         <div class="form-group col-6">
                             <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <input type="text" id="strategic_priorities1" name="strategic_priorities1" class="form-control" value="{{$ipcr_form['strategic_priorities1']}}">
+                            <input type="text" id="functions_sp{{$index}}" name="functions_sp{{$index}}" class="form-control" value="{{$addinput['functions']}}">
                         </div>
                         <div class="form-group col-6">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator1" name="success_indicator1" class="form-control" value="{{$ipcr_form['success_indicator1']}}">
+                            <input type="text" id="success_indicators_sp{{$index}}" name="success_indicators_sp{{$index}}" class="form-control" value="{{$addinput['success_indicators']}}">
                         </div>
                         @else
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <input type="text" id="strategic_priorities1" name="strategic_priorities1" class="form-control" value="{{$ipcr_form['strategic_priorities1']}}">
+                            <input type="text" id="functions_sp{{$index}}" name="functions_sp{{$index}}" class="form-control" value="{{$addinput['functions']}}">
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator1" name="success_indicator1" class="form-control" value="{{$ipcr_form['success_indicator1']}}">
+                            <input type="text" id="success_indicators_sp{{$index}}" name="success_indicators_sp{{$index}}" class="form-control" value="{{$addinput['success_indicators']}}">
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments1" name="actual_accomplishments1" class="form-control" value="{{$ipcr_form['actual_accomplishments1']}}">
+                            <input type="text" id="actual_accomplishments_sp{{$index}}" name="actual_accomplishments_sp{{$index}}" class="form-control" value="{{$addinput['actual_accomplishments']}}">
                         </div>
                         @endif
                     </div>
                     @endif
-                    @if($ipcr_form->strategic_priorities2 != null)
-                    <div class="row">
-                        @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <input type="text" id="strategic_priorities2" name="strategic_priorities2" class="form-control" value="{{$ipcr_form['strategic_priorities2']}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator2" name="success_indicator2" class="form-control" value="{{$ipcr_form['success_indicator2']}}">
-                        </div>
-                        @else
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <input type="text" id="strategic_priorities2" name="strategic_priorities2" class="form-control" value="{{$ipcr_form['strategic_priorities2']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator2" name="success_indicator2" class="form-control" value="{{$ipcr_form['success_indicator2']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments2" name="actual_accomplishments2" class="form-control" value="{{$ipcr_form['actual_accomplishments2']}}">
-                        </div>
-                        @endif
-                    </div>
-                    @endif
-                    @if($ipcr_form->strategic_priorities3 != null)
-                    <div class="row">
-                        @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <input type="text" id="strategic_priorities3" name="strategic_priorities3" class="form-control" value="{{$ipcr_form['strategic_priorities3']}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator3" name="success_indicator3" class="form-control" value="{{$ipcr_form['success_indicator3']}}">
-                        </div>
-                        @else
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <input type="text" id="strategic_priorities3" name="strategic_priorities3" class="form-control" value="{{$ipcr_form['strategic_priorities3']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator3" name="success_indicator3" class="form-control" value="{{$ipcr_form['success_indicator3']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments3" name="actual_accomplishments3" class="form-control" value="{{$ipcr_form['actual_accomplishments3']}}">
-                        </div>
-                        @endif
-                    </div>
-                    @endif
-                    @if($ipcr_form->strategic_priorities4 != null)
-                    <div class="row">
-                        @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <input type="text" id="strategic_priorities4" name="strategic_priorities4" class="form-control" value="{{$ipcr_form['strategic_priorities4']}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator4" name="success_indicator4" class="form-control" value="{{$ipcr_form['success_indicator4']}}">
-                        </div>
-                        @else
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <input type="text" id="strategic_priorities4" name="strategic_priorities4" class="form-control" value="{{$ipcr_form['strategic_priorities4']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator4" name="success_indicator4" class="form-control" value="{{$ipcr_form['success_indicator4']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments4" name="actual_accomplishments4" class="form-control" value="{{$ipcr_form['actual_accomplishments4']}}">
-                        </div>
-                        @endif
-                    </div>
-                    @endif
+                    @endforeach
                 </div>
 
                 <div class="card-header">
                     <label> Core Functions </label>
                 </div>
-                <div class="card-body">
-                    @if($ipcr_form->core_functions5 != null)
-                    <div class="row">
+                <div class="card-body" id="cf_table">
+                    @foreach($add_input as $index => $addinput)
+                    @if($addinput->code == "CF")
+                    <div class="row" id="cf_table">
                         @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
                         <div class="form-group col-6">
                             <p for="requested_by" class="form_label"> Core Functions </p>
-                            <input type="text" id="core_functions5" name="core_functions5" class="form-control" value="{{$ipcr_form['core_functions5']}}">
+                            <input type="text" id="functions_cf{{$index}}" name="functions_cf{{$index}}" class="form-control" value="{{$addinput['functions']}}">
                         </div>
                         <div class="form-group col-6">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator5" name="success_indicator5" class="form-control" value="{{$ipcr_form['success_indicator5']}}">
+                            <input type="text" id="success_indicators_cf{{$index}}" name="success_indicators_cf{{$index}}" class="form-control" value="{{$addinput['success_indicators']}}">
                         </div>
                         @else
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Core Functions </p>
-                            <input type="text" id="core_functions5" name="core_functions5" class="form-control" value="{{$ipcr_form['core_functions5']}}">
+                            <input type="text" id="functions_cf{{$index}}" name="functions_cf{{$index}}" class="form-control" value="{{$addinput['functions']}}">
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator5" name="success_indicator5" class="form-control" value="{{$ipcr_form['success_indicator5']}}">
+                            <input type="text" id="success_indicators_cf{{$index}}" name="success_indicators_cf{{$index}}" class="form-control" value="{{$addinput['success_indicators']}}">
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments5" name="actual_accomplishments5" class="form-control" value="{{$ipcr_form['actual_accomplishments5']}}">
+                            <input type="text" id="actual_accomplishments_cf{{$index}}" name="actual_accomplishments_cf{{$index}}" class="form-control" value="{{$addinput['actual_accomplishments']}}">
                         </div>
                         @endif
                     </div>
                     @endif
-                    @if($ipcr_form->core_functions6 != null)
-                    <div class="row">
-                        @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Core Functions </p>
-                            <input type="text" id="core_functions6" name="core_functions6" class="form-control" value="{{$ipcr_form['core_functions6']}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator6" name="success_indicator6" class="form-control" value="{{$ipcr_form['success_indicator6']}}">
-                        </div>
-                        @else
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Core Functions </p>
-                            <input type="text" id="core_functions6" name="core_functions6" class="form-control" value="{{$ipcr_form['core_functions6']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator6" name="success_indicator6" class="form-control" value="{{$ipcr_form['success_indicator6']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments6" name="actual_accomplishments6" class="form-control" value="{{$ipcr_form['actual_accomplishments6']}}">
-                        </div>
-                        @endif
-                    </div>
-                    @endif
-                    @if($ipcr_form->core_functions7 != null)
-                    <div class="row">
-                        @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Core Functions </p>
-                            <input type="text" id="core_functions7" name="core_functions7" class="form-control" value="{{$ipcr_form['core_functions7']}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator7" name="success_indicator7" class="form-control" value="{{$ipcr_form['success_indicator7']}}">
-                        </div>
-                        @else
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Core Functions </p>
-                            <input type="text" id="core_functions7" name="core_functions7" class="form-control" value="{{$ipcr_form['core_functions7']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator7" name="success_indicator7" class="form-control" value="{{$ipcr_form['success_indicator7']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments7" name="actual_accomplishments7" class="form-control" value="{{$ipcr_form['actual_accomplishments7']}}">
-                        </div>
-                        @endif
-                    </div>
-                    @endif
-                    @if($ipcr_form->core_functions8 != null)
-                    <div class="row">
-                        @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Core Functions </p>
-                            <input type="text" id="core_functions8" name="core_functions8" class="form-control" value="{{$ipcr_form['core_functions8']}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator8" name="success_indicator8" class="form-control" value="{{$ipcr_form['success_indicator8']}}">
-                        </div>
-                        @else
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Core Functions </p>
-                            <input type="text" id="core_functions8" name="core_functions8" class="form-control" value="{{$ipcr_form['core_functions8']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator8" name="success_indicator8" class="form-control" value="{{$ipcr_form['success_indicator8']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments8" name="actual_accomplishments8" class="form-control" value="{{$ipcr_form['actual_accomplishments8']}}">
-                        </div>
-                        @endif
-                    </div>
-                    @endif
+                    @endforeach
                 </div>
 
                 <div class="card-header">
                     <label> Support Functions </label>
                 </div>
-                <div class="card-body">
-                    @if($ipcr_form->support_functions9 != null)
-                    <div class="row">
+                <div class="card-body" id="sf_table">
+                    @foreach($add_input as $index => $addinput)
+                    @if($addinput->code == "SF")
+                    <div class="row" id="sf_table">
                         @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
                         <div class="form-group col-6">
                             <p for="requested_by" class="form_label"> Support Functions </p>
-                            <input type="text" id="support_functions9" name="support_functions9" class="form-control" value="{{$ipcr_form['support_functions9']}}">
+                            <input type="text" id="functions_sf{{$index}}" name="functions_sf{{$index}}" class="form-control" value="{{$addinput['functions']}}">
                         </div>
                         <div class="form-group col-6">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator9" name="success_indicator9" class="form-control" value="{{$ipcr_form['success_indicator9']}}">
+                            <input type="text" id="success_indicators_sf{{$index}}" name="success_indicators_sf{{$index}}" class="form-control" value="{{$addinput['success_indicators']}}">
                         </div>
                         @else
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Support Functions </p>
-                            <input type="text" id="support_functions9" name="support_functions9" class="form-control" value="{{$ipcr_form['support_functions9']}}">
+                            <input type="text" id="functions_sf{{$index}}" name="functions_sf{{$index}}" class="form-control" value="{{$addinput['functions']}}">
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator9" name="success_indicator9" class="form-control" value="{{$ipcr_form['success_indicator9']}}">
+                            <input type="text" id="success_indicators_sf{{$index}}" name="success_indicators_sf{{$index}}" class="form-control" value="{{$addinput['success_indicators']}}">
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments9" name="actual_accomplishments9" class="form-control" value="{{$ipcr_form['actual_accomplishments9']}}">
+                            <input type="text" id="actual_accomplishments_sf{{$index}}" name="actual_accomplishments_sf{{$index}}" class="form-control" value="{{$addinput['actual_accomplishments']}}">
                         </div>
                         @endif
                     </div>
                     @endif
-                    @if($ipcr_form->support_functions10 != null)
-                    <div class="row">
-                        @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Support Functions </p>
-                            <input type="text" id="support_functions10" name="support_functions10" class="form-control" value="{{$ipcr_form['support_functions10']}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator10" name="success_indicator10" class="form-control" value="{{$ipcr_form['success_indicator10']}}">
-                        </div>
-                        @else
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Support Functions </p>
-                            <input type="text" id="support_functions10" name="support_functions10" class="form-control" value="{{$ipcr_form['support_functions10']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator10" name="success_indicator10" class="form-control" value="{{$ipcr_form['success_indicator10']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments10" name="actual_accomplishments10" class="form-control" value="{{$ipcr_form['actual_accomplishments10']}}">
-                        </div>
-                        @endif
-                    </div>
-                    @endif
-                    @if($ipcr_form->support_functions11 != null)
-                    <div class="row">
-                        @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Support Functions </p>
-                            <input type="text" id="support_functions11" name="support_functions11" class="form-control" value="{{$ipcr_form['support_functions11']}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator11" name="success_indicator11" class="form-control" value="{{$ipcr_form['success_indicator11']}}">
-                        </div>
-                        @else
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Support Functions </p>
-                            <input type="text" id="support_functions11" name="support_functions11" class="form-control" value="{{$ipcr_form['support_functions11']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator11" name="success_indicator11" class="form-control" value="{{$ipcr_form['success_indicator11']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments11" name="actual_accomplishments11" class="form-control" value="{{$ipcr_form['actual_accomplishments11']}}">
-                        </div>
-                        @endif
-                    </div>
-                    @endif
-                    @if($ipcr_form->support_functions12 != null)
-                    <div class="row">
-                        @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC")
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Support Functions </p>
-                            <input type="text" id="support_functions12" name="support_functions12" class="form-control" value="{{$ipcr_form['support_functions12']}}">
-                        </div>
-                        <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator12" name="success_indicator12" class="form-control" value="{{$ipcr_form['success_indicator12']}}">
-                        </div>
-                        @else
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Support Functions </p>
-                            <input type="text" id="support_functions12" name="support_functions12" class="form-control" value="{{$ipcr_form['support_functions12']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <input type="text" id="success_indicator12" name="success_indicator12" class="form-control" value="{{$ipcr_form['success_indicator12']}}">
-                        </div>
-                        <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Actual Accomplishments </p>
-                            <input type="text" id="actual_accomplishments12" name="actual_accomplishments12" class="form-control" value="{{$ipcr_form['actual_accomplishments12']}}">
-                        </div>
-                        @endif
-                    </div>
-                    @endif
+                    @endforeach
                 </div>
 
                 <div class="w-100">
@@ -388,7 +151,7 @@
                         if (response.success) {
                             Swal.fire({
                                 title: 'Success!',
-                                text: 'Successfully edited a profile!',
+                                text: 'Successpully edited a profile!',
                                 icon: 'success',
                                 confirmButtonText: 'Okay'
                             }).then((result) => {

@@ -77,9 +77,9 @@ class IPCRController extends Controller
 
         $schedule = Schedule::where('purpose', 'Performance Targets')->first();
 
-        if($validator ->passes()){
+        if ($validator->passes()) {
             $timenow = Carbon::now()->toDateTimeString();
-    
+
             $ipcr_form = new Form();
             $ipcr_form->date_created = $timenow;
             $ipcr_form->covered_period = $request->covered_period;
@@ -97,19 +97,19 @@ class IPCRController extends Controller
             $last_ipcr_form = Form::get()->last();
 
             $sp = 0;
-            $sp2 = $sp + 1;
+            $length = $sp + 1;
             $cf = 0;
-            $cf2 = $cf + 1;
+            $length = $cf + 1;
             $sf = 0;
-            $sf2 = $sf + 1;
+            $length = $sf + 1;
 
-            for($sp; $sp < $sp2; $sp++){
-                $word_sp = "functions_sp".(string)$sp;
-                $word_sp1 = "success_indicator_sp".(string)$sp;
+            for ($sp; $sp < $length; $sp++) {
+                $word_sp = "functions_sp" . (string)$sp;
+                $word_sp1 = "success_indicator_sp" . (string)$sp;
                 $function = $request->$word_sp;
                 $si = $request->$word_sp1;
-                if($function != null){
-                    $sp2++;
+                if ($function != null) {
+                    $length++;
                     $add_input = new Input();
                     $add_input->employee_id = $last_ipcr_form['id'];
                     $add_input->code = "SP";
@@ -118,18 +118,18 @@ class IPCRController extends Controller
                     $add_input->semester = $request->covered_period;
                     $add_input->year = $request->year;
                     $add_input->save();
-                }else{
+                } else {
                     break;
                 }
             }
 
-            for($cf; $cf < $cf2; $cf++){
-                $word_cf = "functions_cf".(string)$cf;
-                $word_cf1 = "success_indicator_cf".(string)$cf;
+            for ($cf; $cf < $length; $cf++) {
+                $word_cf = "functions_cf" . (string)$cf;
+                $word_cf1 = "success_indicator_cf" . (string)$cf;
                 $function = $request->$word_cf;
                 $si = $request->$word_cf1;
-                if($function != null){
-                    $cf2++;
+                if ($function != null) {
+                    $length++;
                     $add_input = new Input();
                     $add_input->employee_id = $last_ipcr_form['id'];
                     $add_input->code = "CF";
@@ -138,18 +138,18 @@ class IPCRController extends Controller
                     $add_input->semester = $request->covered_period;
                     $add_input->year = $request->year;
                     $add_input->save();
-                }else{
+                } else {
                     break;
                 }
             }
 
-            for($sf; $sf < $sf2; $sf++){
-                $word_sf = "functions_sf".(string)$sf;
-                $word_sf1 = "success_indicator_sf".(string)$sf;
+            for ($sf; $sf < $length; $sf++) {
+                $word_sf = "functions_sf" . (string)$sf;
+                $word_sf1 = "success_indicator_sf" . (string)$sf;
                 $function = $request->$word_sf;
                 $si = $request->$word_sf1;
-                if($function != null){
-                    $sf2++;
+                if ($function != null) {
+                    $length++;
                     $add_input = new Input();
                     $add_input->employee_id = $last_ipcr_form['id'];
                     $add_input->code = "SF";
@@ -158,13 +158,13 @@ class IPCRController extends Controller
                     $add_input->semester = $request->covered_period;
                     $add_input->year = $request->year;
                     $add_input->save();
-                }else{
+                } else {
                     break;
                 }
             }
-    
+
             return response()->json(["success" => true, "message" => "Successfully created a form!"]);
-        }else{
+        } else {
             return response()->json(["status" => false, "errors" => $validator->errors()->all()]);
         }
     }
@@ -188,7 +188,9 @@ class IPCRController extends Controller
     {
         $ipcr_form = Form::find($id);
 
-        return view("employee.edit", compact(['ipcr_form', 'id']));
+        $add_input = Input::where('employee_id', $id)->get();
+
+        return view("employee.edit", compact(['ipcr_form', 'id', 'add_input']));
     }
 
     /**
@@ -196,163 +198,96 @@ class IPCRController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $message_error = [
-            "strategic_priorities1.required" => "Strategic Priorities is required.",
-            "strategic_priorities1.max" => "Strategic Priorities should not exceed 200 characters.",
-            "strategic_priorities1.min" => "Strategic Priorities must be at least 10 characters",
+        $add_input = Input::where('employee_id', $id)->get();
 
-            "success_indicator1.required" => "Strategic Priorities' Success Indicator is required.",
-            "success_indicator1.max" => "Strategic Priorities' Success Indicator should not exceed 200 characters.",
-            "success_indicator1.min" => "Strategic Priorities' Success Indicator must be at least 10 characters",
+        $message_error = [];
 
-            "strategic_priorities2.max" => "Strategic Priorities should not exceed 200 characters.",
-            "strategic_priorities2.min" => "Strategic Priorities must be at least 10 characters",
+        $validator = validator::make($request->all(), [], $message_error);
 
-            "success_indicator2.max" => "Strategic Priorities' Success Indicator should not exceed 200 characters.",
-            "success_indicator2.min" => "Strategic Priorities' Success Indicator must be at least 10 characters",
+        $ipcr_form = Form::find($id);
 
-            "strategic_priorities3.max" => "Strategic Priorities should not exceed 200 characters.",
-            "strategic_priorities3.min" => "Strategic Priorities must be at least 10 characters",
+        Input::where('employee_id', $id)->delete();
 
-            "success_indicator3.max" => "Strategic Priorities' Success Indicator should not exceed 200 characters.",
-            "success_indicator3.min" => "Strategic Priorities' Success Indicator must be at least 10 characters",
+        if ($validator->passes()) {
+            $length = 0;
 
-            "strategic_priorities4.max" => "Strategic Priorities should not exceed 200 characters.",
-            "strategic_priorities4.min" => "Strategic Priorities must be at least 10 characters",
+            $sp = 0;
+            $cf = 0;
+            $sf = 0;
+            
+            foreach ($add_input as $addinput) {
+                $length++;
+                
+                $word_sp = "functions_sp" . (string)$sp;
+                $word_sp1 = "success_indicators_sp" . (string)$sp;
+                $word_sp2 = "actual_accomplishments_sp" . (string)$sp;
+                $function_sp = $request->$word_sp;
+                $si_sp = $request->$word_sp1;
+                $aa_sp = $request->$word_sp2;
+                
+                $word_cf = "functions_cf" . (string)$cf;
+                $word_cf1 = "success_indicators_cf" . (string)$cf;
+                $word_cf2 = "actual_accomplishments_cf" . (string)$cf;
+                $function_cf = $request->$word_cf;
+                $si_cf = $request->$word_cf1;
+                $aa_cf = $request->$word_cf2;
+                
+                $word_sf = "functions_sf" . (string)$sf;
+                $word_sf1 = "success_indicators_sf" . (string)$sf;
+                $word_sf2 = "actual_accomplishments_sf" . (string)$sf;
+                $function_sf = $request->$word_sf;
+                $si_sf = $request->$word_sf1;
+                $aa_sf = $request->$word_sf2;
+                
+                if ($function_sp != null) {
+                    $add_input = new Input();
+                    $add_input->employee_id = $id;
+                    $add_input->code = "SP";
+                    $add_input->functions = $function_sp;
+                    $add_input->success_indicators = $si_sp;
+                    $add_input->actual_accomplishments = $aa_sp;
+                    $add_input->semester = $ipcr_form->covered_period;
+                    $add_input->year = '2023';
+                    $add_input->save();
+                } else if ($function_cf != null) {
+                    $add_input = new Input();
+                    $add_input->employee_id = $id;
+                    $add_input->code = "CF";
+                    $add_input->functions = $function_cf;
+                    $add_input->success_indicators = $si_cf;
+                    $add_input->actual_accomplishments = $aa_cf;
+                    $add_input->semester = $ipcr_form->covered_period;
+                    $add_input->year = '2023';
+                    $add_input->save();
+                } else if ($function_sf != null) {
+                    $add_input = new Input();
+                    $add_input->employee_id = $id;
+                    $add_input->code = "SF";
+                    $add_input->functions = $function_sf;
+                    $add_input->success_indicators = $si_sf;
+                    $add_input->actual_accomplishments = $aa_sf;
+                    $add_input->semester = $ipcr_form->covered_period;
+                    $add_input->year = '2023';
+                    $add_input->save();
+                }
 
-            "success_indicator4.max" => "Strategic Priorities' Success Indicator should not exceed 200 characters.",
-            "success_indicator4.min" => "Strategic Priorities' Success Indicator must be at least 10 characters",
+                $sp++;
+                $cf++;
+                $sf++;
+            }
 
-            "core_functions5.required" => "Core Functions is required.",
-            "core_functions5.max" => "Core Functions should not exceed 200 characters.",
-            "core_functions5.min" => "Core Functions must be at least 10 characters",
-
-            "success_indicator5.required" => "Core Functions' Success Indicator is required.",
-            "success_indicator5.max" => "Core Functions' Success Indicator should not exceed 200 characters.",
-            "success_indicator5.min" => "Core Functions' Success Indicator must be at least 10 characters",
-
-            "core_functions6.max" => "Core Functions should not exceed 200 characters.",
-            "core_functions6.min" => "Core Functions must be at least 10 characters",
-
-            "success_indicator6.max" => "Core Functions' Success Indicator should not exceed 200 characters.",
-            "success_indicator6.min" => "Core Functions' Success Indicator must be at least 10 characters",
-
-            "core_functions7.max" => "Core Functions should not exceed 200 characters.",
-            "core_functions7.min" => "Core Functions must be at least 10 characters",
-
-            "success_indicator7.max" => "Core Functions' Success Indicator should not exceed 200 characters.",
-            "success_indicator7.min" => "Core Functions' Success Indicator must be at least 10 characters",
-
-            "core_functions8.max" => "Core Functions should not exceed 200 characters.",
-            "core_functions8.min" => "Core Functions must be at least 10 characters",
-
-            "success_indicator8.max" => "Core Functions' Success Indicator should not exceed 200 characters.",
-            "success_indicator8.min" => "Core Functions' Success Indicator must be at least 10 characters",
-
-            "support_functions9.required" => "Support Functions is required.",
-            "support_functions9.max" => "Support Functions should not exceed 200 characters.",
-            "support_functions9.min" => "Support Functions must be at least 10 characters",
-
-            "success_indicator9.required" => "Support Functions' Success Indicator is required.",
-            "success_indicator9.max" => "Support Functions' Success Indicator should not exceed 200 characters.",
-            "success_indicator9.min" => "Support Functions' Success Indicator must be at least 10 characters",
-
-            "support_functions10.max" => "Support Functions should not exceed 200 characters.",
-            "support_functions10.min" => "Support Functions must be at least 10 characters",
-
-            "success_indicator10.max" => "Support Functions' Success Indicator should not exceed 200 characters.",
-            "success_indicator10.min" => "Support Functions' Success Indicator must be at least 10 characters",
-
-            "support_functions11.max" => "Support Functions should not exceed 200 characters.",
-            "support_functions11.min" => "Support Functions must be at least 10 characters",
-
-            "success_indicator11.max" => "Support Functions' Success Indicator should not exceed 200 characters.",
-            "success_indicator11.min" => "Support Functions' Success Indicator must be at least 10 characters",
-
-            "support_functions12.max" => "Support Functions should not exceed 200 characters.",
-            "support_functions12.min" => "Support Functions must be at least 10 characters",
-
-            "success_indicator12.max" => "Support Functions' Success Indicator should not exceed 200 characters.",
-            "success_indicator12.min" => "Support Functions' Success Indicator must be at least 10 characters"
-        ];
-
-        $validator = validator::make($request->all(), [
-            'strategic_priorities1' => 'required|min:10|max:200',
-            'success_indicator1' => 'required|min:10|max:200',
-            'strategic_priorities2' => 'min:10|max:200',
-            'success_indicator2' => 'min:10|max:200',
-            'strategic_priorities3' => 'min:10|max:200',
-            'success_indicator3' => 'min:10|max:200',
-            'strategic_priorities4' => 'min:10|max:200',
-            'success_indicator4' => 'min:10|max:200',
-            'core_functions5' => 'required|min:10|max:200',
-            'success_indicator5' => 'required|min:10|max:200',
-            'core_functions6' => 'min:10|max:200',
-            'success_indicator6' => 'min:10|max:200',
-            'core_functions7' => 'min:10|max:200',
-            'success_indicator7' => 'min:10|max:200',
-            'core_functions8' => 'min:10|max:200',
-            'success_indicator8' => 'min:10|max:200',
-            'support_functions9' => 'required|min:10|max:200',
-            'success_indicator9' => 'required|min:10|max:200',
-            'support_functions10' => 'min:10|max:200',
-            'success_indicator10' => 'min:10|max:200',
-            'support_functions11' => 'min:10|max:200',
-            'success_indicator11' => 'min:10|max:200',
-            'support_functions12' => 'min:10|max:200',
-            'success_indicator12' => 'min:10|max:200'
-        ], $message_error);
-
-        if($validator ->passes()){
-            $ipcr_form = Form::find($id);
-            $ipcr_form->strategic_priorities1 = $request->strategic_priorities1;
-            $ipcr_form->success_indicator1 = $request->success_indicator1;
-            $ipcr_form->actual_accomplishments1 = $request->actual_accomplishments1;
-            $ipcr_form->strategic_priorities2 = $request->strategic_priorities2;
-            $ipcr_form->success_indicator2 = $request->success_indicator2;
-            $ipcr_form->actual_accomplishments2 = $request->actual_accomplishments2;
-            $ipcr_form->strategic_priorities3 = $request->strategic_priorities3;
-            $ipcr_form->success_indicator3 = $request->success_indicator3;
-            $ipcr_form->actual_accomplishments3 = $request->actual_accomplishments3;
-            $ipcr_form->strategic_priorities4 = $request->strategic_priorities4;
-            $ipcr_form->success_indicator4 = $request->success_indicator4;
-            $ipcr_form->actual_accomplishments4 = $request->actual_accomplishments4;
-            $ipcr_form->core_functions5 = $request->core_functions5;
-            $ipcr_form->success_indicator5 = $request->success_indicator5;
-            $ipcr_form->actual_accomplishments5 = $request->actual_accomplishments5;
-            $ipcr_form->core_functions6 = $request->core_functions6;
-            $ipcr_form->success_indicator6 = $request->success_indicator6;
-            $ipcr_form->actual_accomplishments6 = $request->actual_accomplishments6;
-            $ipcr_form->core_functions7 = $request->core_functions7;
-            $ipcr_form->success_indicator7 = $request->success_indicator7;
-            $ipcr_form->actual_accomplishments7 = $request->actual_accomplishments7;
-            $ipcr_form->core_functions8 = $request->core_functions8;
-            $ipcr_form->success_indicator8 = $request->success_indicator8;
-            $ipcr_form->actual_accomplishments8 = $request->actual_accomplishments8;
-            $ipcr_form->support_functions9 = $request->support_functions9;
-            $ipcr_form->success_indicator9 = $request->success_indicator9;
-            $ipcr_form->actual_accomplishments9 = $request->actual_accomplishments9;
-            $ipcr_form->support_functions10 = $request->support_functions10;
-            $ipcr_form->success_indicator10 = $request->success_indicator10;
-            $ipcr_form->actual_accomplishments10 = $request->actual_accomplishments10;
-            $ipcr_form->support_functions11 = $request->support_functions11;
-            $ipcr_form->success_indicator11 = $request->success_indicator11;
-            $ipcr_form->actual_accomplishments11 = $request->actual_accomplishments11;
-            $ipcr_form->support_functions12 = $request->support_functions12;
-            $ipcr_form->success_indicator12 = $request->success_indicator12;
-            $ipcr_form->actual_accomplishments12 = $request->actual_accomplishments12;
-            if($ipcr_form->status == "Pending"){
+            if ($ipcr_form->status == "Pending") {
                 $ipcr_form->save();
-            }else if($ipcr_form->status == "Rejected by DC"){
+            } else if ($ipcr_form->status == "Rejected by DC") {
                 $ipcr_form->status = "Pending";
                 $ipcr_form->save();
-            }else{
+            } else {
                 $ipcr_form->status = "Grading by DC";
                 $ipcr_form->save();
             }
-    
+
             return response()->json(["success" => true, "message" => "Successfully edited"]);
-        }else{
+        } else {
             return response()->json(["status" => false, "errors" => $validator->errors()->all()]);
         }
     }

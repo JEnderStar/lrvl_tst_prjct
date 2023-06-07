@@ -34,31 +34,38 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
+
         if($request->office == "CMIO"){
-            $division_chief = "Aldrin";
-            $director = "Angie";
+            $division_chief = User::where('office', 'CMIO')->where('position', 'Division Chief')->first();
+            $director = User::where('office', 'CMIO')->where('position', 'Director')->first();
+
+            $division_chief_name = $division_chief->first_name." ".$division_chief->last_name;
+            $director_name = $director->first_name." ".$director->last_name;
             $schedule_form = Schedule::create([
                 'type' => $request->type,
                 'purpose' => $request->purpose,
                 'covered_period' => $request->covered_period,
                 'office' => $request->office,
                 'employees' => $request->input('employees'),
-                'division_chief' => $division_chief,
-                'director' => $director,
+                'division_chief' => $division_chief_name,
+                'director' => $director_name,
                 'duration_from' => $request->duration_from,
                 'duration_to' => $request->duration_to
             ]);
         }else if($request->office == "PSD"){
-            $division_chief = "Carni";
-            $director = "Alvin";
+            $division_chief = User::where('office', 'PSD')->where('position', 'Division Chief')->first();
+            $director = User::where('office', 'PSD')->where('position', 'Director')->first();
+
+            $division_chief_name = $division_chief->first_name." ".$division_chief->last_name;
+            $director_name = $director->first_name." ".$director->last_name;
             $schedule_form = Schedule::create([
                 'type' => $request->type,
                 'purpose' => $request->purpose,
                 'covered_period' => $request->covered_period,
                 'office' => $request->office,
                 'employees' => $request->input('employees'),
-                'division_chief' => $division_chief,
-                'director' => $director,
+                'division_chief' => $division_chief_name,
+                'director' => $director_name,
                 'duration_from' => $request->duration_from,
                 'duration_to' => $request->duration_to
             ]);
