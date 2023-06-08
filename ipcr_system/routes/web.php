@@ -29,4 +29,7 @@ Route::post("/printform/{id}", [App\Http\Controllers\PDFController::class, "prin
 // Set Schedule Form
 Route::resource('/hr', App\Http\Controllers\ScheduleController::class);
 
+// Approve or Disapprove by DC
+Route::resource('/approvedc', App\Http\Controllers\ApproveDCController::class);
+
 Auth::routes();

@@ -347,7 +347,7 @@
                     <form class="require-validation" action="/employee/{{$id}}" data-user-id="{{$id}}" id="verify_form" method="POST">
                         @CSRF
                         @METHOD('PUT')
-                        <button type="button" id="verify" class="btn btn-success"> Approve </button>
+                        <button type="button" id="verify" class="btn btn-success"> Verify </button>
                     </form>
                 </div>
             </div>

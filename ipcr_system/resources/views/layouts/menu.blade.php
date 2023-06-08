@@ -43,3 +43,22 @@
     </a>
 </li>
 @endrole
+
+@role(['division_chief', 'admin'])
+@role('admin')
+<label style="color:white"> Division Chief </label>
+@endrole
+<li class="nav-item">
+    <a href="/approvedc" class="nav-link {{ Request::is('approvedc') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>IPCR Approvals</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="/dc2" class="nav-link {{ Request::is('dc2') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Grade IPCR</p>
+    </a>
+</li>
+@endrole
