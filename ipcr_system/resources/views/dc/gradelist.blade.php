@@ -2,14 +2,15 @@
 
 @section('content')
 
-@role(['hr', 'admin'])
+@role(['division_chief', 'admin'])
+
 <div class="card">
     <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
-        <h3> LIST OF ALL IPCR FORM </h3>
+        <h3> GRADE IPCR FORMS </h3>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-striped table-bordered table-mm" id="ipcr_form_table">
+            <table class="table table-striped table-bordered table-mm" id="grading_table">
                 <thead>
                     <tr>
                         <th> ID </th>
@@ -19,7 +20,6 @@
                         <th> Position </th>
                         <th> Office </th>
                         <th> Status </th>
-                        <th> Date Created </th>
                         <th> Action </th>
                     </tr>
                 </thead>
@@ -33,9 +33,8 @@
                         <td> {{$ipcrform["position"]}} </td>
                         <td> {{$ipcrform["office"]}} </td>
                         <td> {{$ipcrform["status"]}} </td>
-                        <td> {{$ipcrform["date_created"]}} </td>
                         <td>
-                            <a href="/hr/{{$ipcrform['id']}}/edit" class="btn btn-primary"> View </a>
+                            <a href="/gradedc/{{$ipcrform['id']}}/edit" class="btn btn-primary"> View </a>
                         </td>
                     </tr>
                     @endforeach
@@ -44,10 +43,9 @@
         </div>
     </div>
 </div>
-@endrole
 
 <script>
-    $('#ipcr_form_table').DataTable({
+    $('#grading_table').DataTable({
         width: '100%',
         "paging": true,
         "lengthChange": false,
@@ -58,4 +56,7 @@
         "responsive": true
     });
 </script>
+
+@endrole
+
 @endsection

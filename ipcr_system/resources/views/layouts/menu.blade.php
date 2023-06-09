@@ -56,7 +56,7 @@
 </li>
 
 <li class="nav-item">
-    <a href="/dc2" class="nav-link {{ Request::is('dc2') ? 'active' : '' }}">
+    <a href="/gradedc" class="nav-link {{ Request::is('gradedc') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Grade IPCR</p>
     </a>

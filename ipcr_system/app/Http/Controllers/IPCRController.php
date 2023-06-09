@@ -247,7 +247,7 @@ class IPCRController extends Controller
                     $add_input->success_indicators = $si_sp;
                     $add_input->actual_accomplishments = $aa_sp;
                     $add_input->semester = $ipcr_form->covered_period;
-                    $add_input->year = '2023';
+                    $add_input->year = date("Y");
                     $add_input->save();
                 } else if ($function_cf != null) {
                     $add_input = new Input();
@@ -257,7 +257,7 @@ class IPCRController extends Controller
                     $add_input->success_indicators = $si_cf;
                     $add_input->actual_accomplishments = $aa_cf;
                     $add_input->semester = $ipcr_form->covered_period;
-                    $add_input->year = '2023';
+                    $add_input->year = date("Y");
                     $add_input->save();
                 } else if ($function_sf != null) {
                     $add_input = new Input();
@@ -267,7 +267,7 @@ class IPCRController extends Controller
                     $add_input->success_indicators = $si_sf;
                     $add_input->actual_accomplishments = $aa_sf;
                     $add_input->semester = $ipcr_form->covered_period;
-                    $add_input->year = '2023';
+                    $add_input->year = date("Y");
                     $add_input->save();
                 }
 

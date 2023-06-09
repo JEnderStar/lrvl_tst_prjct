@@ -32,4 +32,7 @@ Route::resource('/hr', App\Http\Controllers\ScheduleController::class);
 // Approve or Disapprove by DC
 Route::resource('/approvedc', App\Http\Controllers\ApproveDCController::class);
 
+// Grade by DC
+Route::resource('/gradedc', App\Http\Controllers\GradeDCController::class);
+
 Auth::routes();

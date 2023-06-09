@@ -4,9 +4,12 @@
 
 @role(['division_chief', 'admin'])
 <div class="card">
+    <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
+        <h3> APPROVE IPCR FORMS </h3>
+    </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-striped table-bordered table-mm" id="ipcr_form_table">
+            <table class="table table-striped table-bordered table-mm" id="approve_table">
                 <thead>
                     <tr>
                         <th> ID </th>
@@ -43,7 +46,7 @@
 </div>
 
 <script>
-    $('#ipcr_form_table').DataTable({
+    $('#approve_table').DataTable({
         width: '100%',
         "paging": true,
         "lengthChange": false,
