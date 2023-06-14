@@ -56,3 +56,12 @@ let errorMessages = '';
             }
         });
     });
+
+    function autoExpand(textarea){
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
+    $("textarea").each(function(textarea) {
+        $(this).height( $(this)[0].scrollHeight );
+    });

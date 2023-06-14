@@ -4,7 +4,7 @@
 
 @role(['employee', 'admin'])
 <div class="card">
-    <a href="/employee" style="color:#00B0F0">
+    <a href="/approvedc" class="btn btn-primary col-1">
         << Back </a>
             <br>
             <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">

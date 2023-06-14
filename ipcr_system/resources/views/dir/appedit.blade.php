@@ -2,13 +2,13 @@
 
 @section('content')
 
-@role(['hr', 'admin'])
+@role(['director', 'admin'])
 <div class="card">
-    <a href="/hr" class="btn btn-primary col-1">
+    <a href="/approvedir" class="btn btn-primary col-1">
         << Back </a>
             <br>
             <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
-                <h3> VERIFY SUBMITTED IPCR FORM </h3>
+                <h3> APPROVE GRADED IPCR FORM </h3>
             </div>
 
             <div class="row">
@@ -115,11 +115,7 @@
                         <p> {{$addinput['success_indicators']}} </p>
                     </div>
                     <div class="col-2">
-                        @if($addinput->actual_accomplishments != null)
                         <p> {{$addinput['actual_accomplishments']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
                     </div>
                     <div class="col-1">
                         <p> {{$addinput['q1']}} </p>
@@ -196,11 +192,7 @@
                         <p> {{$addinput['success_indicators']}} </p>
                     </div>
                     <div class="col-2">
-                        @if($addinput->actual_accomplishments != null)
                         <p> {{$addinput['actual_accomplishments']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
                     </div>
                     <div class="col-1">
                         <p> {{$addinput['q1']}} </p>
@@ -277,11 +269,7 @@
                         <p> {{$addinput['success_indicators']}} </p>
                     </div>
                     <div class="col-2">
-                        @if($addinput->actual_accomplishments != null)
                         <p> {{$addinput['actual_accomplishments']}} </p>
-                        @else
-                        <p style="color:gray;"> Not yet approved </p>
-                        @endif
                     </div>
                     <div class="col-1">
                         <p> {{$addinput['q1']}} </p>
@@ -322,39 +310,37 @@
                 <div class="col-1">
 
                 </div>
-                <div class="col-2">
+                <div class="col-1">
+
+                </div>
+                <div class="col-2 average-container">
                     <label> Final Average Rating </label>
-                    @if($ipcr_form->rating != null)
-                    <p> {{$ipcr_form['rating']}} </p>
-                    @else
-                    <p style="color:gray; float: right; padding-right: 56px;"> N/A </p>
-                    @endif
+                    <p>{{$ipcr_form['far']}}</p>
                 </div>
             </div>
 
-            <div class="col-md-12">
-                <label> Comments and Recommendation for Development Purpose. </label>
-                @if($ipcr_form->comment != null)
-                <p> {{$ipcr_form['comment']}} </p>
-                @else
-                <p style="color:gray;"> Not reviewed </p>
-                @endif
-            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label> Comments and Recommendation for Development Purpose. </label>
+                    <p> {{$ipcr_form['comment']}} </p>
+                </div>
 
-            @if($ipcr_form->status == "Approved by Director")
-            <div class="w-100">
-                <div class="float-right">
-                    <form class="require-validation" action="/employee/{{$id}}" data-user-id="{{$id}}" id="verify_form" method="POST">
-                        @CSRF
-                        @METHOD('PUT')
-                        <button type="button" id="verify" class="btn btn-success"> Verify </button>
-                    </form>
+                <div class="col-4"></div>
+
+                <div class="col-2 w-100">
+                    <div class="float-right">
+                        <p>   </p>
+                        <form action="/approvedir/{{$id}}" data-id="{{$id}}" id="approve_form" method="POST">
+                            @METHOD('PUT')
+                            <button type="submit" name="status" value="Rejected by Director" class="btn btn-danger"> Reject </button>
+                            <button type="submit" name="status" value="Approved by Director" class="btn btn-success"> Approve </button>
+                        </form>
+                    </div>
                 </div>
             </div>
-            @endif
 </div>
 
-<script src="{{asset('js/hredit.js')}}"> </script>
+<script src="{{asset('js/dirappedit.js')}}"> </script>
 @endrole
 
 @endsection

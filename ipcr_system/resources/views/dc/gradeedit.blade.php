@@ -5,7 +5,7 @@
 @role(['division_chief', 'admin'])
 
 <div class="card">
-    <a href="/employee" style="color:#00B0F0">
+    <a href="/gradedc" class="btn btn-primary col-1">
         << Back </a>
             <br>
             <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
@@ -67,7 +67,7 @@
             <form class="require-validation" method="POST" action="/gradedc/{{$id}}" data-id="{{$id}}" id="grade_form">
                 @CSRF
                 @METHOD('PUT')
-                
+
                 <div class="card-header">
                     Strategic Priorities
                 </div>
@@ -101,11 +101,11 @@
                             <label> A4 </label>
                             <p> </p>
                         </div>
-                        <div class="col-1">
+                        <div class="col-2">
                             <label> Remarks </label>
                             <p> </p>
                         </div>
-                        <div class="col-1">
+                        <div hidden>
                             <label> Graded by </label>
                             <p> </p>
                         </div>
@@ -114,33 +114,36 @@
                     @if($addinput->code == "SP")
                     <div class="row">
                         <div class="col-2">
-                            <input type="text" id="functions_sp{{$index}}" name="functions_sp{{$index}}" class="form-control" value="{{$addinput['functions']}}" readonly>
+                            <textarea type="text" id="functions_sp{{$index}}" name="functions_sp{{$index}}" class="form-control" readonly>{{$addinput['functions']}}</textarea>
                         </div>
                         <div class="col-2">
-                            <input type="text" id="success_indicators_sp{{$index}}" name="success_indicators_sp{{$index}}" class="form-control" value="{{$addinput['success_indicators']}}" readonly>
+                            <textarea type="text" id="success_indicators_sp{{$index}}" name="success_indicators_sp{{$index}}" class="form-control" readonly>{{$addinput['success_indicators']}}</textarea>
                         </div>
                         <div class="col-2">
-                            <input type="text" id="actual_accomplishments_sp{{$index}}" name="actual_accomplishments_sp{{$index}}" class="form-control" value="{{$addinput['actual_accomplishments']}}" readonly>
+                            <textarea type="text" id="actual_accomplishments_sp{{$index}}" name="actual_accomplishments_sp{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
                         </div>
-                        <div class="col-1">
-                            <input type="number" id="q1_sp{{$index}}" name="q1_sp{{$index}}" class="form-control">
+                        <div class="col-4 row input-container" data-index="{{$index}}">
+                            <div class="col-3">
+                                <input type="text" id="q1_sp{{$index}}" name="q1_sp{{$index}}" class="form-control q1-input" maxlength="1" pattern="[1-5]" oninput="this.value = this.value.replace(/[^1-5]/g, '')">
+                            </div>
+                            <div class="col-3">
+                                <input type="text" id="e2_sp{{$index}}" name="e2_sp{{$index}}" class="form-control e2-input" maxlength="1" pattern="[1-5]" oninput="this.value = this.value.replace(/[^1-5]/g, '')">
+                            </div>
+                            <div class="col-3">
+                                <input type="text" id="t3_sp{{$index}}" name="t3_sp{{$index}}" class="form-control t3-input" maxlength="1" pattern="[1-5]" oninput="this.value = this.value.replace(/[^1-5]/g, '')">
+                            </div>
+                            <div class="col-3">
+                                <input type="number" id="a4_sp{{$index}}" name="a4_sp{{$index}}" class="form-control a4-input" readonly>
+                            </div>
                         </div>
-                        <div class="col-1">
-                            <input type="number" id="e2_sp{{$index}}" name="e2_sp{{$index}}" class="form-control">
-                        </div>
-                        <div class="col-1">
-                            <input type="number" id="t3_sp{{$index}}" name="t3_sp{{$index}}" class="form-control">
-                        </div>
-                        <div class="col-1">
-                            <input type="number" id="a4_sp{{$index}}" name="a4_sp{{$index}}" class="form-control">
-                        </div>
-                        <div class="col-1">
+                        <div class="col-2">
                             <input type="text" id="remarks_sp{{$index}}" name="remarks_sp{{$index}}" class="form-control">
                         </div>
-                        <div class="col-1">
+                        <div hidden>
                             <input type="text" id="graded_by_sp{{$index}}" name="graded_by_sp{{$index}}" class="form-control" value="{{ Auth::user()->first_name }}" readonly>
                         </div>
                     </div>
+                    <p> </p>
                     @endif
                     @endforeach
                 </div>
@@ -178,11 +181,11 @@
                             <label> A4 </label>
                             <p> </p>
                         </div>
-                        <div class="col-1">
+                        <div class="col-2">
                             <label> Remarks </label>
                             <p> </p>
                         </div>
-                        <div class="col-1">
+                        <div hidden>
                             <label> Graded by </label>
                             <p> </p>
                         </div>
@@ -191,33 +194,36 @@
                     @if($addinput->code == "CF")
                     <div class="row">
                         <div class="col-2">
-                            <input type="text" id="functions_cf{{$index}}" name="functions_cf{{$index}}" class="form-control" value="{{$addinput['functions']}}" readonly>
+                            <textarea type="text" id="functions_cf{{$index}}" name="functions_cf{{$index}}" class="form-control" readonly>{{$addinput['functions']}}</textarea>
                         </div>
                         <div class="col-2">
-                            <input type="text" id="success_indicators_cf{{$index}}" name="success_indicators_cf{{$index}}" class="form-control" value="{{$addinput['success_indicators']}}" readonly>
+                            <textarea type="text" id="success_indicators_cf{{$index}}" name="success_indicators_cf{{$index}}" class="form-control" readonly>{{$addinput['success_indicators']}}</textarea>
                         </div>
                         <div class="col-2">
-                            <input type="text" id="actual_accomplishments_cf{{$index}}" name="actual_accomplishments_cf{{$index}}" class="form-control" value="{{$addinput['actual_accomplishments']}}" readonly>
+                            <textarea type="text" id="actual_accomplishments_cf{{$index}}" name="actual_accomplishments_cf{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
                         </div>
-                        <div class="col-1">
-                            <input type="number" id="q1_cf{{$index}}" name="q1_cf{{$index}}" class="form-control">
+                        <div class="col-4 row input-container" data-index="{{$index}}">
+                            <div class="col-3">
+                                <input type="text" id="q1_cf{{$index}}" name="q1_cf{{$index}}" class="form-control q1-input" maxlength="1" pattern="[1-5]" oninput="this.value = this.value.replace(/[^1-5]/g, '')">
+                            </div>
+                            <div class="col-3">
+                                <input type="text" id="e2_cf{{$index}}" name="e2_cf{{$index}}" class="form-control e2-input" maxlength="1" pattern="[1-5]" oninput="this.value = this.value.replace(/[^1-5]/g, '')">
+                            </div>
+                            <div class="col-3">
+                                <input type="text" id="t3_cf{{$index}}" name="t3_cf{{$index}}" class="form-control t3-input" maxlength="1" pattern="[1-5]" oninput="this.value = this.value.replace(/[^1-5]/g, '')">
+                            </div>
+                            <div class="col-3">
+                                <input type="number" id="a4_cf{{$index}}" name="a4_cf{{$index}}" class="form-control a4-input" readonly>
+                            </div>
                         </div>
-                        <div class="col-1">
-                            <input type="number" id="e2_cf{{$index}}" name="e2_cf{{$index}}" class="form-control">
-                        </div>
-                        <div class="col-1">
-                            <input type="number" id="t3_cf{{$index}}" name="t3_cf{{$index}}" class="form-control">
-                        </div>
-                        <div class="col-1">
-                            <input type="number" id="a4_cf{{$index}}" name="a4_cf{{$index}}" class="form-control">
-                        </div>
-                        <div class="col-1">
+                        <div class="col-2">
                             <input type="text" id="remarks_cf{{$index}}" name="remarks_cf{{$index}}" class="form-control">
                         </div>
-                        <div class="col-1">
+                        <div hidden>
                             <input type="text" id="graded_by_cf{{$index}}" name="graded_by_cf{{$index}}" class="form-control" value="{{ Auth::user()->first_name }}" readonly>
                         </div>
                     </div>
+                    <p> </p>
                     @endif
                     @endforeach
                 </div>
@@ -255,11 +261,11 @@
                             <label> A4 </label>
                             <p> </p>
                         </div>
-                        <div class="col-1">
+                        <div class="col-2">
                             <label> Remarks </label>
                             <p> </p>
                         </div>
-                        <div class="col-1">
+                        <div hidden>
                             <label> Graded by </label>
                             <p> </p>
                         </div>
@@ -268,33 +274,36 @@
                     @if($addinput->code == "SF")
                     <div class="row">
                         <div class="col-2">
-                            <input type="text" id="functions_sf{{$index}}" name="functions_sf{{$index}}" class="form-control" value="{{$addinput['functions']}}" readonly>
+                            <textarea type="text" id="functions_sf{{$index}}" name="functions_sf{{$index}}" class="form-control" readonly>{{$addinput['functions']}}</textarea>
                         </div>
                         <div class="col-2">
-                            <input type="text" id="success_indicators_sf{{$index}}" name="success_indicators_sf{{$index}}" class="form-control" value="{{$addinput['success_indicators']}}" readonly>
+                            <textarea type="text" id="success_indicators_sf{{$index}}" name="success_indicators_sf{{$index}}" class="form-control" readonly>{{$addinput['success_indicators']}}</textarea>
                         </div>
                         <div class="col-2">
-                            <input type="text" id="actual_accomplishments_sf{{$index}}" name="actual_accomplishments_sf{{$index}}" class="form-control" value="{{$addinput['actual_accomplishments']}}" readonly>
+                            <textarea type="text" id="actual_accomplishments_sf{{$index}}" name="actual_accomplishments_sf{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
                         </div>
-                        <div class="col-1">
-                            <input type="number" id="q1_sf{{$index}}" name="q1_sf{{$index}}" class="form-control">
+                        <div class="col-4 row input-container" data-index="{{$index}}">
+                            <div class="col-3">
+                                <input type="text" id="q1_sf{{$index}}" name="q1_sf{{$index}}" class="form-control q1-input" maxlength="1" pattern="[1-5]" oninput="this.value = this.value.replace(/[^1-5]/g, '')">
+                            </div>
+                            <div class="col-3">
+                                <input type="text" id="e2_sf{{$index}}" name="e2_sf{{$index}}" class="form-control e2-input" maxlength="1" pattern="[1-5]" oninput="this.value = this.value.replace(/[^1-5]/g, '')">
+                            </div>
+                            <div class="col-3">
+                                <input type="text" id="t3_sf{{$index}}" name="t3_sf{{$index}}" class="form-control t3-input" maxlength="1" pattern="[1-5]" oninput="this.value = this.value.replace(/[^1-5]/g, '')">
+                            </div>
+                            <div class="col-3">
+                                <input type="number" id="a4_sf{{$index}}" name="a4_sf{{$index}}" class="form-control a4-input" readonly>
+                            </div>
                         </div>
-                        <div class="col-1">
-                            <input type="number" id="e2_sf{{$index}}" name="e2_sf{{$index}}" class="form-control">
-                        </div>
-                        <div class="col-1">
-                            <input type="number" id="t3_sf{{$index}}" name="t3_sf{{$index}}" class="form-control">
-                        </div>
-                        <div class="col-1">
-                            <input type="number" id="a4_sf{{$index}}" name="a4_sf{{$index}}" class="form-control">
-                        </div>
-                        <div class="col-1">
+                        <div class="col-2">
                             <input type="text" id="remarks_sf{{$index}}" name="remarks_sf{{$index}}" class="form-control">
                         </div>
-                        <div class="col-1">
+                        <div hidden>
                             <input type="text" id="graded_by_sf{{$index}}" name="graded_by_sf{{$index}}" class="form-control" value="{{ Auth::user()->first_name }}" readonly>
                         </div>
                     </div>
+                    <p> </p>
                     @endif
                     @endforeach
                 </div>
@@ -315,22 +324,30 @@
                     <div class="col-1">
 
                     </div>
-                    <div class="col-2">
+                    <div class="col-1">
+
+                    </div>
+                    <div class="col-2 average-container">
                         <label> Final Average Rating </label>
                         <p> </p>
-                        <input type="text" id="far" name="far" class="form-control">
+                        <input type="text" id="far" name="far" class="form-control far-input" value="0.00" readonly>
                     </div>
                 </div>
 
-                <div class="col-md-12 mb-4">
-                    <label> Comments and Recommendation for Development Purpose. </label>
-                    <p> </p>
-                    <input type="text" id="comments" name="comments" class="form-control">
-                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label> Comments and Recommendation for Development Purpose. </label>
+                        <p> </p>
+                        <textarea type="text" id="comments" name="comments" class="form-control" oninput="autoExpand(this)"></textarea>
+                    </div>
 
-                <div class="w-100">
-                    <div class="float-right">
-                        <button type="submit" class="btn btn-primary"> Submit </button>
+                    <div class="col-5"></div>
+
+                    <div class="col-1 w-100">
+                        <div class="float-right">
+                            <p>   </p>
+                            <button type="submit" class="btn btn-primary"> Submit </button>
+                        </div>
                     </div>
                 </div>
             </form>

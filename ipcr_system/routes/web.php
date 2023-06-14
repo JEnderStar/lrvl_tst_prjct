@@ -35,4 +35,7 @@ Route::resource('/approvedc', App\Http\Controllers\ApproveDCController::class);
 // Grade by DC
 Route::resource('/gradedc', App\Http\Controllers\GradeDCController::class);
 
+// Approve by Director
+Route::resource('/approvedir', App\Http\Controllers\ApproveDirController::class);
+
 Auth::routes();

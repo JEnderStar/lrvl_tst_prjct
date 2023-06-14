@@ -62,3 +62,15 @@
     </a>
 </li>
 @endrole
+
+@role(['director', 'admin'])
+@role('admin')
+<label style="color:white"> Director </label>
+@endrole
+<li class="nav-item">
+    <a href="/approvedir" class="nav-link {{ Request::is('approvedir') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Graded IPCR Approvals</p>
+    </a>
+</li>
+@endrole

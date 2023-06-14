@@ -63,11 +63,11 @@ let errorMessages = '';
         for (sp; sp < sp1; sp++) {
             for (var i = 0; i < sp; i++) {
                 if ($('#functions_sp' + sp).val() == null) {
-                    $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="functions_sp' + sp + '" name="functions_sp' + sp + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_sp' + sp + '" name="success_indicator_sp' + sp + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
+                    $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><textarea type="text" id="functions_sp' + sp + '" name="functions_sp' + sp + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sp' + sp + '" name="success_indicator_sp' + sp + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
                 }else{
                     for(var sp2 = 1; sp2 < sp; sp2++){
                         if ($('#functions_sp' + sp2).val() == null) {
-                            $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><input type="text" id="functions_sp' + sp2 + '" name="functions_sp' + sp2 + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_sp' + sp2 + '" name="success_indicator_sp' + sp2 + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
+                            $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><textarea type="text" id="functions_sp' + sp2 + '" name="functions_sp' + sp2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sp' + sp2 + '" name="success_indicator_sp' + sp2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
                             break;
                         }
                     }
@@ -87,11 +87,11 @@ let errorMessages = '';
         for (cf; cf < cf1; cf++) {
             for (var i = 0; i < cf; i++) {
                 if ($('#functions_cf' + cf).val() == null) {
-                    $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="functions_cf' + cf + '" name="functions_cf' + cf + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_cf' + cf + '" name="success_indicator_cf' + cf + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
+                    $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><textarea type="text" id="functions_cf' + cf + '" name="functions_cf' + cf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_cf' + cf + '" name="success_indicator_cf' + cf + '" class="form-control"></div><div class="form-group col-2" oninput="autoExpand(this)"></textarea> <p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
                 }else{
                     for(var cf2 = 1; cf2 < cf; cf2++){
                         if ($('#functions_cf' + cf2).val() == null) {
-                            $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="functions_cf' + cf2 + '" name="functions_cf' + cf2 + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_cf' + cf2 + '" name="success_indicator_cf' + cf2 + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
+                            $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><textarea type="text" id="functions_cf' + cf2 + '" name="functions_cf' + cf2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_cf' + cf2 + '" name="success_indicator_cf' + cf2 + '" class="form-control"></div><div class="form-group col-2" oninput="autoExpand(this)"></textarea> <p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
                             break;
                         }
                     }
@@ -112,11 +112,11 @@ let errorMessages = '';
         for (sf; sf < sf1; sf++) {
             for (var i = 0; i < sf; i++) {
                 if ($('#functions_sf' + sf).val() == null) {
-                    $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="functions_sf' + sf + '" name="functions_sf' + sf + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_sf' + sf + '" name="success_indicator_sf' + sf + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
+                    $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><textarea type="text" id="functions_sf' + sf + '" name="functions_sf' + sf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sf' + sf + '" name="success_indicator_sf' + sf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
                 }else{
                     for(var sf2 = 1; sf2 < sf; sf2++){
                         if ($('#functions_sf' + sf2).val() == null) {
-                            $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><input type="text" id="functions_sf' + sf2 + '" name="functions_sf' + sf2 + '" class="form-control"></div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><input type="text" id="success_indicator_sf' + sf2 + '" name="success_indicator_sf' + sf2 + '" class="form-control"></div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
+                            $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><textarea type="text" id="functions_sf' + sf2 + '" name="functions_sf' + sf2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sf' + sf2 + '" name="success_indicator_sf' + sf2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
                             break;
                         }
                     }
@@ -129,3 +129,8 @@ let errorMessages = '';
         $(this).parents('.addedsf').remove();
         --sf;
     });
+
+    function autoExpand(textarea){
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }

@@ -248,6 +248,14 @@ class IPCRController extends Controller
                     $add_input->actual_accomplishments = $aa_sp;
                     $add_input->semester = $ipcr_form->covered_period;
                     $add_input->year = date("Y");
+                    if($ipcr_form->status == "Rejected by Director"){
+                        $add_input->q1 = null;
+                        $add_input->e2 = null;
+                        $add_input->t3 = null;
+                        $add_input->a4 = null;
+                        $add_input->remarks = null;
+                        $add_input->graded_by = null;
+                    }
                     $add_input->save();
                 } else if ($function_cf != null) {
                     $add_input = new Input();
@@ -258,6 +266,14 @@ class IPCRController extends Controller
                     $add_input->actual_accomplishments = $aa_cf;
                     $add_input->semester = $ipcr_form->covered_period;
                     $add_input->year = date("Y");
+                    if($ipcr_form->status == "Rejected by Director"){
+                        $add_input->q1 = null;
+                        $add_input->e2 = null;
+                        $add_input->t3 = null;
+                        $add_input->a4 = null;
+                        $add_input->remarks = null;
+                        $add_input->graded_by = null;
+                    }
                     $add_input->save();
                 } else if ($function_sf != null) {
                     $add_input = new Input();
@@ -268,6 +284,14 @@ class IPCRController extends Controller
                     $add_input->actual_accomplishments = $aa_sf;
                     $add_input->semester = $ipcr_form->covered_period;
                     $add_input->year = date("Y");
+                    if($ipcr_form->status == "Rejected by Director"){
+                        $add_input->q1 = null;
+                        $add_input->e2 = null;
+                        $add_input->t3 = null;
+                        $add_input->a4 = null;
+                        $add_input->remarks = null;
+                        $add_input->graded_by = null;
+                    }
                     $add_input->save();
                 }
 
@@ -278,10 +302,15 @@ class IPCRController extends Controller
 
             if ($ipcr_form->status == "Pending") {
                 $ipcr_form->save();
-            } else if ($ipcr_form->status == "Rejected by DC") {
+            } else if($ipcr_form->status == "Rejected by DC"){
                 $ipcr_form->status = "Pending";
                 $ipcr_form->save();
-            } else {
+            } else if ($ipcr_form->status == "Rejected by Director") {
+                $ipcr_form->status = "Pending";
+                $ipcr_form->far = null;
+                $ipcr_form->comment = null;
+                $ipcr_form->save();
+            }else{
                 $ipcr_form->status = "Grading by DC";
                 $ipcr_form->save();
             }

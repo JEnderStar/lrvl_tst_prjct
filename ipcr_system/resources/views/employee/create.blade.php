@@ -69,11 +69,11 @@
             <div class="row">
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                    <input type="text" id="functions_sp0" name="functions_sp0" class="form-control">
+                    <textarea type="text" id="functions_sp0" name="functions_sp0" class="form-control" oninput="autoExpand(this)"></textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <input type="text" id="success_indicator_sp0" name="success_indicator_sp0" class="form-control">
+                    <textarea type="text" id="success_indicator_sp0" name="success_indicator_sp0" class="form-control" oninput="autoExpand(this)"></textarea>
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
@@ -89,11 +89,11 @@
             <div class="row">
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Core Functions </p>
-                    <input type="text" id="functions_cf0" name="functions_cf0" class="form-control">
+                    <textarea type="text" id="functions_cf0" name="functions_cf0" class="form-control" oninput="autoExpand(this)"></textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <input type="text" id="success_indicator_cf0" name="success_indicator_cf0" class="form-control">
+                    <textarea type="text" id="success_indicator_cf0" name="success_indicator_cf0" class="form-control" oninput="autoExpand(this)"></textarea>
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
@@ -108,11 +108,11 @@
             <div class="row">
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Support Functions </p>
-                    <input type="text" id="functions_sf0" name="functions_sf0" class="form-control">
+                    <textarea type="text" id="functions_sf0" name="functions_sf0" class="form-control" oninput="autoExpand(this)"></textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <input type="text" id="success_indicator_sf0" name="success_indicator_sf0" class="form-control">
+                    <textarea type="text" id="success_indicator_sf0" name="success_indicator_sf0" class="form-control" oninput="autoExpand(this)"></textarea>
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
