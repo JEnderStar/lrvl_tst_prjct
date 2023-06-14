@@ -27,6 +27,7 @@ $("#grade_form").on("submit", function (e) {
                             confirmButtonText: 'Okay'
                         }).then((result) => {
                             if (result.isConfirmed) {
+                                // redirect to page
                                 window.location.href = "/gradedc/";
                             }
                         })
@@ -59,29 +60,41 @@ $("#grade_form").on("submit", function (e) {
 });
 
 function autoExpand(textarea){
+    // reset textarea height size
     textarea.style.height = 'auto';
+    // automatically adjust textarea size
     textarea.style.height = textarea.scrollHeight + 'px';
 }
 
 $("textarea").each(function(textarea) {
+    // automatically adjust textarea size when loaded
     $(this).height( $(this)[0].scrollHeight );
 });
 
 $(document).ready(function () {
     $('.input-container').on('change', 'input', function () {
+        // finds the container of that index
         var container = $(this).closest('.input-container');
+        // find the input inside the container
         var inputs = container.find('input');
+        // find the value of the checked input
         var currentValue = $(this).val();
 
-        inputs.prop('readonly', false); // Reset readonly for all inputs 
+        // Reset readonly for all inputs
+        inputs.prop('readonly', false); 
 
         if (currentValue !== '') {
+            // make all input other than user inputted readonly
             inputs.not(this).prop('readonly', true);
         }
+        //get value of user input to a4
         container.find('.a4-input').val(currentValue);
+        //always make a4 input readonly
         container.find('.a4-input').prop('readonly', true);
         
+        // get far input container
         var averageContainer = $('.average-container');
+        // get far input
         var a4Inputs = $('.a4-input');
 
         var sum = 0;
@@ -90,12 +103,16 @@ $(document).ready(function () {
         a4Inputs.each(function () {
             var value = $(this).val();
             if (value !== '') {
+                //get all a4 input values
                 sum += parseFloat(value);
+                //count all a4 input elements
                 count++;
             }
         });
-
+        
+        // count divide sum of all a4
         var average = count > 0 ? sum / count : 0;
+        // place to far
         averageContainer.find('.far-input').val(average.toFixed(2));
     });
 });

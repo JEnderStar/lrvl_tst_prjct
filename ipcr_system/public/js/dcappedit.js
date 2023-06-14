@@ -3,13 +3,18 @@ let errorMessages = '';
     var form = document.getElementById('approve_form');
     var buttons = form.querySelectorAll('button[type="submit"]');
 
-    buttons.forEach(function(button) {      // For each button press will use the function
-        button.addEventListener('click', function(e) {      // Specific button pressed
-            var status = button.value;    //get value of clicked button
-            let formData = new FormData($('#approve_form')[0]);     //get all data from form into array
+    // For each button press will use the function
+    buttons.forEach(function(button) {
+        // Specific button pressed
+        button.addEventListener('click', function(e) {
+            //get value of clicked button
+            var status = button.value;
+            //get all data from form into array
+            let formData = new FormData($('#approve_form')[0]);
 
             if (status == "Approved by DC") {
-                e.preventDefault();     // prevent from redirecting to other page
+                // prevent from redirecting to other page
+                e.preventDefault();
                 Swal.fire({
                     title: "Are you sure you want to approve this form?",
                     icon: "warning",
@@ -18,16 +23,19 @@ let errorMessages = '';
                     cancelButtonText: "Cancel"
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        formData.append('status', status);      // get button value for replacing "status" data in ipcr form
+                        // get button value for replacing "status" data in ipcr form
+                        formData.append('status', status);
                         $.ajax({
-                            url: "/approvedc/" + $('#approve_form').attr("data-id"),    // link to update ipcr form
+                            // link to update ipcr form
+                            url: "/approvedc/" + $('#approve_form').attr("data-id"),
                             method: "POST",
                             processData: false,
                             contentType: false,
                             cache: false,
-                            data: formData,     // get array of form data
+                            // get array of form data
+                            data: formData,
                             headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')    //CSRF Token
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             success: function(response) {
                                 if (response.success) {
@@ -38,7 +46,8 @@ let errorMessages = '';
                                         confirmButtonText: 'Okay'
                                     }).then((result) => {
                                         if (result.isConfirmed) {
-                                            window.location.href = "/approvedc";    // redirect to Approve Page
+                                            // redirect to Approve Page
+                                            window.location.href = "/approvedc";
                                         }
                                     })
                                 } else {
@@ -94,17 +103,6 @@ let errorMessages = '';
                                 let reason = result.value;
                                 formData.append('status', status);
                                 formData.append('reason', reason);
-                                // Swal.fire({
-                                //     title: 'Now Loading',
-                                //     html: '<b> Please wait... </b>',
-                                //     timer: 10000,
-                                //     didOpen: () => {
-                                //         Swal.showLoading()
-                                //     },
-                                //     willClose: () => {
-                                //         clearInterval(timerInterval)
-                                //     }
-                                // });
                                 $.ajax({
                                     url: "/approvedc/" + $('#approve_form').attr("data-id"),
                                     method: "POST",

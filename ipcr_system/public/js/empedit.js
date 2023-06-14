@@ -58,10 +58,13 @@ let errorMessages = '';
     });
 
     function autoExpand(textarea){
+        // reset textarea height size
         textarea.style.height = 'auto';
+        // automatically adjust textarea size
         textarea.style.height = textarea.scrollHeight + 'px';
     }
 
     $("textarea").each(function(textarea) {
+        // automatically adjust textarea size when loaded
         $(this).height( $(this)[0].scrollHeight );
     });
