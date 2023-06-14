@@ -49,7 +49,6 @@
     $('#approve_table').DataTable({
         width: '100%',
         "paging": true,
-        "lengthChange": false,
         "searching": true,
         "ordering": true,
         "info": true,
