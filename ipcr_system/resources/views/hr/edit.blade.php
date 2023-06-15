@@ -319,13 +319,14 @@
                 <div class="col-1">
 
                 </div>
-                <div class="col-1">
-
+                <div class="col-2 w-100">
+                    <div class="float-right">
+                        <label> Final Average Rating </label>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <label> Final Average Rating </label>
-                    @if($ipcr_form->rating != null)
-                    <p> {{$ipcr_form['rating']}} </p>
+                <div class="col-1">
+                    @if($ipcr_form->far != null)
+                    <p> {{$ipcr_form['far']}} </p>
                     @else
                     <p style="color:gray; float: right; padding-right: 56px;"> N/A </p>
                     @endif

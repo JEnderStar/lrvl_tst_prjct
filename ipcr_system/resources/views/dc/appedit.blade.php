@@ -2,7 +2,7 @@
 
 @section('content')
 
-@role(['employee', 'admin'])
+@role(['division_chief', 'admin'])
 <div class="card">
     <a href="/approvedc" class="btn btn-primary col-1">
         << Back </a>

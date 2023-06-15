@@ -307,14 +307,12 @@
                 <div class="col-1">
 
                 </div>
-                <div class="col-1">
-
+                <div class="col-2 w-100">
+                    <div class="float-right">
+                        <label> Final Average Rating </label>
+                    </div>
                 </div>
-                <div class="col-1">
-
-                </div>
-                <div class="col-2 average-container">
-                    <label> Final Average Rating </label>
+                <div class="col-1 average-container">
                     <p>{{$ipcr_form['far']}}</p>
                 </div>
             </div>

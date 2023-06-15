@@ -310,26 +310,19 @@
 
                 <div class="row">
                     <div class="col-2">
-
                     </div>
                     <div class="col-2">
-
                     </div>
                     <div class="col-2">
-
                     </div>
                     <div class="col-1">
-
                     </div>
-                    <div class="col-1">
-
+                    <div class="col-2 w-100">
+                        <div class="float-right">
+                            <label> Final Average Rating </label>
+                        </div>
                     </div>
-                    <div class="col-1">
-
-                    </div>
-                    <div class="col-2 average-container">
-                        <label> Final Average Rating </label>
-                        <p> </p>
+                    <div class="col-1 average-container">
                         <input type="text" id="far" name="far" class="form-control far-input" value="0.00" readonly>
                     </div>
                 </div>
