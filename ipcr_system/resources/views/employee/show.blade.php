@@ -8,7 +8,7 @@
         << Back </a>
             <br>
             <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
-                <h3> VIEW YOUR SUBMITTED IPCR FORM </h3>
+                <h3> View your submitted IPCR Form </h3>
             </div>
 
             <div class="row">

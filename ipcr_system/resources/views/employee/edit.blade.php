@@ -8,7 +8,7 @@
         << Back </a>
             <br>
             <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
-                <h3> EDIT YOUR IPCR FORM </h3>
+                <h3> Edit your IPCR Form </h3>
             </div>
             <br>
             <form class="require-validation" action="/employee/edit/{{$id}}" data-user-id="{{$id}}" id="employee_form" method="POST">

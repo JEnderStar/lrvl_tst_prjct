@@ -5,9 +5,9 @@
 @role(['employee', 'admin'])
 <div class="card">
     <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
-        <h3> VIEW YOUR SUBMITTED IPCR FORM </h3>
+        <h3> View your submitted IPCR Form </h3>
     </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-12">
             <table class="table table-striped table-bordered table-mm" id="ipcr_form_table">
                 <thead>
@@ -39,12 +39,18 @@
                                 <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split dropdown-icon" data-toggle="dropdown"> Action </button>
                                 <div class="dropdown-menu">
                                     <a href="/employee/{{$ipcrform['id']}}" class="dropdown-item">              View </a>
+                                    @if($ipcrform["status"] == "Pending" || $ipcrform["status"] == "Approved by DC" || $ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Grading by DC" || $ipcrform["status"] == "Rejected by Director")
                                     <a href="/employee/{{$ipcrform['id']}}/edit" class="dropdown-item">              Edit </a>
+                                    @endif
+                                    @if($ipcrform["status"] == "Pending" || $ipcrform["status"] == "Approved by DC" || $ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Rejected by Director")
                                     <button type="button" id="delete_form" data-product-id="{{$ipcrform['id']}}" class="dropdown-item">            Delete </button>
+                                    @endif
+                                    @if($ipcrform["status"] == "Approved by Director" || $ipcrform["status"] == "Verified")
                                     <form action="/printform/{{$ipcrform['id']}}" id="print_form" data-product-id="{{$ipcrform['id']}}" method="POST">
                                         @CSRF
                                         <button type="submit" id="print_ipcr" class="dropdown-item">              Print </button>
                                     </form>
+                                    @endif
                                 </div>
                             </div>
                         </td>
@@ -68,12 +74,18 @@
                                 <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split dropdown-icon" data-toggle="dropdown"> Action </button>
                                 <div class="dropdown-menu">
                                     <a href="/employee/{{$ipcrform['id']}}" class="dropdown-item">              View </a>
+                                    @if($ipcrform["status"] == "Pending" || $ipcrform["status"] == "Approved by DC" || $ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Grading by DC" || $ipcrform["status"] == "Rejected by Director")
                                     <a href="/employee/{{$ipcrform['id']}}/edit" class="dropdown-item">              Edit </a>
+                                    @endif
+                                    @if($ipcrform["status"] == "Pending" || $ipcrform["status"] == "Approved by DC" || $ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Rejected by Director")
                                     <button type="button" id="delete_form" data-product-id="{{$ipcrform['id']}}" class="dropdown-item">            Delete </button>
+                                    @endif
+                                    @if($ipcrform["status"] == "Approved by Director" || $ipcrform["status"] == "Verified")
                                     <form action="/printform/{{$ipcrform['id']}}" id="print_form" data-product-id="{{$ipcrform['id']}}" method="POST">
                                         @CSRF
                                         <button type="submit" id="print_ipcr" class="dropdown-item">              Print </button>
                                     </form>
+                                    @endif
                                 </div>
                             </div>
                         </td>

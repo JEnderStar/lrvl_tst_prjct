@@ -5,9 +5,9 @@
 @role(['division_chief', 'admin'])
 <div class="card">
     <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
-        <h3> APPROVE IPCR FORMS </h3>
+        <h3> Approve IPCR Forms </h3>
     </div>
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-12">
             <table class="table table-striped table-bordered table-mm" id="approve_table">
                 <thead>

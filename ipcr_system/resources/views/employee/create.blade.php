@@ -5,7 +5,7 @@
 @role(['employee', 'admin'])
 <div class="card">
     <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
-        <h3> CREATE YOUR IPCR FORM </h3>
+        <h3> Create your IPCR Form </h3>
     </div>
     <form class="require-validation" action="/employee/" id="employee_form" method="POST">
         @CSRF

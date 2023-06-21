@@ -331,8 +331,8 @@ class IPCRController extends Controller
 
     public function DeleteForm(string $id, Request $request)
     {
-        $ipcr_form = Form::find($id);
-        $ipcr_form->delete();
+        Form::find($id)->delete();
+        Input::where("employee_id", $id)->delete();
 
         return response()->json(["success" => true, "message" => "Successfully deleted"]);
     }
