@@ -2,8 +2,6 @@
 
 @section('content')
 
-@role(['division_chief', 'admin'])
-
 <div class="card">
     <a href="/gradedc" class="btn btn-primary col-1">
         << Back </a>
@@ -140,7 +138,7 @@
                             <input type="text" id="remarks_sp{{$index}}" name="remarks_sp{{$index}}" class="form-control">
                         </div>
                         <div hidden>
-                            <input type="text" id="graded_by_sp{{$index}}" name="graded_by_sp{{$index}}" class="form-control" value="{{ Auth::user()->first_name }}" readonly>
+                            <input type="text" id="graded_by_sp{{$index}}" name="graded_by_sp{{$index}}" class="form-control" value="{{ Auth::user()->email }}" readonly>
                         </div>
                     </div>
                     <p> </p>
@@ -220,7 +218,7 @@
                             <input type="text" id="remarks_cf{{$index}}" name="remarks_cf{{$index}}" class="form-control">
                         </div>
                         <div hidden>
-                            <input type="text" id="graded_by_cf{{$index}}" name="graded_by_cf{{$index}}" class="form-control" value="{{ Auth::user()->first_name }}" readonly>
+                            <input type="text" id="graded_by_cf{{$index}}" name="graded_by_cf{{$index}}" class="form-control" value="{{ Auth::user()->email }}" readonly>
                         </div>
                     </div>
                     <p> </p>
@@ -300,7 +298,7 @@
                             <input type="text" id="remarks_sf{{$index}}" name="remarks_sf{{$index}}" class="form-control">
                         </div>
                         <div hidden>
-                            <input type="text" id="graded_by_sf{{$index}}" name="graded_by_sf{{$index}}" class="form-control" value="{{ Auth::user()->first_name }}" readonly>
+                            <input type="text" id="graded_by_sf{{$index}}" name="graded_by_sf{{$index}}" class="form-control" value="{{ Auth::user()->email }}" readonly>
                         </div>
                     </div>
                     <p> </p>
@@ -347,6 +345,5 @@
 </div>
 
 <script src="{{asset('js/dcgrade.js')}}"> </script>
-@endrole
 
 @endsection

@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role(['employee', 'admin'])
 <div class="card">
     <a href="/employee" class="btn btn-primary col-1">
         << Back </a>
@@ -340,6 +339,5 @@
             </div>
 
 </div>
-@endrole
 
 @endsection

@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role(['employee', 'admin'])
 <div class="card">
     <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
         <h3> Create your IPCR Form </h3>
@@ -128,7 +127,6 @@
         </div>
     </form>
 </div>
-@endrole
 
 <script src="{{asset('js/empcreate.js')}}"> </script>
 @endsection

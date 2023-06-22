@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role(['hr', 'admin'])
 <div class="card">
     <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
         <h3> Create schedule for IPCR </h3>
@@ -74,7 +73,6 @@
         </div>
     </form>
 </div>
-@endrole
 
 <script src="{{asset('js/hrcreate.js')}}"> </script>
 @endsection

@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role(['director', 'admin'])
 <div class="card">
     <a href="/approvedir" class="btn btn-primary col-1">
         << Back </a>
@@ -96,12 +95,8 @@
                         <label> A4 </label>
                         <p> </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <label> Remarks </label>
-                        <p> </p>
-                    </div>
-                    <div class="col-1">
-                        <label> Graded by </label>
                         <p> </p>
                     </div>
                 </div>
@@ -129,11 +124,8 @@
                     <div class="col-1">
                         <p> {{$addinput['a4']}} </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <p> {{$addinput['remarks']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$addinput['graded_by']}} </p>
                     </div>
                 </div>
                 @endif
@@ -173,12 +165,8 @@
                         <label> A4 </label>
                         <p> </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <label> Remarks </label>
-                        <p> </p>
-                    </div>
-                    <div class="col-1">
-                        <label> Graded by </label>
                         <p> </p>
                     </div>
                 </div>
@@ -206,11 +194,8 @@
                     <div class="col-1">
                         <p> {{$addinput['a4']}} </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <p> {{$addinput['remarks']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$addinput['graded_by']}} </p>
                     </div>
                 </div>
                 @endif
@@ -250,12 +235,8 @@
                         <label> A4 </label>
                         <p> </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <label> Remarks </label>
-                        <p> </p>
-                    </div>
-                    <div class="col-1">
-                        <label> Graded by </label>
                         <p> </p>
                     </div>
                 </div>
@@ -283,11 +264,8 @@
                     <div class="col-1">
                         <p> {{$addinput['a4']}} </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <p> {{$addinput['remarks']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$addinput['graded_by']}} </p>
                     </div>
                 </div>
                 @endif
@@ -339,6 +317,5 @@
 </div>
 
 <script src="{{asset('js/dirappedit.js')}}"> </script>
-@endrole
 
 @endsection

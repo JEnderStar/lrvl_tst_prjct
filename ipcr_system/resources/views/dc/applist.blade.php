@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role(['division_chief', 'admin'])
 <div class="card">
     <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
         <h3> Approve IPCR Forms </h3>
@@ -56,6 +55,5 @@
         "responsive": true
     });
 </script>
-@endrole
 
 @endsection

@@ -25,6 +25,17 @@ let errorMessages = '';
                     if (result.isConfirmed) {
                         // get button value for replacing "status" data in ipcr form
                         formData.append('status', status);
+                        Swal.fire({
+                            title: 'Now Loading',
+                            html: '<b> Please wait... </b>',
+                            timer: 15000,
+                            didOpen: () => {
+                                Swal.showLoading()
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        })
                         $.ajax({
                             // link to update ipcr form
                             url: "/approvedir/" + $('#approve_form').attr("data-id"),
@@ -87,7 +98,7 @@ let errorMessages = '';
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Swal.fire({
-                            title: "Please state the reason for rejection to be emailed to the employee/patient",
+                            title: "Please state the reason for rejection to be emailed to the Employee and Division Chief",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonText: "Submit",
@@ -103,6 +114,17 @@ let errorMessages = '';
                                 let reason = result.value;
                                 formData.append('status', status);
                                 formData.append('reason', reason);
+                                Swal.fire({
+                                    title: 'Now Loading',
+                                    html: '<b> Please wait... </b>',
+                                    timer: 15000,
+                                    didOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                    willClose: () => {
+                                        clearInterval(timerInterval)
+                                    }
+                                })
                                 $.ajax({
                                     url: "/approvedir/" + $('#approve_form').attr("data-id"),
                                     method: "POST",

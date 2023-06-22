@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role(['employee', 'admin'])
 <div class="card">
     <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
         <h3> View your submitted IPCR Form </h3>
@@ -97,7 +96,6 @@
         </div>
     </div>
 </div>
-@endrole
 
 <script>
     $("body").on("click", "#delete_form", function(e) {
@@ -116,7 +114,7 @@
                 Swal.fire({
                     title: 'Now Loading',
                     html: '<b> Please wait... </b>',
-                    timer: 10000,
+                    timer: 15000,
                     didOpen: () => {
                         Swal.showLoading()
                     },

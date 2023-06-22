@@ -32,6 +32,11 @@
         vertical-align: top;
     }
 
+    .test{
+        position: relative;
+        left: 520px;
+    }
+
     .spann {
         display: inline-block;
         margin: 0 auto;
@@ -46,10 +51,12 @@
                 <p>   </p>
                 <p> I, <b>{{$Form['first_name']}} {{$Form['mi']}} {{$Form['last_name']}}</b>, {{$Form['position']}} of the <b>{{$Form['office']}}</b> of the <b>Central Management Information Office</b> to deliver and agee to be rated on the attainment of the following actual in accordance with the indicated measures for the period {{$Schedule['duration_from']}} to {{$Schedule['duration_to']}}. </p>
                 <p>   </p>
-                <p class="right">________________________</p>
-                <p class="right"><b>{{$Form['first_name']}} {{$Form['mi']}} {{$Form['last_name']}}</b></p>
-                <p class="right">{{$Form['position']}}</p>
-                <p class="right">Date: __________________</p>
+                <div class="test">
+                    <p class="center-nm">________________________</p>
+                    <p class="center-nm"><b>{{$Form['first_name']}} {{$Form['mi']}} {{$Form['last_name']}}</b></p>
+                    <p class="center-nm">{{$Form['position']}}</p>
+                    <p class="center-nm">Date: __________________</p>
+                </div>
             </td>
         </tr>
         <tr>
@@ -184,7 +191,33 @@
                 <p> <b> Final Average Rating </b> </p>
             </td>
             <td colspan="14"> </td>
-            <td colspan="1" class="middle center"> <b> {{$Form['far']}} </b> </td>
+            <td colspan="1" class="middle center">
+                @switch($Form['far'])
+                @case('5.00')
+                <b> 5 </b>
+                @break
+
+                @case('4.00')
+                <b> 4 </b>
+                @break
+
+                @case('3.00')
+                <b> 3 </b>
+                @break
+
+                @case('2.00')
+                <b> 2 </b>
+                @break
+
+                @case('1.00')
+                <b> 1 </b>
+                @break
+
+                @default
+                <b> {{$Form['far']}} </b>
+                @break
+                @endswitch
+            </td>
             <td colspan="5"> </td>
         </tr>
         <tr>

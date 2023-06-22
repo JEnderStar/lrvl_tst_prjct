@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role(['division_chief', 'admin'])
 <div class="card">
     <a href="/approvedc" class="btn btn-primary col-1">
         << Back </a>
@@ -159,6 +158,5 @@
 </div>
 
 <script src="{{asset('js/dcappedit.js')}}"> </script>
-@endrole
 
 @endsection

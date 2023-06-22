@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Ipcrform as Form;
 use App\Models\Input;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ApproveDCController extends Controller
 {
@@ -60,14 +62,31 @@ class ApproveDCController extends Controller
     public function update(Request $request, string $id)
     {
         $ipcr_form = Form::find($id);
+        $email = $ipcr_form->email;
         $status = $request->status;
 
         if($status == "Approved by DC"){
+
+            Mail::send('mail.approvedc', function ($message) use ($email) {
+                $message->to($email);
+                $message->subject('Division Chief approved your form');
+                $message->from(Auth::user()->email, 'IPCR Division Chief');
+            });
+
             $ipcr_form->status = $request->status;
             $ipcr_form->save();
 
             return response()->json(["success" => true, "message" => "Successfully approved!"]);
         }else if($status == "Rejected by DC"){
+            $data = [
+                'reason' => $request->reason,
+            ];
+            Mail::send('mail.rejectdc', $data, function ($message) use ($data, $email) {
+                $message->to($email);
+                $message->subject('Division Chief rejected your form');
+                $message->from(Auth::user()->email, 'IPCR Division Chief');
+            });
+
             $ipcr_form->status = $request->status;
             $ipcr_form->save();
 

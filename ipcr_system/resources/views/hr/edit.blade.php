@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role(['hr', 'admin'])
 <div class="card">
     <a href="/hr" class="btn btn-primary col-1">
         << Back </a>
@@ -356,6 +355,5 @@
 </div>
 
 <script src="{{asset('js/hredit.js')}}"> </script>
-@endrole
 
 @endsection

@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role(['hr', 'admin'])
 <div class="card">
     <div class="w-100" style="background-color:#00B0F0; color:white; display:flex; justify-content:center;">
         <h3> List of all IPCR Form </h3>
@@ -44,7 +43,6 @@
         </div>
     </div>
 </div>
-@endrole
 
 <script>
     $('#ipcr_form_table').DataTable({

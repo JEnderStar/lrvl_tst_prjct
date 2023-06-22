@@ -20,22 +20,30 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Create IPCR Form
-Route::resource('/employee', App\Http\Controllers\IPCRController::class);
-Route::post("/deleteform/{id}", [App\Http\Controllers\IPCRController::class, "DeleteForm"])->name("DeleteForm");
+Route::middleware(['role.access:employee'])->group(function () {
+    Route::resource('/employee', App\Http\Controllers\IPCRController::class);
+    Route::post("/deleteform/{id}", [App\Http\Controllers\IPCRController::class, "DeleteForm"])->name("DeleteForm");
 
-//print
-Route::post("/printform/{id}", [App\Http\Controllers\PDFController::class, "printform"])->name("printform");
+    //print
+    Route::post("/printform/{id}", [App\Http\Controllers\PDFController::class, "printform"])->name("printform");
+});
 
 // Set Schedule Form
-Route::resource('/hr', App\Http\Controllers\ScheduleController::class);
+Route::middleware(['role.access:hr'])->group(function () {
+    Route::resource('/hr', App\Http\Controllers\ScheduleController::class);
+});
 
 // Approve or Disapprove by DC
-Route::resource('/approvedc', App\Http\Controllers\ApproveDCController::class);
+Route::middleware(['role.access:dc'])->group(function () {
+    Route::resource('/approvedc', App\Http\Controllers\ApproveDCController::class);
 
-// Grade by DC
-Route::resource('/gradedc', App\Http\Controllers\GradeDCController::class);
+    // Grade by DC
+    Route::resource('/gradedc', App\Http\Controllers\GradeDCController::class);
+});
 
 // Approve by Director
-Route::resource('/approvedir', App\Http\Controllers\ApproveDirController::class);
+Route::middleware(['role.access:director'])->group(function () {
+    Route::resource('/approvedir', App\Http\Controllers\ApproveDirController::class);
+});
 
 Auth::routes();

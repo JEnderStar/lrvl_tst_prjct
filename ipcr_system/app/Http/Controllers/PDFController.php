@@ -27,14 +27,14 @@ class PDFController extends Controller
 
         $dompdf = new Dompdf();
 
-        $dompdf->setPaper('long', 'landscape');
-        $options = new Options();
-        $options->set('margin_top', '0.2in');
-        $options->set('margin_right', '0.2in');
-        $options->set('margin_bottom', '0.2in');
-        $options->set('margin_left', '0.2in');
+        $dompdf->setPaper('Legal', 'landscape');
+        // $options = new Options();
+        // $options->set('margin_top', '0.2in');
+        // $options->set('margin_right', '0.2in');
+        // $options->set('margin_bottom', '0.2in');
+        // $options->set('margin_left', '0.2in');
 
-        $dompdf->setOptions($options);
+        // $dompdf->setOptions($options);
 
         $ipcr_form = Form::find($id);
         $schedule = Schedule::where('purpose', 'Performance Targets')->first();

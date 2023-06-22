@@ -25,6 +25,18 @@ let errorMessages = '';
                     if (result.isConfirmed) {
                         // get button value for replacing "status" data in ipcr form
                         formData.append('status', status);
+                        // loading dialog pops up 
+                        Swal.fire({
+                            title: 'Now Loading',
+                            html: '<b> Please wait... </b>',
+                            timer: 15000,
+                            didOpen: () => {
+                                Swal.showLoading()
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval)
+                            }
+                        })
                         $.ajax({
                             // link to update ipcr form
                             url: "/approvedc/" + $('#approve_form').attr("data-id"),
@@ -103,6 +115,17 @@ let errorMessages = '';
                                 let reason = result.value;
                                 formData.append('status', status);
                                 formData.append('reason', reason);
+                                Swal.fire({
+                                    title: 'Now Loading',
+                                    html: '<b> Please wait... </b>',
+                                    timer: 15000,
+                                    didOpen: () => {
+                                        Swal.showLoading()
+                                    },
+                                    willClose: () => {
+                                        clearInterval(timerInterval)
+                                    }
+                                })
                                 $.ajax({
                                     url: "/approvedc/" + $('#approve_form').attr("data-id"),
                                     method: "POST",

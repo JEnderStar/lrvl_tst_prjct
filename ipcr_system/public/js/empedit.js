@@ -10,6 +10,17 @@ let errorMessages = '';
             cancelButtonText: "Cancel"
         }).then((result) => {
             if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Now Loading',
+                    html: '<b> Please wait... </b>',
+                    timer: 15000,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    },
+                    willClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                })
                 $.ajax({
                     url: "/employee/" + $('#employee_form').attr("data-user-id"),
                     method: "POST",

@@ -11,6 +11,17 @@ $("#grade_form").on("submit", function (e) {
         cancelButtonText: "Cancel"
     }).then((result) => {
         if (result.isConfirmed) {
+            Swal.fire({
+                title: 'Now Loading',
+                html: '<b> Please wait... </b>',
+                timer: 15000,
+                didOpen: () => {
+                    Swal.showLoading()
+                },
+                willClose: () => {
+                    clearInterval(timerInterval)
+                }
+            })
             $.ajax({
                 url: "/gradedc/" + $('#grade_form').attr("data-id"),
                 method: "POST",

@@ -2,7 +2,6 @@
 
 @section('content')
 
-@role(['employee', 'admin'])
 <div class="card">
     <a href="/employee" class="btn btn-primary col-1">
         << Back </a>
@@ -180,7 +179,6 @@
                 @endif
             </form>
 </div>
-@endrole
 
 <script src="{{asset('js/empedit.js')}}"> </script>
 @endsection

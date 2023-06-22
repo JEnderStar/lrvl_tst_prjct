@@ -78,10 +78,8 @@ class IPCRController extends Controller
         $schedule = Schedule::where('purpose', 'Performance Targets')->first();
 
         if ($validator->passes()) {
-            $timenow = Carbon::now()->toDateTimeString();
-
             $ipcr_form = new Form();
-            $ipcr_form->date_created = $timenow;
+            $ipcr_form->date_created = date("Y");
             $ipcr_form->covered_period = $request->covered_period;
             $ipcr_form->first_name = $request->first_name;
             $ipcr_form->last_name = $request->last_name;

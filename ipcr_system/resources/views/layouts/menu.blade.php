@@ -36,41 +36,88 @@
     </a>
 </li>
 
+@if(DB::table('schedule_ipcr')->where('purpose', 'Performance Targets')->get()->isEmpty())
+<li class="nav-item" style="cursor: not-allowed">
+    <a class="nav-link {{ Request::is('employee/create') ? 'active' : '' }}" onclick="notAllowed()">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Create IPCR Form</p>
+    </a>
+</li>
+@else
 <li class="nav-item">
     <a href="/employee/create" class="nav-link {{ Request::is('employee/create') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Create IPCR Form</p>
     </a>
 </li>
+@endif
 @endrole
 
 @role(['division_chief', 'admin'])
 @role('admin')
 <label style="color:white"> Division Chief </label>
 @endrole
+@if(DB::table('schedule_ipcr')->where('purpose', 'Accomplished & rated IPCR')->get()->isEmpty())
+<li class="nav-item">
+    <a class="nav-link {{ Request::is('approvedc') ? 'active' : '' }}" onclick="notAllowed()">
+        <i class="nav-icon fas fa-home"></i>
+        <p>IPCR Approvals</p>
+    </a>
+</li>
+@else
 <li class="nav-item">
     <a href="/approvedc" class="nav-link {{ Request::is('approvedc') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>IPCR Approvals</p>
     </a>
 </li>
+@endif
 
+@if(DB::table('schedule_ipcr')->where('purpose', 'Accomplished & rated IPCR')->get()->isEmpty())
+<li class="nav-item">
+    <a class="nav-link {{ Request::is('gradedc') ? 'active' : '' }}" onclick="notAllowed()">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Grade IPCR</p>
+    </a>
+</li>
+@else
 <li class="nav-item">
     <a href="/gradedc" class="nav-link {{ Request::is('gradedc') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Grade IPCR</p>
     </a>
 </li>
+@endif
 @endrole
 
 @role(['director', 'admin'])
 @role('admin')
 <label style="color:white"> Director </label>
 @endrole
+@if(DB::table('schedule_ipcr')->where('purpose', 'Accomplished & rated IPCR')->get()->isEmpty())
+<li class="nav-item">
+    <a class="nav-link {{ Request::is('approvedir') ? 'active' : '' }}" onclick="notAllowed()">
+        <i class="nav-icon fas fa-home"></i>
+        <p>Graded IPCR Approvals</p>
+    </a>
+</li>
+@else
 <li class="nav-item">
     <a href="/approvedir" class="nav-link {{ Request::is('approvedir') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Graded IPCR Approvals</p>
     </a>
 </li>
+@endif
 @endrole
+
+<script>
+    function notAllowed() {
+        Swal.fire({
+            title: 'No schedule for creating IPCR',
+            text: "HR hasn't created a schedule yet. Wait for an email of HR.",
+            icon: 'info',
+            confirmButtonText: 'Okay'
+        })
+    }
+</script>

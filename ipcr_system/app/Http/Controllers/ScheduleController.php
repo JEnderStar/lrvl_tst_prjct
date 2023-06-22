@@ -7,6 +7,7 @@ use App\Models\Ipcrform as Form;
 use App\Models\Schedule;
 use App\Models\Input;
 use App\Models\Accounts as User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
@@ -128,6 +129,14 @@ class ScheduleController extends Controller
     public function update(Request $request, string $id)
     {
         $ipcr_form = Form::find($id);
+        $email = $ipcr_form->email;
+
+        Mail::send('mail.verified', function ($message) use ($email) {
+            $message->to($email);
+            $message->subject('HR received your form');
+            $message->from(Auth::user()->email, 'IPCR HR');
+        });
+        
         $ipcr_form->status = "Verified";
         $ipcr_form->save();
 
