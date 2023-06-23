@@ -34,7 +34,7 @@ Route::middleware(['role.access:hr'])->group(function () {
 });
 
 // Approve or Disapprove by DC
-Route::middleware(['role.access:dc'])->group(function () {
+Route::middleware(['role.access:division_chief'])->group(function () {
     Route::resource('/approvedc', App\Http\Controllers\ApproveDCController::class);
 
     // Grade by DC
