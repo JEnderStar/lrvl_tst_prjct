@@ -66,8 +66,8 @@ class ApproveDCController extends Controller
         $status = $request->status;
 
         if($status == "Approved by DC"){
-
-            Mail::send('mail.approvedc', function ($message) use ($email) {
+            $data = [ ];
+            Mail::send('mail.approvedc', $data, function ($message) use ($email) {
                 $message->to($email);
                 $message->subject('Division Chief approved your form');
                 $message->from(Auth::user()->email, 'IPCR Division Chief');
