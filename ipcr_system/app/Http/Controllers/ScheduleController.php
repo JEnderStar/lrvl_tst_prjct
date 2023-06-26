@@ -28,7 +28,17 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        return view("hr.create");
+        $account = User::get();
+
+        return view("hr.create", compact('account'));
+    }
+
+    public function getEmployees()
+    {
+        $account = User::get();
+        dd($account);
+
+        return response()->json($account);
     }
 
     /**
@@ -37,12 +47,14 @@ class ScheduleController extends Controller
     public function store(Request $request)
     {
 
-        if($request->office == "CMIO"){
+        if ($request->office == "CMIO") {
             $division_chief = User::where('office', 'CMIO')->where('position', 'Division Chief')->first();
             $director = User::where('office', 'CMIO')->where('position', 'Director')->first();
 
-            $division_chief_name = $division_chief->first_name." ".$division_chief->last_name;
-            $director_name = $director->first_name." ".$director->last_name;
+            $division_chief_name = $division_chief->first_name . " " . $division_chief->last_name;
+            $division_chief_email = $division_chief->email;
+            $director_name = $director->first_name . " " . $director->last_name;
+            $director_email = $director->email;
             $schedule_form = Schedule::create([
                 'type' => $request->type,
                 'purpose' => $request->purpose,
@@ -54,12 +66,55 @@ class ScheduleController extends Controller
                 'duration_from' => $request->duration_from,
                 'duration_to' => $request->duration_to
             ]);
-        }else if($request->office == "PSD"){
+
+            $selectedOptions = $request->input('employees');
+
+            foreach ($request->input('employees') as $first_name) {
+                if (in_array('CMIO_All', $selectedOptions)) {
+                    // "CMIO_All" is selected
+                    // Perform the desired logic for "CMIO_All"
+                    $user = User::where('office', 'CMIO')->where('Position', 'Employee')->get();
+                    foreach ($user as $users) {
+                        $email = $users['email'];
+                        $data = [
+                            'duration_from' => $request->duration_from,
+                            'duration_to' => $request->duration_to,
+                            'purpose' => $request->purpose,
+                            'covered_period' => $request->covered_period,
+                            'hr' => Auth::user()->first_name
+                        ];
+                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                            $message->to($email); // Get email of users when?
+                            $message->subject('Notification for Scheduling');
+                            $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
+                        });
+                    }
+                    break;
+                } else {
+                    // Other options are selected
+                    // Perform the logic for other options
+                    $user = User::where('first_name', $first_name)->first();
+                    $email = $user['email'];
+                    $data = [
+                        'duration_from' => $request->duration_from,
+                        'duration_to' => $request->duration_to,
+                        'purpose' => $request->purpose,
+                        'covered_period' => $request->covered_period,
+                        'hr' => Auth::user()->first_name
+                    ];
+                    Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                        $message->to($email); // Get email of users when?
+                        $message->subject('Notification for Scheduling');
+                        $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
+                    });
+                }
+            };
+        } else if ($request->office == "PSD") {
             $division_chief = User::where('office', 'PSD')->where('position', 'Division Chief')->first();
             $director = User::where('office', 'PSD')->where('position', 'Director')->first();
 
-            $division_chief_name = $division_chief->first_name." ".$division_chief->last_name;
-            $director_name = $director->first_name." ".$director->last_name;
+            $division_chief_name = $division_chief->first_name . " " . $division_chief->last_name;
+            $director_name = $director->first_name . " " . $director->last_name;
             $schedule_form = Schedule::create([
                 'type' => $request->type,
                 'purpose' => $request->purpose,
@@ -71,7 +126,50 @@ class ScheduleController extends Controller
                 'duration_from' => $request->duration_from,
                 'duration_to' => $request->duration_to
             ]);
-        }else if($request->office == "All"){
+
+            $selectedOptions = $request->input('employees');
+
+            foreach ($request->input('employees') as $first_name) {
+                if (in_array('PSD_All', $selectedOptions)) {
+                    // "CMIO_All" is selected
+                    // Perform the desired logic for "PSD_All"
+                    $user = User::where('office', 'PSD')->where('Position', 'Employee')->get();
+                    foreach ($user as $users) {
+                        $email = $users['email'];
+                        $data = [
+                            'duration_from' => $request->duration_from,
+                            'duration_to' => $request->duration_to,
+                            'purpose' => $request->purpose,
+                            'covered_period' => $request->covered_period,
+                            'hr' => Auth::user()->first_name
+                        ];
+                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                            $message->to($email); // Get email of users when?
+                            $message->subject('Notification for Scheduling');
+                            $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
+                        });
+                    }
+                    break;
+                } else {
+                    // Other options are selected
+                    // Perform the logic for other options
+                    $user = User::where('first_name', $first_name)->first();
+                    $email = $user['email'];
+                    $data = [
+                        'duration_from' => $request->duration_from,
+                        'duration_to' => $request->duration_to,
+                        'purpose' => $request->purpose,
+                        'covered_period' => $request->covered_period,
+                        'hr' => Auth::user()->first_name
+                    ];
+                    Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                        $message->to($email); // Get email of users when?
+                        $message->subject('Notification for Scheduling');
+                        $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
+                    });
+                }
+            };
+        } else if ($request->office == "All") {
             $division_chief = "DC1";
             $director = "D1";
             $schedule_form = Schedule::create([
@@ -85,19 +183,91 @@ class ScheduleController extends Controller
                 'duration_from' => $request->duration_from,
                 'duration_to' => $request->duration_to
             ]);
+
+            $selectedOptions = $request->input('employees');
+
+            foreach ($request->input('employees') as $first_name) {
+                if(in_array('CMIO_All', $selectedOptions) && in_array('PSD_All', $selectedOptions)){
+                    $user = User::where('Position', 'Employee')->get();
+                    foreach ($user as $users) {
+                        $email = $users['email'];
+                        $data = [
+                            'duration_from' => $request->duration_from,
+                            'duration_to' => $request->duration_to,
+                            'purpose' => $request->purpose,
+                            'covered_period' => $request->covered_period,
+                            'hr' => Auth::user()->first_name
+                        ];
+                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                            $message->to($email); // Get email of users when?
+                            $message->subject('Notification for Scheduling');
+                            $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
+                        });
+                    }
+                    break;
+                } else if (in_array('CMIO_All', $selectedOptions)) {
+                    // "CMIO_All" is selected
+                    // Perform the desired logic for "CMIO_All"
+                    $user = User::where('office', 'CMIO')->where('Position', 'Employee')->get();
+                    foreach ($user as $users) {
+                        $email = $users['email'];
+                        $data = [
+                            'duration_from' => $request->duration_from,
+                            'duration_to' => $request->duration_to,
+                            'purpose' => $request->purpose,
+                            'covered_period' => $request->covered_period,
+                            'hr' => Auth::user()->first_name
+                        ];
+                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                            $message->to($email); // Get email of users when?
+                            $message->subject('Notification for Scheduling');
+                            $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
+                        });
+                    }
+                    break;
+                } else if (in_array('PSD_All', $selectedOptions)) {
+                    // "CMIO_All" is selected
+                    // Perform the desired logic for "PSD_All"
+                    $user = User::where('office', 'PSD')->where('Position', 'Employee')->get();
+                    foreach ($user as $users) {
+                        $email = $users['email'];
+                        $data = [
+                            'duration_from' => $request->duration_from,
+                            'duration_to' => $request->duration_to,
+                            'purpose' => $request->purpose,
+                            'covered_period' => $request->covered_period,
+                            'hr' => Auth::user()->first_name
+                        ];
+                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                            $message->to($email); // Get email of users when?
+                            $message->subject('Notification for Scheduling');
+                            $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
+                        });
+                    }
+                    break;
+                } else {
+                    // Other options are selected
+                    // Perform the logic for other options
+                    $user = User::where('first_name', $first_name)->first();
+                    $email = $user['email'];
+                    $data = [
+                        'duration_from' => $request->duration_from,
+                        'duration_to' => $request->duration_to,
+                        'purpose' => $request->purpose,
+                        'covered_period' => $request->covered_period,
+                        'hr' => Auth::user()->first_name
+                    ];
+                    Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                        $message->to($email); // Get email of users when?
+                        $message->subject('Notification for Scheduling');
+                        $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
+                    });
+                }
+            };
         }
-        
+
         $dv_info = User::where('first_name', $division_chief);
         $dir_info = User::where('first_name', $director);
-        
-        $data = [
-            'Test' => 'Test'
-        ];
-        Mail::send('mail.schedule', $data, function ($message) use ($data) {
-            $message->to("jcuevas@finance.gov.ph"); // Get email of users when?
-            $message->subject('Test Message');
-            $message->from('jcuevas@finance.gov.ph', 'Test Message'); // Get HR email when?
-        });
 
         // return response()->json($schedule_form);
         return response()->json([$schedule_form, "success" => true, "message" => "Successfully created a schedule!"]);
@@ -136,7 +306,7 @@ class ScheduleController extends Controller
             $message->subject('HR received your form');
             $message->from(Auth::user()->email, 'IPCR HR');
         });
-        
+
         $ipcr_form->status = "Verified";
         $ipcr_form->save();
 

@@ -3,7 +3,7 @@
     <body class="hold-transition register-page">
         <div class="register-box">
             <div class="register-logo">
-                <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
+                <a href="{{ url('/home') }}"><b> Online IPCR Filling System </b></a>
             </div>
 
             <div class="card">
@@ -14,37 +14,37 @@
                         @csrf
 
                         <div class="input-group mb-3">
-                                <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name') }}" placeholder="First Name">
-                                <div class="input-group-append">
-                                    <div class="input-group-text"><span class="fas fa-heading"></span></div>
-                                </div>
-                                @error('first_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                            <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ old('first_name') }}" placeholder="First Name">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="fas fa-heading"></span></div>
+                            </div>
+                            @error('first_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="input-group mb-3">
-                                <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" value="{{ old('last_name') }}" placeholder="Last Name">
-                                <div class="input-group-append">
-                                    <div class="input-group-text"><span class="fas fa-heading"></span></div>
-                                </div>
-                                @error('last_name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                            <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" value="{{ old('last_name') }}" placeholder="Last Name">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="fas fa-heading"></span></div>
+                            </div>
+                            @error('last_name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="input-group mb-3">
-                                <input type="text" name="mi" class="form-control @error('mi') is-invalid @enderror" value="{{ old('mi') }}" placeholder="MI">
-                                <div class="input-group-append">
-                                    <div class="input-group-text"><span class="fas fa-heading"></span></div>
-                                </div>
-                                @error('mi')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                            <input type="text" name="mi" class="form-control @error('mi') is-invalid @enderror" value="{{ old('mi') }}" placeholder="MI">
+                            <div class="input-group-append">
+                                <div class="input-group-text"><span class="fas fa-heading"></span></div>
+                            </div>
+                            @error('mi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
 
                         <div class="input-group mb-3">
@@ -60,10 +60,15 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="text" name="office" class="form-control @error('office') is-invalid @enderror" value="{{ old('office') }}" placeholder="Office">
+                            <!-- <input type="text" name="office" class="form-control @error('office') is-invalid @enderror" value="{{ old('office') }}" placeholder="Office">
                             <div class="input-group-append">
                                 <div class="input-group-text"><span class="fas fa-object-group"></span></div>
-                            </div>
+                            </div> -->
+                            <select class="form-control @error('office') is-invalid @enderror" value="{{ old('office') }}" name="office" id="office">
+                                <option value="" selected disabled>Select Office</option>
+                                <option value="CMIO">CMIO</option>
+                                <option value="PSD">PSD</option>
+                            </select>
                             @error('office')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

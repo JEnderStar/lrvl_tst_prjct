@@ -50,7 +50,18 @@
 
         <div class="row">
             <div class="employee-list form-group col-6">
-
+                <!-- <div id="existing">
+                    <label> Employees </label>
+                    <select class="select2 form-control employees" name="employees[]" id="employees" required>
+                        <option value="Hazel" disabled>Nothing selected</option>
+                    </select>
+                </div> -->
+                <div id="existing">
+                    <label> Employees </label>
+                    <select class="select2 form-control employees" name="employees[]" id="employees" multiple required>
+                        <optgroup label="No results"> </optgroup>
+                    </select>
+                </div>
             </div>
             <div class="form-group col-3">
                 <label> Duration </label>
@@ -75,4 +86,7 @@
 </div>
 
 <script src="{{asset('js/hrcreate.js')}}"> </script>
+<script>
+    var accountData = @json($account);
+</script>
 @endsection
