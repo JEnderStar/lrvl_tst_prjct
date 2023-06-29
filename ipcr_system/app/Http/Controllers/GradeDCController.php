@@ -15,7 +15,7 @@ class GradeDCController extends Controller
     {
         $ipcr_form = Form::where('status', 'Grading by DC')->get();
 
-        return view('dc.gradelist', compact('ipcr_form'));
+        return view('table.dcGradeList', compact('ipcr_form'));
     }
 
     /**
@@ -51,7 +51,7 @@ class GradeDCController extends Controller
 
         $add_input = Input::where('employee_id', $id)->get();
 
-        return view('dc.gradeedit', compact(['ipcr_form', 'id', 'add_input']));
+        return view('grading.dcGrading', compact(['ipcr_form', 'id', 'add_input']));
     }
 
     /**

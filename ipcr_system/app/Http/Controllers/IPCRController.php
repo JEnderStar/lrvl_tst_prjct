@@ -6,7 +6,6 @@ use App\Models\Ipcrform as Form;
 use App\Models\Input;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class IPCRController extends Controller
@@ -19,7 +18,7 @@ class IPCRController extends Controller
         // Get all IPCR forms
         $ipcr_form = Form::get();
 
-        return view('employee.index', compact("ipcr_form"));
+        return view('table.empIPCRList', compact("ipcr_form"));
     }
 
     /**
@@ -30,7 +29,7 @@ class IPCRController extends Controller
         // Get the schedule for performance targets
         $schedule = Schedule::where('purpose', 'Performance Targets')->first();
 
-        return view("employee.create", compact('schedule'));
+        return view("create.ipcrForm", compact('schedule'));
     }
 
     /**
@@ -199,7 +198,7 @@ class IPCRController extends Controller
         // Get associated inputs for the form
         $add_input = Input::where('employee_id', $id)->get();
 
-        return view("employee.show", compact(['ipcr_form', 'add_input']));
+        return view("view.ipcrForm", compact(['ipcr_form', 'add_input']));
     }
 
     /**
@@ -213,7 +212,7 @@ class IPCRController extends Controller
         // Get associated inputs for the form
         $add_input = Input::where('employee_id', $id)->get();
 
-        return view("employee.edit", compact(['ipcr_form', 'id', 'add_input']));
+        return view("edit.ipcrForm", compact(['ipcr_form', 'id', 'add_input']));
     }
 
     /**

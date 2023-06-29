@@ -20,7 +20,7 @@ class ScheduleController extends Controller
     {
         $ipcr_form = Form::get();
 
-        return view("hr.index", compact('ipcr_form'));
+        return view("table.hrListForm", compact('ipcr_form'));
     }
 
     /**
@@ -30,7 +30,7 @@ class ScheduleController extends Controller
     {
         $account = User::get();
 
-        return view("hr.create", compact('account'));
+        return view("create.scheduleForm", compact('account'));
     }
 
     /**
@@ -299,7 +299,7 @@ class ScheduleController extends Controller
 
         $add_input = Input::where('employee_id', $id)->get();
 
-        return view("hr.edit", compact(['ipcr_form', 'id', 'add_input']));
+        return view("approve.hrVerify", compact(['ipcr_form', 'id', 'add_input']));
     }
 
     /**

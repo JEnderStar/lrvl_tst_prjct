@@ -1,10 +1,10 @@
 let errorMessages = '';
 
 // Submit event handler for the employee form
-$("#employee_form").on("submit", function(e) {
+$("#employee_form").on("submit", function (e) {
     e.preventDefault();
     let formData = new FormData($('#employee_form')[0]);
-    
+
     // Display a confirmation dialog using Swal (SweetAlert) library
     Swal.fire({
         title: "Are you sure?",
@@ -26,7 +26,7 @@ $("#employee_form").on("submit", function(e) {
                     clearInterval(timerInterval)
                 }
             })
-            
+
             // Send an AJAX request to submit the form data
             $.ajax({
                 url: "/employee/",
@@ -35,7 +35,7 @@ $("#employee_form").on("submit", function(e) {
                 contentType: false,
                 cache: false,
                 data: formData,
-                success: function(response) {
+                success: function (response) {
                     if (response.success) {
                         // Display a success message using Swal library
                         Swal.fire({
@@ -53,7 +53,7 @@ $("#employee_form").on("submit", function(e) {
                         for (let i = 0; i < response.errors.length; i++) {
                             errorMessages += "-" + response.errors[i] + "\n";
                         }
-                        
+
                         // Display an error message with the concatenated error messages
                         Swal.fire({
                             html: '<pre>' + errorMessages + '</pre>',
@@ -64,7 +64,7 @@ $("#employee_form").on("submit", function(e) {
                             icon: 'error',
                             confirmButtonText: 'Okay'
                         })
-                        
+
                         errorMessages = "";
                     }
                 }
@@ -85,9 +85,9 @@ $("#employee_form").on("submit", function(e) {
 var sp = 1;
 
 // Event handler for adding a new Strategic Priority
-$("#addsp").click(function() {
+$("#addsp").click(function () {
     var sp1 = sp + 1;
-    
+
     // Infinite loop to check and add elements
     for (sp; sp < sp1; sp++) {
         // Check if the element with the current sp index exists
@@ -111,7 +111,7 @@ $("#addsp").click(function() {
 });
 
 // Event handler for removing a Strategic Priority
-$(document).on('click', '#removesp', function() {
+$(document).on('click', '#removesp', function () {
     $(this).parents('.addedsp').remove();
     --sp;
 });
@@ -120,9 +120,9 @@ $(document).on('click', '#removesp', function() {
 var cf = 1;
 
 // Event handler for adding a new Core Function
-$("#addcf").click(function() {
+$("#addcf").click(function () {
     var cf1 = cf + 1;
-    
+
     // Infinite loop to check and add elements
     for (cf; cf < cf1; cf++) {
         // Check if the element with the current cf index exists
@@ -146,7 +146,7 @@ $("#addcf").click(function() {
 });
 
 // Event handler for removing a Core Function
-$(document).on('click', '#removecf', function() {
+$(document).on('click', '#removecf', function () {
     $(this).parents('.addedcf').remove();
     --cf;
 });
@@ -155,9 +155,9 @@ $(document).on('click', '#removecf', function() {
 var sf = 1;
 
 // Event handler for adding a new Support Function
-$("#addsf").click(function() {
+$("#addsf").click(function () {
     var sf1 = sf + 1;
-    
+
     // Infinite loop to check and add elements
     for (sf; sf < sf1; sf++) {
         // Check if the element with the current sf index exists
@@ -181,7 +181,19 @@ $("#addsf").click(function() {
 });
 
 // Event handler for removing a Support Function
-$(document).on('click', '#removesf', function() {
+$(document).on('click', '#removesf', function () {
     $(this).parents('.addedsf').remove();
     --sf;
+});
+
+function autoExpand(textarea) {
+    // reset textarea height size
+    textarea.style.height = 'auto';
+    // automatically adjust textarea size
+    textarea.style.height = textarea.scrollHeight + 'px';
+}
+
+$("textarea").each(function (textarea) {
+    // automatically adjust textarea size when loaded
+    $(this).height($(this)[0].scrollHeight);
 });

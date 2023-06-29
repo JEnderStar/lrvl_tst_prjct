@@ -33,7 +33,7 @@ $("#grade_form").on("submit", function (e) {
                     if (response.success) {
                         Swal.fire({
                             title: 'Success!',
-                            text: 'Successfully created a form!',
+                            text: 'Successfully graded a form!',
                             icon: 'success',
                             confirmButtonText: 'Okay'
                         }).then((result) => {

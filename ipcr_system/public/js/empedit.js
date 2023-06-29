@@ -32,7 +32,7 @@ let errorMessage = '';
                         if (response.success) {
                             Swal.fire({
                                 title: 'Success!',
-                                text: 'Successpully edited a profile!',
+                                text: 'Successfully edited a profile!',
                                 icon: 'success',
                                 confirmButtonText: 'Okay'
                             }).then((result) => {

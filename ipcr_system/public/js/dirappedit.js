@@ -139,7 +139,7 @@ let errorMessages = '';
                                         if (response.success) {
                                             Swal.fire({
                                                 title: 'Success!',
-                                                text: 'Successfully rejected the form!',
+                                                text: 'Successfully emailed both the Division Chief and the Employee, and rejected the form!',
                                                 icon: 'success',
                                                 confirmButtonText: 'Okay'
                                             }).then((result) => {

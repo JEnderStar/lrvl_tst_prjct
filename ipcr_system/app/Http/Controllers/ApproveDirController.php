@@ -17,7 +17,7 @@ class ApproveDirController extends Controller
     {
         $ipcr_form = Form::where('status', 'Graded by DC')->get();
 
-        return view('dir.applist', compact('ipcr_form'));
+        return view('table.directorApproveList', compact('ipcr_form'));
     }
 
     /**
@@ -53,7 +53,7 @@ class ApproveDirController extends Controller
 
         $add_input = Input::where('employee_id', $id)->get();
 
-        return view('dir.appedit', compact(['ipcr_form', 'id', 'add_input']));
+        return view('approve.directorApprove', compact(['ipcr_form', 'id', 'add_input']));
     }
 
     /**

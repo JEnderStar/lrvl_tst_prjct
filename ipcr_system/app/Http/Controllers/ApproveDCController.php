@@ -18,7 +18,7 @@ class ApproveDCController extends Controller
         // Find the IPCR form where the status is Pending
         $ipcr_form = Form::where('status', 'Pending')->get();
 
-        return view('dc.applist', compact('ipcr_form'));
+        return view('table.dcApproveList', compact('ipcr_form'));
     }
 
     /**
@@ -56,7 +56,7 @@ class ApproveDCController extends Controller
         // Find the Additional input from the user
         $add_input = Input::where('employee_id', $id)->get();
 
-        return view("dc.appedit", compact(['ipcr_form', 'id', 'add_input']));
+        return view("approve.dcApprove", compact(['ipcr_form', 'id', 'add_input']));
     }
 
     /**
