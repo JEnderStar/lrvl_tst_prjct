@@ -16,6 +16,7 @@ class IPCRController extends Controller
      */
     public function index()
     {
+        // Get all IPCR forms
         $ipcr_form = Form::get();
 
         return view('employee.index', compact("ipcr_form"));
@@ -26,6 +27,7 @@ class IPCRController extends Controller
      */
     public function create()
     {
+        // Get the schedule for performance targets
         $schedule = Schedule::where('purpose', 'Performance Targets')->first();
 
         return view("employee.create", compact('schedule'));
@@ -37,6 +39,7 @@ class IPCRController extends Controller
     public function store(Request $request)
     {
         $message_error = [
+            // Validation error messages
             'first_name.required' => 'First name is required.',
             'first_name.max' => 'First name should not exceed 25 characters.',
             'first_name.min' => 'First name must be at least 2 characters',
@@ -65,6 +68,7 @@ class IPCRController extends Controller
         ];
 
         $validator = validator::make($request->all(), [
+            // Validation rules
             'first_name' => 'required|min:2|max:25',
             'last_name' => 'required|min:2|max:25',
             'mi' => 'max:1',
@@ -78,8 +82,10 @@ class IPCRController extends Controller
         $schedule = Schedule::where('purpose', 'Performance Targets')->first();
 
         if ($validator->passes()) {
+            // Store the IPCR form
             $ipcr_form = new Form();
             $ipcr_form->date_created = date("Y");
+            // Set other form attributes from the request
             $ipcr_form->covered_period = $request->covered_period;
             $ipcr_form->first_name = $request->first_name;
             $ipcr_form->last_name = $request->last_name;
@@ -91,6 +97,8 @@ class IPCRController extends Controller
             $ipcr_form->approver = $request->approver;
             $ipcr_form->status = "Pending";
             $ipcr_form->save();
+
+            // Store inputs for different sections (SP, CF, SF)
 
             $last_ipcr_form = Form::get()->last();
 
@@ -167,11 +175,12 @@ class IPCRController extends Controller
                     break;
                 }
             }
-            
-            if($sp_noinput && $cf_noinput && $sf_noinput){
+
+            if ($sp_noinput && $cf_noinput && $sf_noinput) {
+                // Delete the form if there are no inputs
                 $last_ipcr_form->delete();
                 return response()->json(["status" => false, "errors" => ["No input."]]);
-            }else{
+            } else {
                 return response()->json(["success" => true, "message" => "Successfully created a form!"]);
             }
         } else {
@@ -184,8 +193,10 @@ class IPCRController extends Controller
      */
     public function show(string $id)
     {
+        // Find the IPCR form by ID
         $ipcr_form = Form::find($id);
 
+        // Get associated inputs for the form
         $add_input = Input::where('employee_id', $id)->get();
 
         return view("employee.show", compact(['ipcr_form', 'add_input']));
@@ -196,8 +207,10 @@ class IPCRController extends Controller
      */
     public function edit(string $id)
     {
+        // Find the IPCR form by ID
         $ipcr_form = Form::find($id);
 
+        // Get associated inputs for the form
         $add_input = Input::where('employee_id', $id)->get();
 
         return view("employee.edit", compact(['ipcr_form', 'id', 'add_input']));
@@ -208,47 +221,51 @@ class IPCRController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // Get associated inputs for the form
         $add_input = Input::where('employee_id', $id)->get();
 
         $message_error = [];
 
-        $validator = validator::make($request->all(), [], $message_error);
-
         $ipcr_form = Form::find($id);
 
-        Input::where('employee_id', $id)->delete();
+        $length = 0;
 
-        if ($validator->passes()) {
-            $length = 0;
+        $sp = 0;
+        $cf = 0;
+        $sf = 0;
 
-            $sp = 0;
-            $cf = 0;
-            $sf = 0;
-            
+        if (($request->functions_sp0 == "" || $request->success_indicators_sp0 == "") || ($request->functions_cf0 == "" || $request->success_indicators_cf0 == "") || ($request->functions_sf0 == "" || $request->success_indicators_sf0 == "")) {
+            // returns an error if one of the textbox remains empty
+            return response()->json(["status" => false, "message" => "No Input."]);
+        } else {
+            // removes all the employee's input data that he/she submitted
+            Input::where('employee_id', $id)->delete();
+
             foreach ($add_input as $addinput) {
+                // Update the form attributes from the request
                 $length++;
-                
+
                 $word_sp = "functions_sp" . (string)$sp;
                 $word_sp1 = "success_indicators_sp" . (string)$sp;
                 $word_sp2 = "actual_accomplishments_sp" . (string)$sp;
                 $function_sp = $request->$word_sp;
                 $si_sp = $request->$word_sp1;
                 $aa_sp = $request->$word_sp2;
-                
+
                 $word_cf = "functions_cf" . (string)$cf;
                 $word_cf1 = "success_indicators_cf" . (string)$cf;
                 $word_cf2 = "actual_accomplishments_cf" . (string)$cf;
                 $function_cf = $request->$word_cf;
                 $si_cf = $request->$word_cf1;
                 $aa_cf = $request->$word_cf2;
-                
+
                 $word_sf = "functions_sf" . (string)$sf;
                 $word_sf1 = "success_indicators_sf" . (string)$sf;
                 $word_sf2 = "actual_accomplishments_sf" . (string)$sf;
                 $function_sf = $request->$word_sf;
                 $si_sf = $request->$word_sf1;
                 $aa_sf = $request->$word_sf2;
-                
+
                 if ($function_sp != "") {
                     $add_input = new Input();
                     $add_input->employee_id = $id;
@@ -258,7 +275,7 @@ class IPCRController extends Controller
                     $add_input->actual_accomplishments = $aa_sp;
                     $add_input->semester = $ipcr_form->covered_period;
                     $add_input->year = date("Y");
-                    if($ipcr_form->status == "Rejected by Director"){
+                    if ($ipcr_form->status == "Rejected by Director") {
                         $add_input->q1 = null;
                         $add_input->e2 = null;
                         $add_input->t3 = null;
@@ -276,7 +293,7 @@ class IPCRController extends Controller
                     $add_input->actual_accomplishments = $aa_cf;
                     $add_input->semester = $ipcr_form->covered_period;
                     $add_input->year = date("Y");
-                    if($ipcr_form->status == "Rejected by Director"){
+                    if ($ipcr_form->status == "Rejected by Director") {
                         $add_input->q1 = null;
                         $add_input->e2 = null;
                         $add_input->t3 = null;
@@ -294,7 +311,7 @@ class IPCRController extends Controller
                     $add_input->actual_accomplishments = $aa_sf;
                     $add_input->semester = $ipcr_form->covered_period;
                     $add_input->year = date("Y");
-                    if($ipcr_form->status == "Rejected by Director"){
+                    if ($ipcr_form->status == "Rejected by Director") {
                         $add_input->q1 = null;
                         $add_input->e2 = null;
                         $add_input->t3 = null;
@@ -310,9 +327,10 @@ class IPCRController extends Controller
                 $sf++;
             }
 
+            // change the status of IPCR form
             if ($ipcr_form->status == "Pending") {
                 $ipcr_form->save();
-            } else if($ipcr_form->status == "Rejected by DC"){
+            } else if ($ipcr_form->status == "Rejected by DC") {
                 $ipcr_form->status = "Pending";
                 $ipcr_form->save();
             } else if ($ipcr_form->status == "Rejected by Director") {
@@ -320,14 +338,12 @@ class IPCRController extends Controller
                 $ipcr_form->far = null;
                 $ipcr_form->comment = null;
                 $ipcr_form->save();
-            }else{
+            } else {
                 $ipcr_form->status = "Grading by DC";
                 $ipcr_form->save();
             }
 
             return response()->json(["success" => true, "message" => "Successfully edited"]);
-        } else {
-            return response()->json(["status" => false, "errors" => $validator->errors()->all()]);
         }
     }
 

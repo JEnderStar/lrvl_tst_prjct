@@ -1,4 +1,4 @@
-let errorMessages = '';
+let errorMessage = '';
     $("#employee_form").on("submit", function(e) {
         e.preventDefault();
         let formData = new FormData($('#employee_form')[0]);
@@ -41,11 +41,10 @@ let errorMessages = '';
                                 }
                             })
                         } else {
-                            for (let i = 0; i < response.errors.length; i++) {
-                                errorMessages += "-" + response.errors[i] + "\n";
-                            }
+                            errorMessage += "-" + response.message + "\n";
+
                             Swal.fire({
-                                html: '<pre>' + errorMessages + '</pre>',
+                                html: '<pre>' + errorMessage + '</pre>',
                                 customClass: {
                                     popup: 'format-pre'
                                 },
@@ -53,7 +52,7 @@ let errorMessages = '';
                                 icon: 'error',
                                 confirmButtonText: 'Okay'
                             })
-                            errorMessages = "";
+                            errorMessage = "";
                         }
                     }
                 });

@@ -33,10 +33,12 @@ class ScheduleController extends Controller
         return view("hr.create", compact('account'));
     }
 
+    /**
+     * Get employees for the specified office.
+     */
     public function getEmployees()
     {
         $account = User::get();
-        dd($account);
 
         return response()->json($account);
     }
@@ -46,15 +48,19 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-
+        // Check the selected office
         if ($request->office == "CMIO") {
+            // Get the division chief and director for CMIO office
             $division_chief = User::where('office', 'CMIO')->where('position', 'Division Chief')->first();
             $director = User::where('office', 'CMIO')->where('position', 'Director')->first();
 
+            // Extract relevant information from retrieved data
             $division_chief_name = $division_chief->first_name . " " . $division_chief->last_name;
             $division_chief_email = $division_chief->email;
             $director_name = $director->first_name . " " . $director->last_name;
             $director_email = $director->email;
+
+            // Create a new schedule form with the provided data
             $schedule_form = Schedule::create([
                 'type' => $request->type,
                 'purpose' => $request->purpose,
@@ -67,6 +73,7 @@ class ScheduleController extends Controller
                 'duration_to' => $request->duration_to
             ]);
 
+            // Retrieve selected employee options
             $selectedOptions = $request->input('employees');
 
             foreach ($request->input('employees') as $first_name) {
@@ -76,6 +83,7 @@ class ScheduleController extends Controller
                     $user = User::where('office', 'CMIO')->where('Position', 'Employee')->get();
                     foreach ($user as $users) {
                         $email = $users['email'];
+                        // Prepare data for email template
                         $data = [
                             'duration_from' => $request->duration_from,
                             'duration_to' => $request->duration_to,
@@ -83,8 +91,9 @@ class ScheduleController extends Controller
                             'covered_period' => $request->covered_period,
                             'hr' => Auth::user()->first_name
                         ];
+                        // Send the email
                         Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
-                            $message->to($email); // Get email of users when?
+                            $message->to($email);
                             $message->subject('Notification for Scheduling');
                             $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                         });
@@ -103,7 +112,7 @@ class ScheduleController extends Controller
                         'hr' => Auth::user()->first_name
                     ];
                     Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
-                        $message->to($email); // Get email of users when?
+                        $message->to($email); 
                         $message->subject('Notification for Scheduling');
                         $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                     });
@@ -144,7 +153,7 @@ class ScheduleController extends Controller
                             'hr' => Auth::user()->first_name
                         ];
                         Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
-                            $message->to($email); // Get email of users when?
+                            $message->to($email);
                             $message->subject('Notification for Scheduling');
                             $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                         });
@@ -163,7 +172,7 @@ class ScheduleController extends Controller
                         'hr' => Auth::user()->first_name
                     ];
                     Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
-                        $message->to($email); // Get email of users when?
+                        $message->to($email);
                         $message->subject('Notification for Scheduling');
                         $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                     });
@@ -199,7 +208,7 @@ class ScheduleController extends Controller
                             'hr' => Auth::user()->first_name
                         ];
                         Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
-                            $message->to($email); // Get email of users when?
+                            $message->to($email);
                             $message->subject('Notification for Scheduling');
                             $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                         });
@@ -219,7 +228,7 @@ class ScheduleController extends Controller
                             'hr' => Auth::user()->first_name
                         ];
                         Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
-                            $message->to($email); // Get email of users when?
+                            $message->to($email);
                             $message->subject('Notification for Scheduling');
                             $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                         });
@@ -239,7 +248,7 @@ class ScheduleController extends Controller
                             'hr' => Auth::user()->first_name
                         ];
                         Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
-                            $message->to($email); // Get email of users when?
+                            $message->to($email);
                             $message->subject('Notification for Scheduling');
                             $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                         });
@@ -258,7 +267,7 @@ class ScheduleController extends Controller
                         'hr' => Auth::user()->first_name
                     ];
                     Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
-                        $message->to($email); // Get email of users when?
+                        $message->to($email);
                         $message->subject('Notification for Scheduling');
                         $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                     });
@@ -301,12 +310,14 @@ class ScheduleController extends Controller
         $ipcr_form = Form::find($id);
         $email = $ipcr_form->email;
 
+        // send email that he/she was verified
         Mail::send('mail.verified', function ($message) use ($email) {
             $message->to($email);
             $message->subject('HR received your form');
             $message->from(Auth::user()->email, 'IPCR HR');
         });
 
+        // change the status of the form to "Verified"
         $ipcr_form->status = "Verified";
         $ipcr_form->save();
 

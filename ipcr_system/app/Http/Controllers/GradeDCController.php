@@ -59,13 +59,15 @@ class GradeDCController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // Find the IPCR form based on the provided $id
         $ipcr_form = Form::find($id);
         $add_input = Input::where('employee_id', $id)->get();
 
+        // Delete existing input records for the employee
         Input::where('employee_id', $id)->delete();
 
         $length = 0;
-
+        
         $sp = 0;
         $cf = 0;
         $sf = 0;
@@ -73,6 +75,7 @@ class GradeDCController extends Controller
         foreach ($add_input as $addinput) {
             $length++;
 
+            // Generate dynamic variable names based on the index
             $word_sp = "functions_sp" . (string)$sp;
             $word_sp1 = "success_indicators_sp" . (string)$sp;
             $word_sp2 = "actual_accomplishments_sp" . (string)$sp;
@@ -82,6 +85,8 @@ class GradeDCController extends Controller
             $grade_sp4 = "a4_sp" . (string)$sp;
             $remarks_sp = "remarks_sp" . (string)$sp;
             $graded_by_sp = "graded_by_sp" . (string)$sp;
+
+            // Get the values from the request using the generated variable names
             $function_sp = $request->$word_sp;
             $si_sp = $request->$word_sp1;
             $aa_sp = $request->$word_sp2;
@@ -92,6 +97,7 @@ class GradeDCController extends Controller
             $re_sp = $request->$remarks_sp;
             $graded_sp = $request->$graded_by_sp;
 
+            // Repeat the same process for "CF" and "SF" codes
             $word_cf = "functions_cf" . (string)$cf;
             $word_cf1 = "success_indicators_cf" . (string)$cf;
             $word_cf2 = "actual_accomplishments_cf" . (string)$cf;
@@ -101,6 +107,7 @@ class GradeDCController extends Controller
             $grade_cf4 = "a4_cf" . (string)$cf;
             $remarks_cf = "remarks_cf" . (string)$cf;
             $graded_by_cf = "graded_by_cf" . (string)$cf;
+
             $function_cf = $request->$word_cf;
             $si_cf = $request->$word_cf1;
             $aa_cf = $request->$word_cf2;
@@ -120,6 +127,7 @@ class GradeDCController extends Controller
             $grade_sf4 = "a4_sf" . (string)$sf;
             $remarks_sf = "remarks_sf" . (string)$sf;
             $graded_by_sf = "graded_by_sf" . (string)$sf;
+
             $function_sf = $request->$word_sf;
             $si_sf = $request->$word_sf1;
             $aa_sf = $request->$word_sf2;
@@ -131,6 +139,7 @@ class GradeDCController extends Controller
             $graded_sf = $request->$graded_by_sf;
 
             if ($function_sp != null) {
+                // Create and save a new Input record for "SP" code
                 $add_input = new Input();
                 $add_input->employee_id = $id;
                 $add_input->code = "SP";
@@ -147,6 +156,7 @@ class GradeDCController extends Controller
                 $add_input->year = date("Y");
                 $add_input->save();
             } else if ($function_cf != null) {
+                // Create and save a new Input record for "CF" code
                 $add_input = new Input();
                 $add_input->employee_id = $id;
                 $add_input->code = "CF";
@@ -163,6 +173,7 @@ class GradeDCController extends Controller
                 $add_input->year = date("Y");
                 $add_input->save();
             } else if ($function_sf != null) {
+                // Create and save a new Input record for "SF" code
                 $add_input = new Input();
                 $add_input->employee_id = $id;
                 $add_input->code = "SF";

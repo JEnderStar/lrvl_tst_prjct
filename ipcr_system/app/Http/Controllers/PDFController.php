@@ -13,20 +13,9 @@ class PDFController extends Controller
 {
     public function printform(string $id)
     {
-        // $ipcr_form = Form::find($id);
-        // $schedule = Schedule::where('purpose', 'Performance Targets')->first();
-        // $add_inputs = Input::where('employee_id', $ipcr_form->id)->get();
-        // $data = [
-        //     'Form' => $ipcr_form,
-        //     'Schedule' => $schedule,
-        //     'Add_inputs' => $add_inputs
-        // ];
-
-        // $html = view("print.form", $data)->render();
-        // return PDF::loadHTML($html, "utf-8")->setPaper("long", "landscape")->stream();
-
         $dompdf = new Dompdf();
 
+        // Set paper options
         $dompdf->setPaper('Legal', 'landscape');
         // $options = new Options();
         // $options->set('margin_top', '0.2in');
@@ -39,17 +28,21 @@ class PDFController extends Controller
         $ipcr_form = Form::find($id);
         $schedule = Schedule::where('purpose', 'Performance Targets')->first();
         $add_inputs = Input::where('employee_id', $ipcr_form->id)->get();
+        // get data
         $data = [
             'Form' => $ipcr_form,
             'Schedule' => $schedule,
             'Add_inputs' => $add_inputs
         ];
 
+        // import data to the blade
         $html = view("print.form", $data);
+        // make it into a print form
         $dompdf->loadHtml($html);
 
         $dompdf->render();
 
+        // redirect to the page
         $dompdf->stream('output.pdf', ['Attachment' => false]);
     }
 }

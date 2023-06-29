@@ -22,7 +22,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @role('employee')
                     @foreach($ipcr_form as $ipcrform)
                     @if($ipcrform["first_name"] == Auth::user()->first_name)
                     <tr>
@@ -56,41 +55,6 @@
                     </tr>
                     @endif
                     @endforeach
-                    @endrole
-
-                    @role('admin')
-                    @foreach($ipcr_form as $ipcrform)
-                    <tr>
-                        <td> {{$ipcrform["id"]}} </td>
-                        <td> {{$ipcrform["first_name"]}} </td>
-                        <td> {{$ipcrform["last_name"]}} </td>
-                        <td> {{$ipcrform["mi"]}} </td>
-                        <td> {{$ipcrform["position"]}} </td>
-                        <td> {{$ipcrform["office"]}} </td>
-                        <td> {{$ipcrform["status"]}} </td>
-                        <td>
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split dropdown-icon" data-toggle="dropdown"> Action </button>
-                                <div class="dropdown-menu">
-                                    <a href="/employee/{{$ipcrform['id']}}" class="dropdown-item">              View </a>
-                                    @if($ipcrform["status"] == "Pending" || $ipcrform["status"] == "Approved by DC" || $ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Grading by DC" || $ipcrform["status"] == "Rejected by Director")
-                                    <a href="/employee/{{$ipcrform['id']}}/edit" class="dropdown-item">              Edit </a>
-                                    @endif
-                                    @if($ipcrform["status"] == "Pending" || $ipcrform["status"] == "Approved by DC" || $ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Rejected by Director")
-                                    <button type="button" id="delete_form" data-product-id="{{$ipcrform['id']}}" class="dropdown-item">            Delete </button>
-                                    @endif
-                                    @if($ipcrform["status"] == "Approved by Director" || $ipcrform["status"] == "Verified")
-                                    <form action="/printform/{{$ipcrform['id']}}" id="print_form" data-product-id="{{$ipcrform['id']}}" method="POST">
-                                        @CSRF
-                                        <button type="submit" id="print_ipcr" class="dropdown-item">              Print </button>
-                                    </form>
-                                    @endif
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                    @endrole
                 </tbody>
             </table>
         </div>

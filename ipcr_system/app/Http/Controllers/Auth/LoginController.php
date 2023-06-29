@@ -44,9 +44,12 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if (Auth::check()) {
+            //get the logged user
             $user = Auth::user();
+            //get laratrust
             $laratrust = app(Laratrust::class);
 
+            //check which role the user has, then redirects to its specific role's home page
             if ($laratrust->hasRole('employee', $user)) {
                 return redirect('/employee');
             } elseif ($laratrust->hasRole('division_chief', $user)) {
