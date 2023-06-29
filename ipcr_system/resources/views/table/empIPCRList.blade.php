@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                     @foreach($ipcr_form as $ipcrform)
-                    @if($ipcrform["first_name"] == Auth::user()->first_name)
+                    @if($ipcrform["employee_id"] == Auth::user()->id)
                     <tr>
                         <td> {{$ipcrform["id"]}} </td>
                         <td> {{$ipcrform["first_name"]}} </td>

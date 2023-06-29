@@ -100,7 +100,7 @@
             <td colspan="5" rowspan="2" class="center"> Success Indicator (Target + Measure) </td>
             <td colspan="5" rowspan="2" class="center"> Actual Accomplishments </td>
             <td colspan="4" class="center"> Rating </td>
-            <td colspan="5" rowspan="2" class="center"> Remarks </td>
+            <td colspan="5" rowspan="2" class="center"> Remark </td>
         </tr>
         <tr>
             <td class="center"> Q1 </td>
@@ -119,14 +119,14 @@
         @foreach($Add_inputs as $addinput)
         @if($addinput->code == "SP")
         <tr>
-            <td colspan="5"> {{$index + 1}}. {{$addinput['functions']}} </td>
-            <td colspan="5"> {{$addinput['success_indicators']}} </td>
+            <td colspan="5"> {{$index + 1}}. {{$addinput['function']}} </td>
+            <td colspan="5"> {{$addinput['success_indicator']}} </td>
             <td colspan="5"> {{$addinput['actual_accomplishments']}} </td>
             <td colspan="1" class="center"> {{$addinput['q1']}} </td>
             <td colspan="1" class="center"> {{$addinput['e2']}} </td>
             <td colspan="1" class="center"> {{$addinput['t3']}} </td>
             <td colspan="1" class="center"> <b> {{$addinput['a4']}} </b> </td>
-            <td colspan="5"> {{$addinput['remarks']}} </td>
+            <td colspan="5"> {{$addinput['remark']}} </td>
         </tr>
 
         @php
@@ -145,14 +145,14 @@
         @foreach($Add_inputs as $addinput)
         @if($addinput->code == "CF")
         <tr>
-            <td colspan="5"> {{$index + 1}}. {{$addinput['functions']}} </td>
-            <td colspan="5"> {{$addinput['success_indicators']}} </td>
+            <td colspan="5"> {{$index + 1}}. {{$addinput['function']}} </td>
+            <td colspan="5"> {{$addinput['success_indicator']}} </td>
             <td colspan="5"> {{$addinput['actual_accomplishments']}} </td>
             <td colspan="1" class="center"> {{$addinput['q1']}} </td>
             <td colspan="1" class="center"> {{$addinput['e2']}} </td>
             <td colspan="1" class="center"> {{$addinput['t3']}} </td>
             <td colspan="1" class="center"> <b> {{$addinput['a4']}} </b> </td>
-            <td colspan="5"> {{$addinput['remarks']}} </td>
+            <td colspan="5"> {{$addinput['remark']}} </td>
         </tr>
 
         @php
@@ -171,14 +171,14 @@
         @foreach($Add_inputs as $addinput)
         @if($addinput->code == "SF")
         <tr>
-            <td colspan="5"> {{$index + 1}}. {{$addinput['functions']}} </td>
-            <td colspan="5"> {{$addinput['success_indicators']}} </td>
+            <td colspan="5"> {{$index + 1}}. {{$addinput['function']}} </td>
+            <td colspan="5"> {{$addinput['success_indicator']}} </td>
             <td colspan="5"> {{$addinput['actual_accomplishments']}} </td>
             <td colspan="1" class="center"> {{$addinput['q1']}} </td>
             <td colspan="1" class="center"> {{$addinput['e2']}} </td>
             <td colspan="1" class="center"> {{$addinput['t3']}} </td>
             <td colspan="1" class="center"> <b> {{$addinput['a4']}} </b> </td>
-            <td colspan="5"> {{$addinput['remarks']}} </td>
+            <td colspan="5"> {{$addinput['remark']}} </td>
         </tr>
 
         @php

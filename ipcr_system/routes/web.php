@@ -19,31 +19,51 @@ Route::get('/', function () {
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Create IPCR Form
+// For Employee View
 Route::middleware(['role.access:employee'])->group(function () {
-    Route::resource('/employee', App\Http\Controllers\IPCRController::class);
-    Route::post("/deleteform/{id}", [App\Http\Controllers\IPCRController::class, "DeleteForm"])->name("DeleteForm");
+    Route::get('/employee', [App\Http\Controllers\IPCRFormController::class, 'EmployeeIPCRFormList']);
+    Route::post('/employee', [App\Http\Controllers\IPCRFormController::class, 'EmployeeStoreIPCRForm']);
+    Route::get('/employee/create', [App\Http\Controllers\IPCRFormController::class, 'EmployeeCreateIPCRForm']);
+    Route::get('/employee/{employee}', [App\Http\Controllers\IPCRFormController::class, 'EmployeeViewIPCRForm']);
+    Route::get('/employee/{employee}/edit', [App\Http\Controllers\IPCRFormController::class, 'EmployeeEditIPCRForm']);
+    Route::match(['put', 'patch'], '/employee/{employee}', [App\Http\Controllers\IPCRFormController::class, 'EmployeeUpdateIPCRForm']);
+    Route::post('/deleteform/{id}', [App\Http\Controllers\IPCRFormController::class, 'EmployeeDeleteIPCRForm']);
 
     //print
     Route::post("/printform/{id}", [App\Http\Controllers\PDFController::class, "printform"])->name("printform");
 });
 
-// Set Schedule Form
+// For HR View
 Route::middleware(['role.access:hr'])->group(function () {
-    Route::resource('/hr', App\Http\Controllers\ScheduleController::class);
+    // Read and Update IPCR Form
+    Route::get('/hr', [App\Http\Controllers\IPCRFormController::class, 'HRListIPCRForm']);
+    Route::get('/hr/{hr}/edit', [App\Http\Controllers\IPCRFormController::class, 'HRViewIPCRForm']);
+    Route::match(['put', 'patch'], '/hr/{hr}', [App\Http\Controllers\IPCRFormController::class, 'HRUpdateIPCRForm']);
+    
+    // Create Schedule Form
+    Route::get('/hr/create', [App\Http\Controllers\ScheduleController::class, 'createSchedule']);
+    Route::post('hr', [App\Http\Controllers\ScheduleController::class, 'storeSchedule']);
 });
 
-// Approve or Disapprove by DC
+// For Division Chief View
 Route::middleware(['role.access:division_chief'])->group(function () {
-    Route::resource('/approvedc', App\Http\Controllers\ApproveDCController::class);
-
-    // Grade by DC
-    Route::resource('/gradedc', App\Http\Controllers\GradeDCController::class);
+    // For Approving IPCR Form
+    Route::get('/approvedc', [App\Http\Controllers\IPCRFormController::class, 'DCListPendingIPCRForm']);
+    Route::get('/approvedc/{approvedc}/edit', [App\Http\Controllers\IPCRFormController::class, 'DCEditPendingIPCRForm']);
+    Route::match(['put', 'patch'], '/approvedc/{approvedc}', [App\Http\Controllers\IPCRFormController::class, 'DCUpdatePendingIPCRForm']);
+    
+    // For Grading IPCR Form
+    Route::get('/gradedc', [App\Http\Controllers\IPCRFormController::class, 'DCListGradingIPCRForm']);
+    Route::get('/gradedc/{gradedc}/edit', [App\Http\Controllers\IPCRFormController::class, 'DCEditGradingIPCRForm']);
+    Route::match(['put', 'patch'], '/gradedc/{gradedc}', [App\Http\Controllers\IPCRFormController::class, 'DCUpdateGradingIPCRForm']);
+    
 });
 
-// Approve by Director
+// For Director View
 Route::middleware(['role.access:director'])->group(function () {
-    Route::resource('/approvedir', App\Http\Controllers\ApproveDirController::class);
+    Route::get('/approvedir', [App\Http\Controllers\IPCRFormController::class, 'DirectorListGradedIPCRForm']);
+    Route::get('/approvedir/{approvedir}/edit', [App\Http\Controllers\IPCRFormController::class, 'DirectorEditGradedIPCRForm']);
+    Route::match(['put', 'patch'], '/approvedir/{approvedir}', [App\Http\Controllers\IPCRFormController::class, 'DirectorUpdateGradedIPCRForm']);
 });
 
 Auth::routes();

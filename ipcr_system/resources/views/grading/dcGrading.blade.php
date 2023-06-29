@@ -100,7 +100,7 @@
                             <p> </p>
                         </div>
                         <div class="col-2">
-                            <label> Remarks </label>
+                            <label> Remark </label>
                             <p> </p>
                         </div>
                         <div hidden>
@@ -112,10 +112,10 @@
                     @if($addinput->code == "SP")
                     <div class="row">
                         <div class="col-2">
-                            <textarea type="text" id="functions_sp{{$index}}" name="functions_sp{{$index}}" class="form-control" readonly>{{$addinput['functions']}}</textarea>
+                            <textarea type="text" id="function_sp{{$index}}" name="function_sp{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
                         </div>
                         <div class="col-2">
-                            <textarea type="text" id="success_indicators_sp{{$index}}" name="success_indicators_sp{{$index}}" class="form-control" readonly>{{$addinput['success_indicators']}}</textarea>
+                            <textarea type="text" id="success_indicator_sp{{$index}}" name="success_indicator_sp{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="col-2">
                             <textarea type="text" id="actual_accomplishments_sp{{$index}}" name="actual_accomplishments_sp{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
@@ -135,7 +135,7 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input type="text" id="remarks_sp{{$index}}" name="remarks_sp{{$index}}" class="form-control">
+                            <input type="text" id="remark_sp{{$index}}" name="remark_sp{{$index}}" class="form-control">
                         </div>
                         <div hidden>
                             <input type="text" id="graded_by_sp{{$index}}" name="graded_by_sp{{$index}}" class="form-control" value="{{ Auth::user()->email }}" readonly>
@@ -152,7 +152,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-2">
-                            <label> Core Functions </label>
+                            <label> Core Function </label>
                             <p> </p>
                         </div>
                         <div class="col-2">
@@ -180,7 +180,7 @@
                             <p> </p>
                         </div>
                         <div class="col-2">
-                            <label> Remarks </label>
+                            <label> Remark </label>
                             <p> </p>
                         </div>
                         <div hidden>
@@ -192,10 +192,10 @@
                     @if($addinput->code == "CF")
                     <div class="row">
                         <div class="col-2">
-                            <textarea type="text" id="functions_cf{{$index}}" name="functions_cf{{$index}}" class="form-control" readonly>{{$addinput['functions']}}</textarea>
+                            <textarea type="text" id="function_cf{{$index}}" name="function_cf{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
                         </div>
                         <div class="col-2">
-                            <textarea type="text" id="success_indicators_cf{{$index}}" name="success_indicators_cf{{$index}}" class="form-control" readonly>{{$addinput['success_indicators']}}</textarea>
+                            <textarea type="text" id="success_indicator_cf{{$index}}" name="success_indicator_cf{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="col-2">
                             <textarea type="text" id="actual_accomplishments_cf{{$index}}" name="actual_accomplishments_cf{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
@@ -215,7 +215,7 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input type="text" id="remarks_cf{{$index}}" name="remarks_cf{{$index}}" class="form-control">
+                            <input type="text" id="remark_cf{{$index}}" name="remark_cf{{$index}}" class="form-control">
                         </div>
                         <div hidden>
                             <input type="text" id="graded_by_cf{{$index}}" name="graded_by_cf{{$index}}" class="form-control" value="{{ Auth::user()->email }}" readonly>
@@ -232,7 +232,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-2">
-                            <label> Support Functions </label>
+                            <label> Support Function </label>
                             <p> </p>
                         </div>
                         <div class="col-2">
@@ -260,7 +260,7 @@
                             <p> </p>
                         </div>
                         <div class="col-2">
-                            <label> Remarks </label>
+                            <label> Remark </label>
                             <p> </p>
                         </div>
                         <div hidden>
@@ -272,10 +272,10 @@
                     @if($addinput->code == "SF")
                     <div class="row">
                         <div class="col-2">
-                            <textarea type="text" id="functions_sf{{$index}}" name="functions_sf{{$index}}" class="form-control" readonly>{{$addinput['functions']}}</textarea>
+                            <textarea type="text" id="function_sf{{$index}}" name="function_sf{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
                         </div>
                         <div class="col-2">
-                            <textarea type="text" id="success_indicators_sf{{$index}}" name="success_indicators_sf{{$index}}" class="form-control" readonly>{{$addinput['success_indicators']}}</textarea>
+                            <textarea type="text" id="success_indicator_sf{{$index}}" name="success_indicator_sf{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="col-2">
                             <textarea type="text" id="actual_accomplishments_sf{{$index}}" name="actual_accomplishments_sf{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
@@ -295,7 +295,7 @@
                             </div>
                         </div>
                         <div class="col-2">
-                            <input type="text" id="remarks_sf{{$index}}" name="remarks_sf{{$index}}" class="form-control">
+                            <input type="text" id="remark_sf{{$index}}" name="remark_sf{{$index}}" class="form-control">
                         </div>
                         <div hidden>
                             <input type="text" id="graded_by_sf{{$index}}" name="graded_by_sf{{$index}}" class="form-control" value="{{ Auth::user()->email }}" readonly>

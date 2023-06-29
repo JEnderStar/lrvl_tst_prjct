@@ -12,52 +12,85 @@
         <div class="row">
             <div class="form-group col-2">
                 <label for="requested_by" class="form_label"> Covered Period </label>
-                <input type="text" id="covered_period" name="covered_period" class="form-control" value="{{$schedule['covered_period']}}" readonly>
+                <p> {{$schedule['covered_period']}} </p>
+                <div class="form-group" hidden>
+                    <input type="text" id="covered_period" name="covered_period" class="form-control" value="{{$schedule['covered_period']}}" readonly hidden>
+                </div>
             </div>
             <div class="form-group col-2">
                 <label for="requested_by" class="form_label"> Year </label>
-                <input type="text" id="year" name="year" class="form-control" value="2023" readonly>
+                <p> {{ date('Y') }} </p>
+                <div class="form-group" hidden>
+                    <input type="text" id="year" name="year" class="form-control" value="{{ date('Y') }}" readonly hidden>
+                </div>
+            </div>
+            <div class="form-group col-2" hidden>
+                <input type="text" id="employee_id" name="employee_id" class="form-control" value="{{ Auth::user()->id }}" readonly>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-5">
                 <label for="requested_by" class="form_label"> First Name </label>
-                <input type="text" id="first_name" name="first_name" class="form-control" value="{{ Auth::user()->first_name }}" readonly>
+                <p> {{ Auth::user()->first_name }} </p>
+                <div class="form-group" hidden>
+                    <input type="text" id="first_name" name="first_name" class="form-control" value="{{ Auth::user()->first_name }}" readonly hidden>
+                </div>
             </div>
             <div class="form-group col-5">
                 <label for="requested_by" class="form_label"> Last Name </label>
-                <input type="text" id="last_name" name="last_name" class="form-control" value="{{ Auth::user()->last_name }}" readonly>
+                <p> {{ Auth::user()->last_name }} </p>
+                <div class="form-group" hidden>
+                    <input type="text" id="last_name" name="last_name" class="form-control" value="{{ Auth::user()->last_name }}" readonly hidden>
+                </div>
             </div>
             <div class="form-group col-2">
                 <label for="requested_by" class="form_label"> MI </label>
-                <input type="text" id="mi" name="mi" class="form-control" value="{{ Auth::user()->mi }}" readonly>
+                <p> {{ Auth::user()->mi }} </p>
+                <div class="form-group" hidden>
+                    <input type="text" id="mi" name="mi" class="form-control" value="{{ Auth::user()->mi }}" readonly hidden>
+                </div>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-3">
                 <label for="requested_by" class="form_label"> Position </label>
-                <input type="text" id="position" name="position" class="form-control" value="{{ Auth::user()->position }}" readonly>
+                <p> {{ Auth::user()->position }} </p>
+                <div class="form-group" hidden>
+                    <input type="text" id="position" name="position" class="form-control" value="{{ Auth::user()->position }}" readonly hidden>
+                </div>
             </div>
             <div class="form-group col-3">
                 <label for="requested_by" class="form_label"> Office </label>
-                <input type="text" id="office" name="office" class="form-control" value="{{ Auth::user()->office }}" readonly>
+                <p> {{ Auth::user()->office }} </p>
+                <div class="form-group" hidden>
+                    <input type="text" id="office" name="office" class="form-control" value="{{ Auth::user()->office }}" readonly hidden>
+                </div>
             </div>
             <div class="form-group col-6">
                 <label for="requested_by" class="form_label"> E-mail </label>
-                <input type="text" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly>
+                <p> {{ Auth::user()->email }} </p>
+                <div class="form-group" hidden>
+                    <input type="text" id="email" name="email" class="form-control" value="{{ Auth::user()->email }}" readonly hidden>
+                </div>
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-6">
                 <label for="requested_by" class="form_label"> Reviewer </label>
-                <input type="text" id="reviewer" name="reviewer" class="form-control" value="{{$schedule['division_chief']}}" readonly>
+                <p> {{$schedule['division_chief']}} </p>
+                <div class="form-group" hidden>
+                    <input type="text" id="reviewer" name="reviewer" class="form-control" value="{{$schedule['division_chief']}}" readonly hidden>
+                </div>
             </div>
             <div class="form-group col-6">
                 <label for="requested_by" class="form_label"> Approver </label>
-                <input type="text" id="approver" name="approver" class="form-control" value="{{$schedule['director']}}" readonly>
+                <p> {{$schedule['director']}} </p>
+                <div class="form-group" hidden>
+                    <input type="text" id="approver" name="approver" class="form-control" value="{{$schedule['director']}}" readonly hidden>
+                </div>
             </div>
         </div>
 
@@ -68,7 +101,7 @@
             <div class="row">
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                    <textarea type="text" id="functions_sp0" name="functions_sp0" class="form-control" oninput="autoExpand(this)"></textarea>
+                    <textarea type="text" id="function_sp0" name="function_sp0" class="form-control" oninput="autoExpand(this)"></textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
@@ -87,8 +120,8 @@
         <div class="card-body" id="core_table">
             <div class="row">
                 <div class="form-group col-5">
-                    <p for="requested_by" class="form_label"> Core Functions </p>
-                    <textarea type="text" id="functions_cf0" name="functions_cf0" class="form-control" oninput="autoExpand(this)"></textarea>
+                    <p for="requested_by" class="form_label"> Core Function </p>
+                    <textarea type="text" id="function_cf0" name="function_cf0" class="form-control" oninput="autoExpand(this)"></textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
@@ -106,8 +139,8 @@
         <div class="card-body" id="supp_table">
             <div class="row">
                 <div class="form-group col-5">
-                    <p for="requested_by" class="form_label"> Support Functions </p>
-                    <textarea type="text" id="functions_sf0" name="functions_sf0" class="form-control" oninput="autoExpand(this)"></textarea>
+                    <p for="requested_by" class="form_label"> Support Function </p>
+                    <textarea type="text" id="function_sf0" name="function_sf0" class="form-control" oninput="autoExpand(this)"></textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>

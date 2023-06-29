@@ -80,10 +80,10 @@
                 @if($addinput->code == "SP")
                 <div class="row">
                     <div class="col-6">
-                        <p> {{$addinput['functions']}} </p>
+                        <p> {{$addinput['function']}} </p>
                     </div>
                     <div class="col-6">
-                        <p> {{$addinput['success_indicators']}} </p>
+                        <p> {{$addinput['success_indicator']}} </p>
                     </div>
                 </div>
                 @endif
@@ -96,7 +96,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <label> Core Functions </label>
+                        <label> Core Function </label>
                         <p> </p>
                     </div>
                     <div class="col-6">
@@ -108,10 +108,10 @@
                 @if($addinput->code == "CF")
                 <div class="row">
                     <div class="col-6">
-                        <p> {{$addinput['functions']}} </p>
+                        <p> {{$addinput['function']}} </p>
                     </div>
                     <div class="col-6">
-                        <p> {{$addinput['success_indicators']}} </p>
+                        <p> {{$addinput['success_indicator']}} </p>
                     </div>
                 </div>
                 @endif
@@ -124,7 +124,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-6">
-                        <label> Support Functions </label>
+                        <label> Support Function </label>
                         <p> </p>
                     </div>
                     <div class="col-6">
@@ -136,10 +136,10 @@
                 @if($addinput->code == "SF")
                 <div class="row">
                     <div class="col-6">
-                        <p> {{$addinput['functions']}} </p>
+                        <p> {{$addinput['function']}} </p>
                     </div>
                     <div class="col-6">
-                        <p> {{$addinput['success_indicators']}} </p>
+                        <p> {{$addinput['success_indicator']}} </p>
                     </div>
                 </div>
                 @endif

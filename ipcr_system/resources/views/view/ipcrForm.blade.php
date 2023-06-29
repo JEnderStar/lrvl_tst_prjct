@@ -96,7 +96,7 @@
                         <p> </p>
                     </div>
                     <div class="col-1">
-                        <label> Remarks </label>
+                        <label> Remark </label>
                         <p> </p>
                     </div>
                     <div class="col-1">
@@ -111,7 +111,7 @@
                         <p> {{$addinput['functions']}} </p>
                     </div>
                     <div class="col-2">
-                        <p> {{$addinput['success_indicators']}} </p>
+                        <p> {{$addinput['success_indicator']}} </p>
                     </div>
                     <div class="col-2">
                         @if($addinput->actual_accomplishments != null)
@@ -133,7 +133,7 @@
                         <p> {{$addinput['a4']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$addinput['remarks']}} </p>
+                        <p> {{$addinput['remark']}} </p>
                     </div>
                     <div class="col-1">
                         <p> {{$addinput['graded_by']}} </p>
@@ -177,7 +177,7 @@
                         <p> </p>
                     </div>
                     <div class="col-1">
-                        <label> Remarks </label>
+                        <label> Remark </label>
                         <p> </p>
                     </div>
                     <div class="col-1">
@@ -192,7 +192,7 @@
                         <p> {{$addinput['functions']}} </p>
                     </div>
                     <div class="col-2">
-                        <p> {{$addinput['success_indicators']}} </p>
+                        <p> {{$addinput['success_indicator']}} </p>
                     </div>
                     <div class="col-2">
                         @if($addinput->actual_accomplishments != null)
@@ -214,7 +214,7 @@
                         <p> {{$addinput['a4']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$addinput['remarks']}} </p>
+                        <p> {{$addinput['remark']}} </p>
                     </div>
                     <div class="col-1">
                         <p> {{$addinput['graded_by']}} </p>
@@ -258,7 +258,7 @@
                         <p> </p>
                     </div>
                     <div class="col-1">
-                        <label> Remarks </label>
+                        <label> Remark </label>
                         <p> </p>
                     </div>
                     <div class="col-1">
@@ -273,7 +273,7 @@
                         <p> {{$addinput['functions']}} </p>
                     </div>
                     <div class="col-2">
-                        <p> {{$addinput['success_indicators']}} </p>
+                        <p> {{$addinput['success_indicator']}} </p>
                     </div>
                     <div class="col-2">
                         @if($addinput->actual_accomplishments != null)
@@ -295,7 +295,7 @@
                         <p> {{$addinput['a4']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$addinput['remarks']}} </p>
+                        <p> {{$addinput['remark']}} </p>
                     </div>
                     <div class="col-1">
                         <p> {{$addinput['graded_by']}} </p>

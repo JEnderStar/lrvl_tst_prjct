@@ -24,11 +24,11 @@
                     @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC" || $ipcr_form->status == "Rejected by Director")
                         <div class="form-group col-6">
                             <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <textarea type="text" id="functions_sp{{$index}}" name="functions_sp{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['functions']}}</textarea>
+                            <textarea type="text" id="function_sp{{$index}}" name="function_sp{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['function']}}</textarea>
                         </div>
                         <div class="form-group col-6">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <textarea type="text" id="success_indicators_sp{{$index}}" name="success_indicators_sp{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['success_indicators']}}</textarea>
+                            <textarea type="text" id="success_indicator_sp{{$index}}" name="success_indicator_sp{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="form-group" hidden>
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
@@ -37,13 +37,13 @@
                         @elseif($ipcr_form->status == "Approved by DC" || $ipcr_form->status == "Grading by DC")
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <p> <b> {{$addinput['functions']}} </b> </p>
-                            <textarea type="text" id="functions_sp{{$index}}" name="functions_sp{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['functions']}}</textarea>
+                            <p> <b> {{$addinput['function']}} </b> </p>
+                            <textarea type="text" id="function_sp{{$index}}" name="function_sp{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['function']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <p> <b> {{$addinput['success_indicators']}} </b> </p>
-                            <textarea type="text" id="success_indicators_sp{{$index}}" name="success_indicators_sp{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['success_indicators']}}</textarea>
+                            <p> <b> {{$addinput['success_indicator']}} </b> </p>
+                            <textarea type="text" id="success_indicator_sp{{$index}}" name="success_indicator_sp{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
@@ -52,11 +52,11 @@
                         @else
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                            <textarea type="text" id="functions_sp{{$index}}" name="functions_sp{{$index}}" class="form-control"readonly>{{$addinput['functions']}}</textarea>
+                            <textarea type="text" id="function_sp{{$index}}" name="function_sp{{$index}}" class="form-control"readonly>{{$addinput['function']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <textarea type="text" id="success_indicators_sp{{$index}}" name="success_indicators_sp{{$index}}" class="form-control" readonly>{{$addinput['success_indicators']}}</textarea>
+                            <textarea type="text" id="success_indicator_sp{{$index}}" name="success_indicator_sp{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
@@ -77,12 +77,12 @@
                     <div class="row" id="cf_table">
                         @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC" || $ipcr_form->status == "Rejected by Director")
                         <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Core Functions </p>
-                            <textarea type="text" id="functions_cf{{$index}}" name="functions_cf{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['functions']}}</textarea>
+                            <p for="requested_by" class="form_label"> Core Function </p>
+                            <textarea type="text" id="function_cf{{$index}}" name="function_cf{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['function']}}</textarea>
                         </div>
                         <div class="form-group col-6">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <textarea type="text" id="success_indicators_cf{{$index}}" name="success_indicators_cf{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['success_indicators']}}</textarea>
+                            <textarea type="text" id="success_indicator_cf{{$index}}" name="success_indicator_cf{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="form-group" hidden>
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
@@ -90,14 +90,14 @@
                         </div>
                         @elseif($ipcr_form->status == "Approved by DC" || $ipcr_form->status == "Grading by DC")
                         <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Core Functions </p>
-                            <p> <b> {{$addinput['functions']}} </b> </p>
-                            <textarea type="text" id="functions_cf{{$index}}" name="functions_cf{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['functions']}}</textarea>
+                            <p for="requested_by" class="form_label"> Core Function </p>
+                            <p> <b> {{$addinput['function']}} </b> </p>
+                            <textarea type="text" id="function_cf{{$index}}" name="function_cf{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['function']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <p> <b> {{$addinput['success_indicators']}} </b> </p>
-                            <textarea type="text" id="success_indicators_cf{{$index}}" name="success_indicators_cf{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['success_indicators']}}</textarea>
+                            <p> <b> {{$addinput['success_indicator']}} </b> </p>
+                            <textarea type="text" id="success_indicator_cf{{$index}}" name="success_indicator_cf{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
@@ -105,12 +105,12 @@
                         </div>
                         @else
                         <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Core Functions </p>
-                            <textarea type="text" id="functions_cf{{$index}}" name="functions_cf{{$index}}" class="form-control" readonly>{{$addinput['functions']}}</textarea>
+                            <p for="requested_by" class="form_label"> Core Function </p>
+                            <textarea type="text" id="function_cf{{$index}}" name="function_cf{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <textarea type="text" id="success_indicators_cf{{$index}}" name="success_indicators_cf{{$index}}" class="form-control" readonly>{{$addinput['success_indicators']}}</textarea>
+                            <textarea type="text" id="success_indicator_cf{{$index}}" name="success_indicator_cf{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
@@ -131,12 +131,12 @@
                     <div class="row" id="sf_table">
                     @if($ipcr_form->status == "Pending" || $ipcr_form->status == "Rejected by DC" || $ipcr_form->status == "Rejected by Director")
                         <div class="form-group col-6">
-                            <p for="requested_by" class="form_label"> Support Functions </p>
-                            <textarea type="text" id="functions_sf{{$index}}" name="functions_sf{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['functions']}}</textarea>
+                            <p for="requested_by" class="form_label"> Support Function </p>
+                            <textarea type="text" id="function_sf{{$index}}" name="function_sf{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['function']}}</textarea>
                         </div>
                         <div class="form-group col-6">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <textarea type="text" id="success_indicators_sf{{$index}}" name="success_indicators_sf{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['success_indicators']}}</textarea>
+                            <textarea type="text" id="success_indicator_sf{{$index}}" name="success_indicator_sf{{$index}}" class="form-control" oninput="autoExpand(this)">{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="form-group" hidden>
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
@@ -144,14 +144,14 @@
                         </div>
                         @elseif($ipcr_form->status == "Approved by DC" || $ipcr_form->status == "Grading by DC")
                         <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Support Functions </p>
-                            <p> <b> {{$addinput['functions']}} </b> </p>
-                            <textarea type="text" id="functions_sf{{$index}}" name="functions_sf{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['functions']}}</textarea>
+                            <p for="requested_by" class="form_label"> Support Function </p>
+                            <p> <b> {{$addinput['function']}} </b> </p>
+                            <textarea type="text" id="function_sf{{$index}}" name="function_sf{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['function']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <p> <b> {{$addinput['success_indicators']}} </b> </p>
-                            <textarea type="text" id="success_indicators_sf{{$index}}" name="success_indicators_sf{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['success_indicators']}}</textarea>
+                            <p> <b> {{$addinput['success_indicator']}} </b> </p>
+                            <textarea type="text" id="success_indicator_sf{{$index}}" name="success_indicator_sf{{$index}}" class="form-control" style="display:none;" readonly>{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>
@@ -159,12 +159,12 @@
                         </div>
                         @else
                         <div class="form-group col-4">
-                            <p for="requested_by" class="form_label"> Support Functions </p>
-                            <textarea type="text" id="functions_sf{{$index}}" name="functions_sf{{$index}}" class="form-control" readonly>{{$addinput['functions']}}</textarea>
+                            <p for="requested_by" class="form_label"> Support Function </p>
+                            <textarea type="text" id="function_sf{{$index}}" name="function_sf{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Success Indicator </p>
-                            <textarea type="text" id="success_indicators_sf{{$index}}" name="success_indicators_sf{{$index}}" class="form-control" readonly>{{$addinput['success_indicators']}}</textarea>
+                            <textarea type="text" id="success_indicator_sf{{$index}}" name="success_indicator_sf{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
                         </div>
                         <div class="form-group col-4">
                             <p for="requested_by" class="form_label"> Actual Accomplishments </p>

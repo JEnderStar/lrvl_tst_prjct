@@ -96,7 +96,7 @@
                         <p> </p>
                     </div>
                     <div class="col-1">
-                        <label> Remarks </label>
+                        <label> Remark </label>
                         <p> </p>
                     </div>
                     <div class="col-1">
@@ -108,10 +108,10 @@
                 @if($addinput->code == "SP")
                 <div class="row">
                     <div class="col-2">
-                        <p> {{$addinput['functions']}} </p>
+                        <p> {{$addinput['function']}} </p>
                     </div>
                     <div class="col-2">
-                        <p> {{$addinput['success_indicators']}} </p>
+                        <p> {{$addinput['success_indicator']}} </p>
                     </div>
                     <div class="col-2">
                         @if($addinput->actual_accomplishments != null)
@@ -133,7 +133,7 @@
                         <p> {{$addinput['a4']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$addinput['remarks']}} </p>
+                        <p> {{$addinput['remark']}} </p>
                     </div>
                     <div class="col-1">
                         <p> {{$addinput['graded_by']}} </p>
@@ -149,7 +149,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-2">
-                        <label> Core Functions </label>
+                        <label> Core Function </label>
                         <p> </p>
                     </div>
                     <div class="col-2">
@@ -177,7 +177,7 @@
                         <p> </p>
                     </div>
                     <div class="col-1">
-                        <label> Remarks </label>
+                        <label> Remark </label>
                         <p> </p>
                     </div>
                     <div class="col-1">
@@ -189,10 +189,10 @@
                 @if($addinput->code == "CF")
                 <div class="row">
                     <div class="col-2">
-                        <p> {{$addinput['functions']}} </p>
+                        <p> {{$addinput['function']}} </p>
                     </div>
                     <div class="col-2">
-                        <p> {{$addinput['success_indicators']}} </p>
+                        <p> {{$addinput['success_indicator']}} </p>
                     </div>
                     <div class="col-2">
                         @if($addinput->actual_accomplishments != null)
@@ -214,7 +214,7 @@
                         <p> {{$addinput['a4']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$addinput['remarks']}} </p>
+                        <p> {{$addinput['remark']}} </p>
                     </div>
                     <div class="col-1">
                         <p> {{$addinput['graded_by']}} </p>
@@ -230,7 +230,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-2">
-                        <label> Support Functions </label>
+                        <label> Support Function </label>
                         <p> </p>
                     </div>
                     <div class="col-2">
@@ -258,7 +258,7 @@
                         <p> </p>
                     </div>
                     <div class="col-1">
-                        <label> Remarks </label>
+                        <label> Remark </label>
                         <p> </p>
                     </div>
                     <div class="col-1">
@@ -270,10 +270,10 @@
                 @if($addinput->code == "SF")
                 <div class="row">
                     <div class="col-2">
-                        <p> {{$addinput['functions']}} </p>
+                        <p> {{$addinput['function']}} </p>
                     </div>
                     <div class="col-2">
-                        <p> {{$addinput['success_indicators']}} </p>
+                        <p> {{$addinput['success_indicator']}} </p>
                     </div>
                     <div class="col-2">
                         @if($addinput->actual_accomplishments != null)
@@ -295,7 +295,7 @@
                         <p> {{$addinput['a4']}} </p>
                     </div>
                     <div class="col-1">
-                        <p> {{$addinput['remarks']}} </p>
+                        <p> {{$addinput['remark']}} </p>
                     </div>
                     <div class="col-1">
                         <p> {{$addinput['graded_by']}} </p>

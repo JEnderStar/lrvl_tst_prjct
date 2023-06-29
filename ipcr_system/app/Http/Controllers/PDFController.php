@@ -27,7 +27,7 @@ class PDFController extends Controller
 
         $ipcr_form = Form::find($id);
         $schedule = Schedule::where('purpose', 'Performance Targets')->first();
-        $add_inputs = Input::where('employee_id', $ipcr_form->id)->get();
+        $add_inputs = Input::where('form_id', $ipcr_form->id)->get();
         // get data
         $data = [
             'Form' => $ipcr_form,
