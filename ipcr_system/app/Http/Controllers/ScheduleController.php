@@ -76,7 +76,8 @@ class ScheduleController extends Controller
                             'duration_to' => $request->duration_to,
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
-                            'hr' => Auth::user()->first_name
+                            'hr_firstName' => Auth::user()->first_name,
+                            'hr_lastName' => Auth::user()->last_name
                         ];
                         // Send the email
                         Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
@@ -96,10 +97,11 @@ class ScheduleController extends Controller
                         'duration_to' => $request->duration_to,
                         'purpose' => $request->purpose,
                         'covered_period' => $request->covered_period,
-                        'hr' => Auth::user()->first_name
+                        'hr_firstName' => Auth::user()->first_name,
+                        'hr_lastName' => Auth::user()->last_name
                     ];
                     Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
-                        $message->to($email); 
+                        $message->to($email);
                         $message->subject('Notification for Scheduling');
                         $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                     });
@@ -137,7 +139,8 @@ class ScheduleController extends Controller
                             'duration_to' => $request->duration_to,
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
-                            'hr' => Auth::user()->first_name
+                            'hr_firstName' => Auth::user()->first_name,
+                            'hr_lastName' => Auth::user()->last_name
                         ];
                         Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
                             $message->to($email);
@@ -156,7 +159,8 @@ class ScheduleController extends Controller
                         'duration_to' => $request->duration_to,
                         'purpose' => $request->purpose,
                         'covered_period' => $request->covered_period,
-                        'hr' => Auth::user()->first_name
+                        'hr_firstName' => Auth::user()->first_name,
+                        'hr_lastName' => Auth::user()->last_name
                     ];
                     Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
                         $message->to($email);
@@ -183,7 +187,7 @@ class ScheduleController extends Controller
             $selectedOptions = $request->input('employees');
 
             foreach ($request->input('employees') as $first_name) {
-                if(in_array('CMIO_All', $selectedOptions) && in_array('PSD_All', $selectedOptions)){
+                if (in_array('CMIO_All', $selectedOptions) && in_array('PSD_All', $selectedOptions)) {
                     $user = User::where('Position', 'Employee')->get();
                     foreach ($user as $users) {
                         $email = $users['email'];
@@ -192,7 +196,8 @@ class ScheduleController extends Controller
                             'duration_to' => $request->duration_to,
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
-                            'hr' => Auth::user()->first_name
+                            'hr_firstName' => Auth::user()->first_name,
+                            'hr_lastName' => Auth::user()->last_name
                         ];
                         Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
                             $message->to($email);
@@ -212,7 +217,8 @@ class ScheduleController extends Controller
                             'duration_to' => $request->duration_to,
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
-                            'hr' => Auth::user()->first_name
+                            'hr_firstName' => Auth::user()->first_name,
+                            'hr_lastName' => Auth::user()->last_name
                         ];
                         Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
                             $message->to($email);
@@ -232,7 +238,8 @@ class ScheduleController extends Controller
                             'duration_to' => $request->duration_to,
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
-                            'hr' => Auth::user()->first_name
+                            'hr_firstName' => Auth::user()->first_name,
+                            'hr_lastName' => Auth::user()->last_name
                         ];
                         Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
                             $message->to($email);
@@ -251,7 +258,8 @@ class ScheduleController extends Controller
                         'duration_to' => $request->duration_to,
                         'purpose' => $request->purpose,
                         'covered_period' => $request->covered_period,
-                        'hr' => Auth::user()->first_name
+                        'hr_firstName' => Auth::user()->first_name,
+                        'hr_lastName' => Auth::user()->last_name
                     ];
                     Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
                         $message->to($email);

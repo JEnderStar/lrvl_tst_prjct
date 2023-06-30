@@ -95,12 +95,8 @@
                         <label> A4 </label>
                         <p> </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <label> Remark </label>
-                        <p> </p>
-                    </div>
-                    <div class="col-1">
-                        <label> Graded by </label>
                         <p> </p>
                     </div>
                 </div>
@@ -132,11 +128,8 @@
                     <div class="col-1">
                         <p> {{$addinput['a4']}} </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <p> {{$addinput['remark']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$addinput['graded_by']}} </p>
                     </div>
                 </div>
                 @endif
@@ -176,12 +169,8 @@
                         <label> A4 </label>
                         <p> </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <label> Remark </label>
-                        <p> </p>
-                    </div>
-                    <div class="col-1">
-                        <label> Graded by </label>
                         <p> </p>
                     </div>
                 </div>
@@ -213,11 +202,8 @@
                     <div class="col-1">
                         <p> {{$addinput['a4']}} </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <p> {{$addinput['remark']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$addinput['graded_by']}} </p>
                     </div>
                 </div>
                 @endif
@@ -257,12 +243,8 @@
                         <label> A4 </label>
                         <p> </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <label> Remark </label>
-                        <p> </p>
-                    </div>
-                    <div class="col-1">
-                        <label> Graded by </label>
                         <p> </p>
                     </div>
                 </div>
@@ -294,11 +276,8 @@
                     <div class="col-1">
                         <p> {{$addinput['a4']}} </p>
                     </div>
-                    <div class="col-1">
+                    <div class="col-2">
                         <p> {{$addinput['remark']}} </p>
-                    </div>
-                    <div class="col-1">
-                        <p> {{$addinput['graded_by']}} </p>
                     </div>
                 </div>
                 @endif

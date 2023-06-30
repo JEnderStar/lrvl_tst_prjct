@@ -5,7 +5,7 @@
 <p>   </p>
 
 <p>Sincerely,</p>
-<p>{{$hr}}</p>
+<p>{{$hr_firstName}} {{$hr_lastName}}</p>
 
 <p>   </p>
 <p>   </p>
