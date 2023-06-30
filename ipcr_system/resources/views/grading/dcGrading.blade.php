@@ -112,13 +112,22 @@
                     @if($addinput->code == "SP")
                     <div class="row">
                         <div class="col-2">
-                            <textarea type="text" id="function_sp{{$index}}" name="function_sp{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
+                            <p> {{$addinput['function']}} </p>
+                            <div class="form-control" hidden>
+                                <textarea type="text" id="function_sp{{$index}}" name="function_sp{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
+                            </div>
                         </div>
                         <div class="col-2">
-                            <textarea type="text" id="success_indicator_sp{{$index}}" name="success_indicator_sp{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
+                            <p> {{$addinput['success_indicator']}} </p>
+                            <div class="form-control" hidden>
+                                <textarea type="text" id="success_indicator_sp{{$index}}" name="success_indicator_sp{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
+                            </div>
                         </div>
                         <div class="col-2">
-                            <textarea type="text" id="actual_accomplishments_sp{{$index}}" name="actual_accomplishments_sp{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
+                            <p> {{$addinput['actual_accomplishments']}} </p>
+                            <div class="form-control" hidden>
+                                <textarea type="text" id="actual_accomplishments_sp{{$index}}" name="actual_accomplishments_sp{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
+                            </div>
                         </div>
                         <div class="col-4 row input-container" data-index="{{$index}}">
                             <div class="col-3">
@@ -192,13 +201,22 @@
                     @if($addinput->code == "CF")
                     <div class="row">
                         <div class="col-2">
-                            <textarea type="text" id="function_cf{{$index}}" name="function_cf{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
+                            <p> {{$addinput['function']}} </p>
+                            <div class="form-control" hidden>
+                                <textarea type="text" id="function_cf{{$index}}" name="function_cf{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
+                            </div>
                         </div>
                         <div class="col-2">
-                            <textarea type="text" id="success_indicator_cf{{$index}}" name="success_indicator_cf{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
+                            <p> {{$addinput['success_indicator']}} </p>
+                            <div class="form-control" hidden>
+                                <textarea type="text" id="success_indicator_cf{{$index}}" name="success_indicator_cf{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
+                            </div>
                         </div>
                         <div class="col-2">
-                            <textarea type="text" id="actual_accomplishments_cf{{$index}}" name="actual_accomplishments_cf{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
+                            <p> {{$addinput['actual_accomplishments']}} </p>
+                            <div class="form-control" hidden>
+                                <textarea type="text" id="actual_accomplishments_cf{{$index}}" name="actual_accomplishments_cf{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
+                            </div>
                         </div>
                         <div class="col-4 row input-container" data-index="{{$index}}">
                             <div class="col-3">
@@ -272,13 +290,22 @@
                     @if($addinput->code == "SF")
                     <div class="row">
                         <div class="col-2">
-                            <textarea type="text" id="function_sf{{$index}}" name="function_sf{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
+                            <p> {{$addinput['function']}} </p>
+                            <div class="form-control" hidden>
+                                <textarea type="text" id="function_sf{{$index}}" name="function_sf{{$index}}" class="form-control" readonly>{{$addinput['function']}}</textarea>
+                            </div>
                         </div>
                         <div class="col-2">
-                            <textarea type="text" id="success_indicator_sf{{$index}}" name="success_indicator_sf{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
+                            <p> {{$addinput['success_indicator']}} </p>
+                            <div class="form-control" hidden>
+                                <textarea type="text" id="success_indicator_sf{{$index}}" name="success_indicator_sf{{$index}}" class="form-control" readonly>{{$addinput['success_indicator']}}</textarea>
+                            </div>
                         </div>
                         <div class="col-2">
-                            <textarea type="text" id="actual_accomplishments_sf{{$index}}" name="actual_accomplishments_sf{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
+                            <p> {{$addinput['actual_accomplishments']}} </p>
+                            <div class="form-control" hidden>
+                                <textarea type="text" id="actual_accomplishments_sf{{$index}}" name="actual_accomplishments_sf{{$index}}" class="form-control" readonly>{{$addinput['actual_accomplishments']}}</textarea>
+                            </div>
                         </div>
                         <div class="col-4 row input-container" data-index="{{$index}}">
                             <div class="col-3">

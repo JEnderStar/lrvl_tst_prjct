@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ipcrform as Form;
 use App\Models\Input;
 use App\Models\Schedule;
+use App\Models\Accounts as User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -395,10 +396,18 @@ class IPCRFormController extends Controller
         $ipcr_form = Form::find($id);
         $email = $ipcr_form->email;
 
+        $data = [
+            'ipcr_form' => $ipcr_form,
+            'hr_firstName' => Auth::user()->first_name,
+            'hr_lastName' => Auth::user()->last_name,
+            'hr_position' => Auth::user()->position,
+            'hr_email' => Auth::user()->email,
+        ];
+
         // send email that he/she was verified
-        Mail::send('mail.verified', function ($message) use ($email) {
+        Mail::send('mail.verified', $data, function ($message) use ($email) {
             $message->to($email);
-            $message->subject('HR received your form');
+            $message->subject('HR Confirmation: Your Form Has Been Successfully Verified');
             $message->from(Auth::user()->email, 'IPCR HR');
         });
 
@@ -451,12 +460,19 @@ class IPCRFormController extends Controller
         $status = $request->status;
 
         if ($status == "Approved by DC") {
-            $data = [];
+            $data = [
+                'ipcr_form' => $ipcr_form,
+                'dc_firstName' => Auth::user()->first_name,
+                'dc_lastName' => Auth::user()->last_name,
+                'dc_position' => Auth::user()->position,
+                'dc_email' => Auth::user()->email,
+                'schedule' => Schedule::where('purpose', 'Performance Targets')->first(),
+            ];
 
             // Send an email notification for form approval
-            Mail::send('mail.approvedc', $data, function ($message) use ($email) {
+            Mail::send('mail.approveDC', $data, function ($message) use ($email) {
                 $message->to($email);
-                $message->subject('Division Chief approved your form');
+                $message->subject('Update Your IPCR Form: Division Chief Approval and Accomplishments Input');
                 $message->from(Auth::user()->email, 'IPCR Division Chief');
             });
 
@@ -468,12 +484,18 @@ class IPCRFormController extends Controller
         } else if ($status == "Rejected by DC") {
             $data = [
                 'reason' => $request->reason,
+                'ipcr_form' => $ipcr_form,
+                'dc_firstName' => Auth::user()->first_name,
+                'dc_lastName' => Auth::user()->last_name,
+                'dc_position' => Auth::user()->position,
+                'dc_email' => Auth::user()->email,
+                'schedule' => Schedule::where('purpose', 'Performance Targets')->first(),
             ];
 
             // Send an email notification for form rejection
-            Mail::send('mail.rejectdc', $data, function ($message) use ($data, $email) {
+            Mail::send('mail.rejectDC', $data, function ($message) use ($data, $email) {
                 $message->to($email);
-                $message->subject('Division Chief rejected your form');
+                $message->subject('Action Required: Revision of IPCR Form - Division Chief Review');
                 $message->from(Auth::user()->email, 'IPCR Division Chief');
             });
 
@@ -522,7 +544,7 @@ class IPCRFormController extends Controller
         Input::where('form_id', $id)->delete();
 
         $length = 0;
-        
+
         $sp = 0;
         $cf = 0;
         $sf = 0;
@@ -691,26 +713,34 @@ class IPCRFormController extends Controller
         $ipcr_form = Form::find($id);
         $input = Input::where('form_id', $id)->first();
         $dc_email = $input->graded_by;
+        $dc_info = User::where('email', $input->graded_by)->first();
         $email = $ipcr_form->email;
         $status = $request->status;
 
-        if($status == "Approved by Director"){
+        if ($status == "Approved by Director") {
             $ipcr_form->status = $request->status;
             $ipcr_form->save();
 
             return response()->json(["success" => true, "message" => "Successfully approved!"]);
-        }else if($status == "Rejected by Director"){
+        } else if ($status == "Rejected by Director") {
             $data = [
                 'reason' => $request->reason,
+                'ipcr_form' => $ipcr_form,
+                'director_firstName' => Auth::user()->first_name,
+                'director_lastName' => Auth::user()->last_name,
+                'director_position' => Auth::user()->position,
+                'director_email' => Auth::user()->email,
+                'dc_info' => $dc_info,
+                'schedule' => Schedule::where('purpose', 'Performance Targets')->first(),
             ];
-            Mail::send('mail.rejectdirtoemp', $data, function ($message) use ($data, $email) {
+            Mail::send('mail.rejectDirectorToEmployee', $data, function ($message) use ($data, $email) {
                 $message->to($email);
-                $message->subject('Director rejected your form');
+                $message->subject("Action Required: Revision of IPCR Form - Director's Feedback");
                 $message->from(Auth::user()->email, 'IPCR Director');
             });
-            Mail::send('mail.rejectdirtodc', $data, function ($message) use ($data, $dc_email) {
+            Mail::send('mail.rejectDirectorToDC', $data, function ($message) use ($data, $dc_email) {
                 $message->to($dc_email);
-                $message->subject('Director rejected your grade');
+                $message->subject('Request for Review: IPCR Form Grade Rejection');
                 $message->from(Auth::user()->email, 'IPCR Director');
             });
 
