@@ -109,23 +109,23 @@ class IPCRFormController extends Controller
             $last_ipcr_form = Form::get()->last();
 
             $sp = 0;
-            $length = $sp + 1;
+            $length1 = $sp + 1;
             $cf = 0;
-            $length = $cf + 1;
+            $length2 = $cf + 1;
             $sf = 0;
-            $length = $sf + 1;
+            $length3 = $sf + 1;
 
             $sp_noinput = true;
             $cf_noinput = true;
             $sf_noinput = true;
 
-            for ($sp; $sp < $length; $sp++) {
+            for ($sp; $sp < $length1; $sp++) {
                 $word_sp = "function_sp" . (string)$sp;
                 $word_sp1 = "success_indicator_sp" . (string)$sp;
                 $function_sp = $request->$word_sp;
                 $si_sp = $request->$word_sp1;
                 if ($function_sp != null) {
-                    $length++;
+                    $length1++;
                     $add_input = new Input();
                     $add_input->form_id = $last_ipcr_form['id'];
                     $add_input->code = "SP";
@@ -140,13 +140,13 @@ class IPCRFormController extends Controller
                 }
             }
 
-            for ($cf; $cf < $length; $cf++) {
+            for ($cf; $cf < $length2; $cf++) {
                 $word_cf = "function_cf" . (string)$cf;
                 $word_cf1 = "success_indicator_cf" . (string)$cf;
                 $function_cf = $request->$word_cf;
                 $si_cf = $request->$word_cf1;
                 if ($function_cf != null) {
-                    $length++;
+                    $length2++;
                     $add_input = new Input();
                     $add_input->form_id = $last_ipcr_form['id'];
                     $add_input->code = "CF";
@@ -161,13 +161,13 @@ class IPCRFormController extends Controller
                 }
             }
 
-            for ($sf; $sf < $length; $sf++) {
+            for ($sf; $sf < $length3; $sf++) {
                 $word_sf = "function_sf" . (string)$sf;
                 $word_sf1 = "success_indicator_sf" . (string)$sf;
                 $function_sf = $request->$word_sf;
                 $si_sf = $request->$word_sf1;
                 if ($function_sf != null) {
-                    $length++;
+                    $length3++;
                     $add_input = new Input();
                     $add_input->form_id = $last_ipcr_form['id'];
                     $add_input->code = "SF";

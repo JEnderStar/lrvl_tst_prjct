@@ -92,15 +92,15 @@ $("#addsp").click(function () {
     for (sp; sp < sp1; sp++) {
         // Check if the element with the current sp index exists
         for (var i = 0; i < sp; i++) {
-            if ($('#functions_sp' + sp).val() == null) {
+            if ($('#function_sp' + sp).val() == null) {
                 // Create a new element for the Strategic Priority
-                $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><textarea type="text" id="functions_sp' + sp + '" name="functions_sp' + sp + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sp' + sp + '" name="success_indicator_sp' + sp + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
+                $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><textarea type="text" id="function_sp' + sp + '" name="function_sp' + sp + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sp' + sp + '" name="success_indicator_sp' + sp + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
             } else {
                 // Repeat from the first index if an element with the index exists
                 for (var sp2 = 1; sp2 < sp; sp2++) {
-                    if ($('#functions_sp' + sp2).val() == null) {
+                    if ($('#function_sp' + sp2).val() == null) {
                         // Create an element with an index that does not exist
-                        $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><textarea type="text" id="functions_sp' + sp2 + '" name="functions_sp' + sp2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sp' + sp2 + '" name="success_indicator_sp' + sp2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
+                        $("#strat_table").append('<div class="row addedsp"><div class="form-group col-5"><p for="requested_by" class="form_label"> Strategic Priorities </p><textarea type="text" id="function_sp' + sp2 + '" name="function_sp' + sp2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sp' + sp2 + '" name="success_indicator_sp' + sp2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesp"> Remove </button></div></div>');
                         break;
                     }
                 }
@@ -127,15 +127,15 @@ $("#addcf").click(function () {
     for (cf; cf < cf1; cf++) {
         // Check if the element with the current cf index exists
         for (var i = 0; i < cf; i++) {
-            if ($('#functions_cf' + cf).val() == null) {
+            if ($('#function_cf' + cf).val() == null) {
                 // Create a new element for the Core Function
-                $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><textarea type="text" id="functions_cf' + cf + '" name="functions_cf' + cf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_cf' + cf + '" name="success_indicator_cf' + cf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2" > <p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
+                $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Function </p><textarea type="text" id="function_cf' + cf + '" name="function_cf' + cf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_cf' + cf + '" name="success_indicator_cf' + cf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2" > <p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
             } else {
                 // Repeat from the first index if an element with the index exists
                 for (var cf2 = 1; cf2 < cf; cf2++) {
-                    if ($('#functions_cf' + cf2).val() == null) {
+                    if ($('#function_cf' + cf2).val() == null) {
                         // Create an element with an index that does not exist
-                        $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><textarea type="text" id="functions_cf' + cf2 + '" name="functions_cf' + cf2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_cf' + cf2 + '" name="success_indicator_cf' + cf2 + '" class="form-control" oninput="autoExpand(this)"></textarea></div><div class="form-group col-2"> <p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
+                        $("#core_table").append('<div class="row addedcf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Function </p><textarea type="text" id="function_cf' + cf2 + '" name="function_cf' + cf2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_cf' + cf2 + '" name="success_indicator_cf' + cf2 + '" class="form-control" oninput="autoExpand(this)"></textarea></div><div class="form-group col-2"> <p> </p><button type="button" class="btn btn-danger" id="removecf"> Remove </button></div></div>');
                         break;
                     }
                 }
@@ -162,15 +162,15 @@ $("#addsf").click(function () {
     for (sf; sf < sf1; sf++) {
         // Check if the element with the current sf index exists
         for (var i = 0; i < sf; i++) {
-            if ($('#functions_sf' + sf).val() == null) {
+            if ($('#function_sf' + sf).val() == null) {
                 // Create a new element for the Support Function
-                $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><textarea type="text" id="functions_sf' + sf + '" name="functions_sf' + sf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sf' + sf + '" name="success_indicator_sf' + sf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
+                $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Function </p><textarea type="text" id="function_sf' + sf + '" name="function_sf' + sf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sf' + sf + '" name="success_indicator_sf' + sf + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
             } else {
                 // Repeat from the first index if an element with the index exists
                 for (var sf2 = 1; sf2 < sf; sf2++) {
-                    if ($('#functions_sf' + sf2).val() == null) {
+                    if ($('#function_sf' + sf2).val() == null) {
                         // Create an element with an index that does not exist
-                        $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Functions </p><textarea type="text" id="functions_sf' + sf2 + '" name="functions_sf' + sf2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sf' + sf2 + '" name="success_indicator_sf' + sf2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
+                        $("#supp_table").append('<div class="row addedsf"><div class="form-group col-5"><p for="requested_by" class="form_label"> Core Function </p><textarea type="text" id="function_sf' + sf2 + '" name="function_sf' + sf2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-5"><p for="requested_by" class="form_label"> Success Indicator </p><textarea type="text" id="success_indicator_sf' + sf2 + '" name="success_indicator_sf' + sf2 + '" class="form-control" oninput="autoExpand(this)"></textarea> </div><div class="form-group col-2"><p> </p><button type="button" class="btn btn-danger" id="removesf"> Remove </button></div></div>');
                         break;
                     }
                 }
