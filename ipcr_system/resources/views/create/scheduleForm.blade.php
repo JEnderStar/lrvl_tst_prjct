@@ -33,8 +33,6 @@
                     <option value="" selected disabled>Select Covered Period</option>
                     <option value="1st Semester">1st Semester</option>
                     <option value="2nd Semester">2nd Semester</option>
-                    <option value="3rd Semester">3rd Semester</option>
-                    <option value="4th Semester">4th Semester</option>
                 </select>
             </div>
             <div class="form-group col-3">
@@ -67,13 +65,13 @@
                 <label> Duration </label>
                 <br>
                 <label for="requested_by" class="form_label"> From </label>
-                <input type="date" id="duration_from" name="duration_from" class="form-control" min="{{date('Y-m-d')}}" required>
+                <input type="date" id="duration_from" name="duration_from" class="form-control" readonly required>
             </div>
             <div class="form-group col-3">
                 <label>   </label>
                 <br>
                 <label for="requested_by" class="form_label"> To </label>
-                <input type="date" id="duration_to" name="duration_to" class="form-control" min="{{date('Y-m-d')}}" required>
+                <input type="date" id="duration_to" name="duration_to" class="form-control" readonly required>
             </div>
         </div>
 

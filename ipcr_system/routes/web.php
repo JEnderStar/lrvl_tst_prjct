@@ -18,6 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/registeraccount', [App\Http\Controllers\RegisterController::class, 'createAccount']);
 
 // For Employee View
 Route::middleware(['role.access:employee'])->group(function () {

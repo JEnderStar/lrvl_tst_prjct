@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laratrust\LaratrustFacade;
 
 use function Ramsey\Uuid\v1;
 
@@ -51,7 +52,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        // return Validator::make($data, [
+        //     'first_name' => ['required', 'string', 'max:255'],
+        //     'last_name' => ['required', 'string', 'max:255'],
+        //     'mi' => ['required', 'string', 'max:255'],
+        //     'position' => ['required', 'string', 'max:255'],
+        //     'office' => ['required', 'string', 'max:25'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        // ]);
+        $validator = Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'mi' => ['required', 'string', 'max:255'],
@@ -60,6 +70,21 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+
+        if ($validator->passes()) {
+            User::create([
+                'first_name' => $data['first_name'],
+                'last_name' => $data['last_name'],
+                'mi' => $data['mi'],
+                'position' => $data['position'],
+                'office' => $data['office'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
+            return response()->json(["success" => true, "message" => "Successfully created an account!"]);
+        } else {
+            return response()->json(["success" => false, "message" => "Error making an account!"]);
+        }
     }
 
     /**
@@ -70,6 +95,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd("create");
+        // // Perform the user registration process
+        // $user = User::create([
+        //     'first_name' => $data['first_name'],
+        //     'last_name' => $data['last_name'],
+        //     'mi' => $data['mi'],
+        //     'position' => $data['position'],
+        //     'office' => $data['office'],
+        //     'email' => $data['email'],
+        //     'password' => Hash::make($data['password']),
+        // ]);
+
+        // // Return success response
+        // return response()->json(["success" => true, "message" => "Successfully created an account!"]);
         return User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
