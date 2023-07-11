@@ -40,7 +40,7 @@
                                     @if($ipcrform["status"] == "Pending" || $ipcrform["status"] == "Approved by DC" || $ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Grading by DC" || $ipcrform["status"] == "Rejected by Director")
                                     <a href="/employee/{{$ipcrform['id']}}/edit" class="dropdown-item">              Edit </a>
                                     @endif
-                                    @if($ipcrform["status"] == "Pending" || $ipcrform["status"] == "Approved by DC" || $ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Rejected by Director")
+                                    @if($ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Rejected by Director")
                                     <button type="button" id="delete_form" data-product-id="{{$ipcrform['id']}}" class="dropdown-item">            Delete </button>
                                     @endif
                                     @if($ipcrform["status"] == "Approved by Director" || $ipcrform["status"] == "Verified")
