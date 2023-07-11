@@ -16,5 +16,5 @@ class Schedule extends Model
         'employees' => 'array'
     ];
 
-    protected $fillable = ['type','purpose','covered_period','office','employees','division_chief','director','duration_from','duration_to'];
+    protected $fillable = ['type','purpose','covered_period','office','employees','division_chief','director','duration_from','duration_to', 'last_submission'];
 }

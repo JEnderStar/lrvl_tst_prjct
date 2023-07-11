@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -25,6 +26,8 @@ class RegisterController extends Controller
      */
     protected function createAccount(Request $request)
     {
+        $role = Role::where('name', 'employee')->first();
+
         $validator = Validator::make($request->all(), [
             'first_name' => 'required', 'string', 'max:255',
             'last_name' => 'required', 'string', 'max:255',
@@ -36,7 +39,8 @@ class RegisterController extends Controller
         ]);
 
         if ($validator->passes()) {
-            $user = User::create([
+            // Registers User and assign the role to the user
+            User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'mi' => $request->mi,
@@ -44,10 +48,9 @@ class RegisterController extends Controller
                 'office' => $request->office,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-            ]);
+            ])->roles()->attach($role);
 
-            // Assign the role to the user
-            LaratrustFacade::attachRole('employee', $user->id);
+            // LaratrustFacade::attachRole('employee', $user->id);
 
             return response()->json(["success" => true, "message" => "Successfully created an account!"]);
         } else {

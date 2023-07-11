@@ -115,102 +115,77 @@ $('#covered_period').on('change', function () {
     var selectedValue = $(this).val();
     var firstDateInput = $('#duration_from');
     var secondDateInput = $('#duration_to');
+    var lastSubmissionInput = $('#last_submission');
 
-    firstDateInput.removeAttr('value');
-    secondDateInput.removeAttr('value');
+    // Clear the values of the second date and last submission inputs
+    secondDateInput.val('');
+    lastSubmissionInput.val('');
 
-    // Set min and max dates based on selected value
+    // Set min and max dates for the first date input based on selected value
     if (selectedValue == '1st Semester') {
-        firstDateInput.val(today);
         firstDateInput.attr('min', minDate_1stSemester);
         firstDateInput.attr('max', maxDate_1stSemester);
-        firstDateInput.attr('readonly', false);
-        secondDateInput.attr('readonly', false);
+        firstDateInput.removeAttr('readonly');
+        secondDateInput.attr('min', minDate_1stSemester);
+        secondDateInput.attr('max', maxDate_1stSemester);
     } else if (selectedValue == '2nd Semester') {
-        firstDateInput.val(today);
         firstDateInput.attr('min', minDate_2ndSemester);
         firstDateInput.attr('max', maxDate_2ndSemester);
-        firstDateInput.attr('readonly', false);
-        secondDateInput.attr('readonly', false);
+        firstDateInput.removeAttr('readonly');
+        secondDateInput.attr('min', minDate_2ndSemester);
+        secondDateInput.attr('max', maxDate_2ndSemester);
     } else {
-        firstDateInput.attr('value', '');
+        firstDateInput.removeAttr('min');
+        firstDateInput.removeAttr('max');
         firstDateInput.attr('readonly', true);
-        secondDateInput.attr('readonly', true);
+        secondDateInput.removeAttr('min');
+        secondDateInput.removeAttr('max');
     }
 
     // Disable past dates
     firstDateInput.attr('min', today);
+});
 
-    // Clear the value of the second date input
+$('#duration_from').on('change', function () {
+    var firstDateInput = $(this);
+    var secondDateInput = $('#duration_to');
+    var lastSubmissionInput = $('#last_submission');
+
+    // Clear the values of the second date and last submission inputs
     secondDateInput.val('');
+    lastSubmissionInput.val('');
 
     // Update the minimum value of the second date input
     var firstDateValue = firstDateInput.val();
     if (firstDateValue) {
-        if (selectedValue == '1st Semester') {
-            secondDateInput.attr('min', firstDateValue);
-            secondDateInput.attr('max', maxDate_1stSemester);
-            secondDateInput.attr('readonly', false);
-        } else if (selectedValue == '2nd Semester') {
-            secondDateInput.attr('min', firstDateValue);
-            secondDateInput.attr('max', maxDate_2ndSemester);
-            secondDateInput.attr('readonly', false);
-        }
+        secondDateInput.attr('min', firstDateValue);
+        secondDateInput.removeAttr('readonly');
+        lastSubmissionInput.attr('min', firstDateValue);
+        lastSubmissionInput.removeAttr('max');
+        lastSubmissionInput.attr('readonly', true);
     } else {
         secondDateInput.removeAttr('min');
-        secondDateInput.removeAttr('max');
-        secondDateInput.removeAttr('value');
         secondDateInput.attr('readonly', true);
+        lastSubmissionInput.removeAttr('min');
+        lastSubmissionInput.removeAttr('max');
+        lastSubmissionInput.attr('readonly', true);
     }
 });
 
-$('#duration_from').on('change', function () {
-    // Get current year
-    var currentYear = new Date().getFullYear();
+$('#duration_to').on('change', function () {
+    var secondDateInput = $(this);
+    var lastSubmissionInput = $('#last_submission');
 
-    // Set maximum dates
-    var maxDate_1stSemester = currentYear + '-06-30';
-    var maxDate_2ndSemester = currentYear + '-12-31';
+    // Clear the value of the last submission input
+    lastSubmissionInput.val('');
 
-    var firstDateValue = $(this).val();
-    
-    var periodValue = $('#covered_period').val();
-    var secondDateInput = $('#duration_to');
-
-    // Clear the value of the second date input
-    secondDateInput.val('');
-
-    // Update the minimum value of the second date input
-    if (firstDateValue) {
-        if (periodValue == '1st Semester') {
-            secondDateInput.attr('min', firstDateValue);
-            secondDateInput.attr('max', maxDate_1stSemester);
-            secondDateInput.attr('readonly', false);
-        } else if (periodValue == '2nd Semester') {
-            secondDateInput.attr('min', firstDateValue);
-            secondDateInput.attr('max', maxDate_2ndSemester);
-            secondDateInput.attr('readonly', false);
-        }
-    } else {
-        secondDateInput.removeAttr('min');
-        secondDateInput.removeAttr('max');
-        secondDateInput.removeAttr('value');
-        secondDateInput.attr('readonly', true);
-    }
-});
-
-// Get the checkbox and input element
-var checkbox = document.getElementById('enableStartDate');
-var input = document.getElementById('duration_from');
-
-// Add event listener to the checkbox
-checkbox.addEventListener('change', function() {
-    // If the checkbox is checked, remove the readonly attribute
-    if (this.checked) {
-        input.removeAttribute('readonly');
-    } else {
-        // If the checkbox is unchecked, add the readonly attribute
-        input.setAttribute('readonly', 'readonly');
+    var secondDateValue = secondDateInput.val();
+    if(secondDateValue){
+        lastSubmissionInput.attr('max', secondDateValue);
+        lastSubmissionInput.removeAttr('readonly');
+    }else{
+        lastSubmissionInput.removeAttr('max');
+        lastSubmissionInput.attr('readonly', true);
     }
 });
 

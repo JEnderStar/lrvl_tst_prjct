@@ -1,6 +1,6 @@
 <p> This is a notice from DOF that you've been notified that a schedule for the {{$purpose}} for {{$covered_period}} is scheduled from {{$duration_from}} to {{$duration_to}}. </p>
 
-<p> Please take note that once the schedule ends, you cannot access the {{$purpose}} anymore. </p>
+<p> Please take note that there's a last submission that is scheduled on {{$last_submission}}, and once the schedule ends, you cannot access the {{$purpose}} anymore. </p>
 
 <p>   </p>
 

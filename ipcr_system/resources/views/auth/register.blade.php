@@ -170,7 +170,7 @@
                             confirmButtonText: 'Okay'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                window.location.href = "/employee/";
+                                window.location.href = "/";
                             }
                         })
                     } else {

@@ -40,12 +40,14 @@ class ScheduleController extends Controller
             // Validation error messages
             'duration_from.required' => 'Duration From is required.',
             'duration_to.required' => 'Duration To is required.',
+            'last_submission.required' => 'Last Submission Date is required',
         ];
 
         $validator = Validator::make($request->all(), [
             // Validation rules
             'duration_from' => 'required|date',
             'duration_to' => 'required|date',
+            'last_submission' => 'required|date',
         ], $message_error);
 
         if ($validator->passes()) {
@@ -71,7 +73,8 @@ class ScheduleController extends Controller
                     'division_chief' => $division_chief_name,
                     'director' => $director_name,
                     'duration_from' => $request->duration_from,
-                    'duration_to' => $request->duration_to
+                    'duration_to' => $request->duration_to,
+                    'last_submission' => $request->last_submission,
                 ]);
 
                 // Retrieve selected employee options
@@ -88,6 +91,7 @@ class ScheduleController extends Controller
                             $data = [
                                 'duration_from' => $request->duration_from,
                                 'duration_to' => $request->duration_to,
+                                'last_submission' => $request->last_submission,
                                 'purpose' => $request->purpose,
                                 'covered_period' => $request->covered_period,
                                 'hr_firstName' => Auth::user()->first_name,
@@ -109,6 +113,7 @@ class ScheduleController extends Controller
                         $data = [
                             'duration_from' => $request->duration_from,
                             'duration_to' => $request->duration_to,
+                            'last_submission' => $request->last_submission,
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
                             'hr_firstName' => Auth::user()->first_name,
@@ -136,7 +141,8 @@ class ScheduleController extends Controller
                     'division_chief' => $division_chief_name,
                     'director' => $director_name,
                     'duration_from' => $request->duration_from,
-                    'duration_to' => $request->duration_to
+                    'duration_to' => $request->duration_to,
+                    'last_submission' => $request->last_submission,
                 ]);
 
                 $selectedOptions = $request->input('employees');
@@ -151,6 +157,7 @@ class ScheduleController extends Controller
                             $data = [
                                 'duration_from' => $request->duration_from,
                                 'duration_to' => $request->duration_to,
+                                'last_submission' => $request->last_submission,
                                 'purpose' => $request->purpose,
                                 'covered_period' => $request->covered_period,
                                 'hr_firstName' => Auth::user()->first_name,
@@ -171,6 +178,7 @@ class ScheduleController extends Controller
                         $data = [
                             'duration_from' => $request->duration_from,
                             'duration_to' => $request->duration_to,
+                            'last_submission' => $request->last_submission,
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
                             'hr_firstName' => Auth::user()->first_name,
@@ -195,7 +203,8 @@ class ScheduleController extends Controller
                     'division_chief' => $division_chief,
                     'director' => $director,
                     'duration_from' => $request->duration_from,
-                    'duration_to' => $request->duration_to
+                    'duration_to' => $request->duration_to,
+                    'last_submission' => $request->last_submission,
                 ]);
 
                 $selectedOptions = $request->input('employees');
@@ -208,6 +217,7 @@ class ScheduleController extends Controller
                             $data = [
                                 'duration_from' => $request->duration_from,
                                 'duration_to' => $request->duration_to,
+                                'last_submission' => $request->last_submission,
                                 'purpose' => $request->purpose,
                                 'covered_period' => $request->covered_period,
                                 'hr_firstName' => Auth::user()->first_name,
@@ -229,6 +239,7 @@ class ScheduleController extends Controller
                             $data = [
                                 'duration_from' => $request->duration_from,
                                 'duration_to' => $request->duration_to,
+                                'last_submission' => $request->last_submission,
                                 'purpose' => $request->purpose,
                                 'covered_period' => $request->covered_period,
                                 'hr_firstName' => Auth::user()->first_name,
@@ -250,6 +261,7 @@ class ScheduleController extends Controller
                             $data = [
                                 'duration_from' => $request->duration_from,
                                 'duration_to' => $request->duration_to,
+                                'last_submission' => $request->last_submission,
                                 'purpose' => $request->purpose,
                                 'covered_period' => $request->covered_period,
                                 'hr_firstName' => Auth::user()->first_name,
@@ -270,6 +282,7 @@ class ScheduleController extends Controller
                         $data = [
                             'duration_from' => $request->duration_from,
                             'duration_to' => $request->duration_to,
+                            'last_submission' => $request->last_submission,
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
                             'hr_firstName' => Auth::user()->first_name,
