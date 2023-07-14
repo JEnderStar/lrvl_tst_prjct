@@ -83,7 +83,7 @@ $("textarea").each(function(textarea) {
 });
 
 $(document).ready(function () {
-    $('.input-container').on('change', 'input', function () {
+    $('.input-container').on('keyup', 'input', function () {
         // finds the container of that index
         var container = $(this).closest('.input-container');
         // find the input inside the container
@@ -91,15 +91,36 @@ $(document).ready(function () {
         // find the value of the checked input
         var currentValue = $(this).val();
 
-        // Reset readonly for all inputs
-        inputs.prop('readonly', false); 
+        //get values of Q1, E2, and T3 inputs
+        var q1Value = parseFloat(container.find('.q1-input').val()) || 0;
+        var e2Value = parseFloat(container.find('.e2-input').val()) || 0;
+        var t3Value = parseFloat(container.find('.t3-input').val()) || 0;
 
-        if (currentValue !== '') {
-            // make all input other than user inputted readonly
-            inputs.not(this).prop('readonly', true);
+        // limit decimal places to 2 and restrict to maximum 5.00, and update them to the blade
+        if(q1Value > 5){
+            q1Value = Math.min(parseFloat(q1Value.toFixed(2)), 5.00);
+            container.find('.q1-input').val(q1Value);
         }
-        //get value of user input to a4
-        container.find('.a4-input').val(currentValue);
+        if(e2Value > 5){
+            e2Value = Math.min(parseFloat(e2Value.toFixed(2)), 5.00);
+            container.find('.e2-input').val(e2Value);
+        }
+        if(t3Value > 5){
+            t3Value = Math.min(parseFloat(t3Value.toFixed(2)), 5.00);
+            container.find('.t3-input').val(t3Value);
+        }
+
+        // calculate the sum of Q1, E2, and T3
+        var sum = q1Value + e2Value + t3Value;
+
+        // calculate the divisor based on the number of inputs with values
+        var divisor = (q1Value !== 0 ? 1 : 0) + (e2Value !== 0 ? 1 : 0) + (t3Value !== 0 ? 1 : 0);
+
+        // divide the sum by the divisor
+        var dividedSum = sum / divisor;
+
+        // set the dividedSum value to A4 input
+        container.find('.a4-input').val(dividedSum.toFixed(2));
         //always make a4 input readonly
         container.find('.a4-input').prop('readonly', true);
         

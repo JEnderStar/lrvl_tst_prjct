@@ -98,7 +98,7 @@ let errorMessages = '';
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Swal.fire({
-                            title: "Please state the reason for rejection to be emailed to the Employee and Division Chief",
+                            title: "Please state the reason to be emailed to the Employee and Division Chief",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonText: "Submit",

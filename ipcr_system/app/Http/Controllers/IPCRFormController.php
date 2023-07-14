@@ -536,149 +536,165 @@ class IPCRFormController extends Controller
      */
     public function DCUpdateGradingIPCRForm(Request $request, string $id)
     {
-        // Find the IPCR form based on the provided $id
-        $ipcr_form = Form::find($id);
-        $add_input = Input::where('form_id', $id)->get();
+        $message_error = [
+            // Validation error messages
+            'comments.required' => 'Comments is required.',
+        ];
 
-        // Delete existing input records for the employee
-        Input::where('form_id', $id)->delete();
+        $validator = validator::make($request->all(), [
+            // Validation rules
+            'comments' => 'required',
+        ], $message_error);
 
-        $length = 0;
+        $schedule = Schedule::where('purpose', 'Performance Targets')->first();
 
-        $sp = 0;
-        $cf = 0;
-        $sf = 0;
+        if ($validator->passes()) {
+            // Find the IPCR form based on the provided $id
+            $ipcr_form = Form::find($id);
+            $add_input = Input::where('form_id', $id)->get();
 
-        foreach ($add_input as $addinput) {
-            $length++;
+            // Delete existing input records for the employee
+            Input::where('form_id', $id)->delete();
 
-            // Generate dynamic variable names based on the index
-            $word_sp = "function_sp" . (string)$sp;
-            $word_sp1 = "success_indicator_sp" . (string)$sp;
-            $word_sp2 = "actual_accomplishments_sp" . (string)$sp;
-            $grade_sp1 = "q1_sp" . (string)$sp;
-            $grade_sp2 = "e2_sp" . (string)$sp;
-            $grade_sp3 = "t3_sp" . (string)$sp;
-            $grade_sp4 = "a4_sp" . (string)$sp;
-            $remark_sp = "remark_sp" . (string)$sp;
-            $graded_by_sp = "graded_by_sp" . (string)$sp;
+            $length = 0;
 
-            // Get the values from the request using the generated variable names
-            $function_sp = $request->$word_sp;
-            $si_sp = $request->$word_sp1;
-            $aa_sp = $request->$word_sp2;
-            $q1_sp = $request->$grade_sp1;
-            $e2_sp = $request->$grade_sp2;
-            $t3_sp = $request->$grade_sp3;
-            $a4_sp = $request->$grade_sp4;
-            $re_sp = $request->$remark_sp;
-            $graded_sp = $request->$graded_by_sp;
+            $sp = 0;
+            $cf = 0;
+            $sf = 0;
 
-            // Repeat the same process for "CF" and "SF" codes
-            $word_cf = "function_cf" . (string)$cf;
-            $word_cf1 = "success_indicator_cf" . (string)$cf;
-            $word_cf2 = "actual_accomplishments_cf" . (string)$cf;
-            $grade_cf1 = "q1_cf" . (string)$cf;
-            $grade_cf2 = "e2_cf" . (string)$cf;
-            $grade_cf3 = "t3_cf" . (string)$cf;
-            $grade_cf4 = "a4_cf" . (string)$cf;
-            $remark_cf = "remark_cf" . (string)$cf;
-            $graded_by_cf = "graded_by_cf" . (string)$cf;
+            foreach ($add_input as $addinput) {
+                $length++;
 
-            $function_cf = $request->$word_cf;
-            $si_cf = $request->$word_cf1;
-            $aa_cf = $request->$word_cf2;
-            $q1_cf = $request->$grade_cf1;
-            $e2_cf = $request->$grade_cf2;
-            $t3_cf = $request->$grade_cf3;
-            $a4_cf = $request->$grade_cf4;
-            $re_cf = $request->$remark_cf;
-            $graded_cf = $request->$graded_by_cf;
+                // Generate dynamic variable names based on the index
+                $word_sp = "function_sp" . (string)$sp;
+                $word_sp1 = "success_indicator_sp" . (string)$sp;
+                $word_sp2 = "actual_accomplishments_sp" . (string)$sp;
+                $grade_sp1 = "q1_sp" . (string)$sp;
+                $grade_sp2 = "e2_sp" . (string)$sp;
+                $grade_sp3 = "t3_sp" . (string)$sp;
+                $grade_sp4 = "a4_sp" . (string)$sp;
+                $remark_sp = "remark_sp" . (string)$sp;
+                $graded_by_sp = "graded_by_sp" . (string)$sp;
 
-            $word_sf = "function_sf" . (string)$sf;
-            $word_sf1 = "success_indicator_sf" . (string)$sf;
-            $word_sf2 = "actual_accomplishments_sf" . (string)$sf;
-            $grade_sf1 = "q1_sf" . (string)$sf;
-            $grade_sf2 = "e2_sf" . (string)$sf;
-            $grade_sf3 = "t3_sf" . (string)$sf;
-            $grade_sf4 = "a4_sf" . (string)$sf;
-            $remark_sf = "remark_sf" . (string)$sf;
-            $graded_by_sf = "graded_by_sf" . (string)$sf;
+                // Get the values from the request using the generated variable names
+                $function_sp = $request->$word_sp;
+                $si_sp = $request->$word_sp1;
+                $aa_sp = $request->$word_sp2;
+                $q1_sp = $request->$grade_sp1;
+                $e2_sp = $request->$grade_sp2;
+                $t3_sp = $request->$grade_sp3;
+                $a4_sp = $request->$grade_sp4;
+                $re_sp = $request->$remark_sp;
+                $graded_sp = $request->$graded_by_sp;
 
-            $function_sf = $request->$word_sf;
-            $si_sf = $request->$word_sf1;
-            $aa_sf = $request->$word_sf2;
-            $q1_sf = $request->$grade_sf1;
-            $e2_sf = $request->$grade_sf2;
-            $t3_sf = $request->$grade_sf3;
-            $a4_sf = $request->$grade_sf4;
-            $re_sf = $request->$remark_sf;
-            $graded_sf = $request->$graded_by_sf;
+                // Repeat the same process for "CF" and "SF" codes
+                $word_cf = "function_cf" . (string)$cf;
+                $word_cf1 = "success_indicator_cf" . (string)$cf;
+                $word_cf2 = "actual_accomplishments_cf" . (string)$cf;
+                $grade_cf1 = "q1_cf" . (string)$cf;
+                $grade_cf2 = "e2_cf" . (string)$cf;
+                $grade_cf3 = "t3_cf" . (string)$cf;
+                $grade_cf4 = "a4_cf" . (string)$cf;
+                $remark_cf = "remark_cf" . (string)$cf;
+                $graded_by_cf = "graded_by_cf" . (string)$cf;
 
-            if ($function_sp != null) {
-                // Create and save a new Input record for "SP" code
-                $add_input = new Input();
-                $add_input->form_id = $id;
-                $add_input->code = "SP";
-                $add_input->function = $function_sp;
-                $add_input->success_indicator = $si_sp;
-                $add_input->actual_accomplishments = $aa_sp;
-                $add_input->q1 = $q1_sp;
-                $add_input->e2 = $e2_sp;
-                $add_input->t3 = $t3_sp;
-                $add_input->a4 = $a4_sp;
-                $add_input->remark = $re_sp;
-                $add_input->graded_by = $graded_sp;
-                $add_input->semester = $ipcr_form->covered_period;
-                $add_input->year = date("Y");
-                $add_input->save();
-            } else if ($function_cf != null) {
-                // Create and save a new Input record for "CF" code
-                $add_input = new Input();
-                $add_input->form_id = $id;
-                $add_input->code = "CF";
-                $add_input->function = $function_cf;
-                $add_input->success_indicator = $si_cf;
-                $add_input->actual_accomplishments = $aa_cf;
-                $add_input->q1 = $q1_cf;
-                $add_input->e2 = $e2_cf;
-                $add_input->t3 = $t3_cf;
-                $add_input->a4 = $a4_cf;
-                $add_input->remark = $re_cf;
-                $add_input->graded_by = $graded_cf;
-                $add_input->semester = $ipcr_form->covered_period;
-                $add_input->year = date("Y");
-                $add_input->save();
-            } else if ($function_sf != null) {
-                // Create and save a new Input record for "SF" code
-                $add_input = new Input();
-                $add_input->form_id = $id;
-                $add_input->code = "SF";
-                $add_input->function = $function_sf;
-                $add_input->success_indicator = $si_sf;
-                $add_input->actual_accomplishments = $aa_sf;
-                $add_input->q1 = $q1_sf;
-                $add_input->e2 = $e2_sf;
-                $add_input->t3 = $t3_sf;
-                $add_input->a4 = $a4_sf;
-                $add_input->remark = $re_sf;
-                $add_input->graded_by = $graded_sf;
-                $add_input->semester = $ipcr_form->covered_period;
-                $add_input->year = date("Y");
-                $add_input->save();
+                $function_cf = $request->$word_cf;
+                $si_cf = $request->$word_cf1;
+                $aa_cf = $request->$word_cf2;
+                $q1_cf = $request->$grade_cf1;
+                $e2_cf = $request->$grade_cf2;
+                $t3_cf = $request->$grade_cf3;
+                $a4_cf = $request->$grade_cf4;
+                $re_cf = $request->$remark_cf;
+                $graded_cf = $request->$graded_by_cf;
+
+                $word_sf = "function_sf" . (string)$sf;
+                $word_sf1 = "success_indicator_sf" . (string)$sf;
+                $word_sf2 = "actual_accomplishments_sf" . (string)$sf;
+                $grade_sf1 = "q1_sf" . (string)$sf;
+                $grade_sf2 = "e2_sf" . (string)$sf;
+                $grade_sf3 = "t3_sf" . (string)$sf;
+                $grade_sf4 = "a4_sf" . (string)$sf;
+                $remark_sf = "remark_sf" . (string)$sf;
+                $graded_by_sf = "graded_by_sf" . (string)$sf;
+
+                $function_sf = $request->$word_sf;
+                $si_sf = $request->$word_sf1;
+                $aa_sf = $request->$word_sf2;
+                $q1_sf = $request->$grade_sf1;
+                $e2_sf = $request->$grade_sf2;
+                $t3_sf = $request->$grade_sf3;
+                $a4_sf = $request->$grade_sf4;
+                $re_sf = $request->$remark_sf;
+                $graded_sf = $request->$graded_by_sf;
+
+                if ($function_sp != null) {
+                    // Create and save a new Input record for "SP" code
+                    $add_input = new Input();
+                    $add_input->form_id = $id;
+                    $add_input->code = "SP";
+                    $add_input->function = $function_sp;
+                    $add_input->success_indicator = $si_sp;
+                    $add_input->actual_accomplishments = $aa_sp;
+                    $add_input->q1 = $q1_sp;
+                    $add_input->e2 = $e2_sp;
+                    $add_input->t3 = $t3_sp;
+                    $add_input->a4 = $a4_sp;
+                    $add_input->remark = $re_sp;
+                    $add_input->graded_by = $graded_sp;
+                    $add_input->semester = $ipcr_form->covered_period;
+                    $add_input->year = date("Y");
+                    $add_input->save();
+                } else if ($function_cf != null) {
+                    // Create and save a new Input record for "CF" code
+                    $add_input = new Input();
+                    $add_input->form_id = $id;
+                    $add_input->code = "CF";
+                    $add_input->function = $function_cf;
+                    $add_input->success_indicator = $si_cf;
+                    $add_input->actual_accomplishments = $aa_cf;
+                    $add_input->q1 = $q1_cf;
+                    $add_input->e2 = $e2_cf;
+                    $add_input->t3 = $t3_cf;
+                    $add_input->a4 = $a4_cf;
+                    $add_input->remark = $re_cf;
+                    $add_input->graded_by = $graded_cf;
+                    $add_input->semester = $ipcr_form->covered_period;
+                    $add_input->year = date("Y");
+                    $add_input->save();
+                } else if ($function_sf != null) {
+                    // Create and save a new Input record for "SF" code
+                    $add_input = new Input();
+                    $add_input->form_id = $id;
+                    $add_input->code = "SF";
+                    $add_input->function = $function_sf;
+                    $add_input->success_indicator = $si_sf;
+                    $add_input->actual_accomplishments = $aa_sf;
+                    $add_input->q1 = $q1_sf;
+                    $add_input->e2 = $e2_sf;
+                    $add_input->t3 = $t3_sf;
+                    $add_input->a4 = $a4_sf;
+                    $add_input->remark = $re_sf;
+                    $add_input->graded_by = $graded_sf;
+                    $add_input->semester = $ipcr_form->covered_period;
+                    $add_input->year = date("Y");
+                    $add_input->save();
+                }
+
+                $sp++;
+                $cf++;
+                $sf++;
             }
 
-            $sp++;
-            $cf++;
-            $sf++;
+            $ipcr_form->status = "Graded by DC";
+            $ipcr_form->far = $request->far;
+            $ipcr_form->comment = $request->comments;
+            $ipcr_form->save();
+
+            return response()->json(["success" => true, "message" => "Successfully updated the form"]);
+        }else{
+            return response()->json(["success" => false, "message" => "An error has been occured."]);
         }
-
-        $ipcr_form->status = "Graded by DC";
-        $ipcr_form->far = $request->far;
-        $ipcr_form->comment = $request->comments;
-        $ipcr_form->save();
-
-        return response()->json(["success" => true, "message" => "Successfully updated the form"]);
     }
 
     // For Director View

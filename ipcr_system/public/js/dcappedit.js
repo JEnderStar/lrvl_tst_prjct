@@ -99,7 +99,7 @@ let errorMessages = '';
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Swal.fire({
-                            title: "Please state the reason for rejection to be emailed to the employee/patient",
+                            title: "Please state the reason to be emailed to the employee",
                             icon: "warning",
                             showCancelButton: true,
                             confirmButtonText: "Submit",

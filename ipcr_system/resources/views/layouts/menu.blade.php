@@ -62,15 +62,15 @@
 @if($isAccomplishedRatedWithinRange)
 {{-- Current date is within the range, check AppServiceProvider.php --}}
 <li class="nav-item">
-    <a class="nav-link {{ Request::is('approvedc') ? 'active' : '' }}" onclick="notAllowed()">
+    <a href="/approvedc" class="nav-link {{ Request::is('approvedc') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>IPCR Approvals</p>
     </a>
 </li>
 @else
 {{-- Current date is outside the range, check AppServiceProvider.php --}}
-<li class="nav-item">
-    <a href="/approvedc" class="nav-link {{ Request::is('approvedc') ? 'active' : '' }}">
+<li class="nav-item" style="cursor: not-allowed">
+    <a class="nav-link {{ Request::is('approvedc') ? 'active' : '' }}" onclick="notAllowed()">
         <i class="nav-icon fas fa-home"></i>
         <p>IPCR Approvals</p>
     </a>
@@ -79,14 +79,14 @@
 
 @if($isAccomplishedRatedWithinRange)
 <li class="nav-item">
-    <a class="nav-link {{ Request::is('gradedc') ? 'active' : '' }}" onclick="notAllowed()">
+    <a href="/gradedc" class="nav-link {{ Request::is('gradedc') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Grade IPCR</p>
     </a>
 </li>
 @else
-<li class="nav-item">
-    <a href="/gradedc" class="nav-link {{ Request::is('gradedc') ? 'active' : '' }}">
+<li class="nav-item" style="cursor: not-allowed">
+    <a class="nav-link {{ Request::is('gradedc') ? 'active' : '' }}" onclick="notAllowed()">
         <i class="nav-icon fas fa-home"></i>
         <p>Grade IPCR</p>
     </a>
@@ -100,14 +100,14 @@
 @endrole
 @if($isAccomplishedRatedWithinRange)
 <li class="nav-item">
-    <a class="nav-link {{ Request::is('approvedir') ? 'active' : '' }}" onclick="notAllowed()">
+    <a href="/approvedir" class="nav-link {{ Request::is('approvedir') ? 'active' : '' }}">
         <i class="nav-icon fas fa-home"></i>
         <p>Graded IPCR Approvals</p>
     </a>
 </li>
 @else
-<li class="nav-item">
-    <a href="/approvedir" class="nav-link {{ Request::is('approvedir') ? 'active' : '' }}">
+<li class="nav-item" style="cursor: not-allowed">
+    <a class="nav-link {{ Request::is('approvedir') ? 'active' : '' }}" onclick="notAllowed()">
         <i class="nav-icon fas fa-home"></i>
         <p>Graded IPCR Approvals</p>
     </a>
