@@ -131,13 +131,13 @@
                         </div>
                         <div class="col-4 row input-container" data-index="{{$index}}">
                             <div class="col-3">
-                                <input type="text" id="q1_sp{{$index}}" name="q1_sp{{$index}}" class="form-control q1-input" maxlength="1" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
+                                <input type="text" id="q1_sp{{$index}}" name="q1_sp{{$index}}" class="form-control q1-input" maxlength="4" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
                             </div>
                             <div class="col-3">
-                                <input type="text" id="e2_sp{{$index}}" name="e2_sp{{$index}}" class="form-control e2-input" maxlength="1" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
+                                <input type="text" id="e2_sp{{$index}}" name="e2_sp{{$index}}" class="form-control e2-input" maxlength="4" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
                             </div>
                             <div class="col-3">
-                                <input type="text" id="t3_sp{{$index}}" name="t3_sp{{$index}}" class="form-control t3-input" maxlength="1" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
+                                <input type="text" id="t3_sp{{$index}}" name="t3_sp{{$index}}" class="form-control t3-input" maxlength="4" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
                             </div>
                             <div class="col-3">
                                 <input type="number" id="a4_sp{{$index}}" name="a4_sp{{$index}}" class="form-control a4-input" readonly>
@@ -220,13 +220,13 @@
                         </div>
                         <div class="col-4 row input-container" data-index="{{$index}}">
                             <div class="col-3">
-                                <input type="text" id="q1_cf{{$index}}" name="q1_cf{{$index}}" class="form-control q1-input" maxlength="1" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
+                                <input type="text" id="q1_cf{{$index}}" name="q1_cf{{$index}}" class="form-control q1-input" maxlength="4" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
                             </div>
                             <div class="col-3">
-                                <input type="text" id="e2_cf{{$index}}" name="e2_cf{{$index}}" class="form-control e2-input" maxlength="1" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
+                                <input type="text" id="e2_cf{{$index}}" name="e2_cf{{$index}}" class="form-control e2-input" maxlength="4" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
                             </div>
                             <div class="col-3">
-                                <input type="text" id="t3_cf{{$index}}" name="t3_cf{{$index}}" class="form-control t3-input" maxlength="1" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
+                                <input type="text" id="t3_cf{{$index}}" name="t3_cf{{$index}}" class="form-control t3-input" maxlength="4" oninput="this.value = this.value.replace(/^0{2,}|[^0-9.]/g, '').replace(/^0(\d+)/, '$1').replace(/^0(\.)$/, '0$1').replace(/(\.\d{0,2})\./g, '$1')">
                             </div>
                             <div class="col-3">
                                 <input type="number" id="a4_cf{{$index}}" name="a4_cf{{$index}}" class="form-control a4-input" readonly>

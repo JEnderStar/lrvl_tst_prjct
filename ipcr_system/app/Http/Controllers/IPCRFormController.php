@@ -241,7 +241,7 @@ class IPCRFormController extends Controller
             $si_cf = $request->$word_cf1;
             if ($function_cf != null) {
                 $length2++;
-                $draft = new Input();
+                $draft = new DraftIPCR();
                 $draft->employee_id = Auth::user()->id;
                 $draft->code = "CF";
                 $draft->function = $function_cf;
@@ -262,7 +262,7 @@ class IPCRFormController extends Controller
             $si_sf = $request->$word_sf1;
             if ($function_sf != null) {
                 $length3++;
-                $draft = new Input();
+                $draft = new DraftIPCR();
                 $draft->form_id = Auth::user()->id;
                 $draft->code = "SF";
                 $draft->function = $function_sf;
