@@ -78,3 +78,18 @@ let errorMessage = '';
         // automatically adjust textarea size when loaded
         $(this).height( $(this)[0].scrollHeight );
     });
+
+    function deleteFunction_sp(index) {
+        // Remove the function line from the view
+        document.getElementById('sp_table_' + index).remove();
+    }
+
+    function deleteFunction_cf(index) {
+        // Remove the function line from the view
+        document.getElementById('cf_table_' + index).remove();
+    }
+
+    function deleteFunction_sf(index) {
+        // Remove the function line from the view
+        document.getElementById('sf_table_' + index).remove();
+    }

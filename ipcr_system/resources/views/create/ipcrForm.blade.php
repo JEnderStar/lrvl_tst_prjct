@@ -109,7 +109,7 @@
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
-                    <button type="button" class="btn btn-primary" id="addsp"> Add more </button>
+                    <button type="button" class="btn btn-primary" id="addsp"> + </button>
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
-                    <button type="button" class="btn btn-primary" id="addcf"> Add more </button>
+                    <button type="button" class="btn btn-primary" id="addcf"> + </button>
                 </div>
             </div>
         </div>
@@ -148,13 +148,14 @@
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
-                    <button type="button" class="btn btn-primary" id="addsf"> Add more </button>
+                    <button type="button" class="btn btn-primary" id="addsf"> + </button>
                 </div>
             </div>
         </div>
 
         <div class="w-100">
             <div class="float-right">
+                <button type="submit" class="btn btn-secondary" id="saveDraft">Save as Draft</button>
                 <button type="submit" class="btn btn-primary"> Submit </button>
             </div>
         </div>

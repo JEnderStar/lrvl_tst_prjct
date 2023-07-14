@@ -13,17 +13,20 @@ return new class extends Migration
     {
         Schema::create('ipcrform', function (Blueprint $table) {
             $table->id();
-            $table->date('date_created');
-            $table->string('covered_period', 20)->nullable();
+            $table->string('employee_id', 5);
+            $table->date('date_created', 5);
+            $table->date('covered_period', 20)->nullable();
             $table->string('first_name', 20);
             $table->string('last_name', 20);
             $table->char('mi', 1);
             $table->string('position', 30);
             $table->string('office', 50);
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('reviewer', 100);
             $table->string('approver', 100);
             $table->string('status', 50);
+            $table->string('far', 5)->nullable();
+            $table->string('comment', 255)->nullable();
             $table->timestamps();
         });
     }

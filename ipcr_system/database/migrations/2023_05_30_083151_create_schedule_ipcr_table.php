@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string("director", 100);
             $table->date("duration_from");
             $table->date("duration_to");
+            $table->date("last_submission");
             $table->timestamps();
         });
     }

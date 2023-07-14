@@ -6,6 +6,7 @@ use App\Models\Ipcrform as Form;
 use App\Models\Input;
 use App\Models\Schedule;
 use App\Models\Accounts as User;
+use App\Models\DraftIPCR;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -34,8 +35,9 @@ class IPCRFormController extends Controller
     {
         // Get the schedule for performance targets
         $schedule = Schedule::where('purpose', 'Performance Targets')->first();
+        $draft = DraftIPCR::where('employee_id', Auth::user()->id)->first();
 
-        return view("create.ipcrForm", compact('schedule'));
+        return view("create.ipcrForm", compact('schedule', 'draft'));
     }
 
     /**
@@ -191,6 +193,93 @@ class IPCRFormController extends Controller
             }
         } else {
             return response()->json(["status" => false, "errors" => $validator->errors()->all()]);
+        }
+    }
+
+    public function EmployeeSaveDraft(Request $request)
+    {
+        $schedule = Schedule::where('purpose', 'Performance Targets')->first();
+
+        // Store inputs for different sections (SP, CF, SF)
+
+        $sp = 0;
+        $length1 = $sp + 1;
+        $cf = 0;
+        $length2 = $cf + 1;
+        $sf = 0;
+        $length3 = $sf + 1;
+
+        $sp_noinput = true;
+        $cf_noinput = true;
+        $sf_noinput = true;
+
+        for ($sp; $sp < $length1; $sp++) {
+            $word_sp = "function_sp" . (string)$sp;
+            $word_sp1 = "success_indicator_sp" . (string)$sp;
+            $function_sp = $request->$word_sp;
+            $si_sp = $request->$word_sp1;
+            if ($function_sp != null) {
+                $length1++;
+                $draft = new DraftIPCR();
+                $draft->employee_id = Auth::user()->id;
+                $draft->code = "SP";
+                $draft->function = $function_sp;
+                $draft->success_indicator = $si_sp;
+                $draft->semester = $request->covered_period;
+                $draft->year = $request->year;
+                $draft->save();
+                $sp_noinput = false;
+            } else {
+                break;
+            }
+        }
+
+        for ($cf; $cf < $length2; $cf++) {
+            $word_cf = "function_cf" . (string)$cf;
+            $word_cf1 = "success_indicator_cf" . (string)$cf;
+            $function_cf = $request->$word_cf;
+            $si_cf = $request->$word_cf1;
+            if ($function_cf != null) {
+                $length2++;
+                $draft = new Input();
+                $draft->employee_id = Auth::user()->id;
+                $draft->code = "CF";
+                $draft->function = $function_cf;
+                $draft->success_indicator = $si_cf;
+                $draft->semester = $request->covered_period;
+                $draft->year = $request->year;
+                $draft->save();
+                $cf_noinput = false;
+            } else {
+                break;
+            }
+        }
+
+        for ($sf; $sf < $length3; $sf++) {
+            $word_sf = "function_sf" . (string)$sf;
+            $word_sf1 = "success_indicator_sf" . (string)$sf;
+            $function_sf = $request->$word_sf;
+            $si_sf = $request->$word_sf1;
+            if ($function_sf != null) {
+                $length3++;
+                $draft = new Input();
+                $draft->form_id = Auth::user()->id;
+                $draft->code = "SF";
+                $draft->function = $function_sf;
+                $draft->success_indicator = $si_sf;
+                $draft->semester = $request->covered_period;
+                $draft->year = $request->year;
+                $draft->save();
+                $sf_noinput = false;
+            } else {
+                break;
+            }
+        }
+
+        if ($sp_noinput && $cf_noinput && $sf_noinput) {
+            return response()->json(["status" => false, "errors" => ["No input."]]);
+        } else {
+            return response()->json(["success" => true, "message" => "Successfully created a form!"]);
         }
     }
 
@@ -692,7 +781,7 @@ class IPCRFormController extends Controller
             $ipcr_form->save();
 
             return response()->json(["success" => true, "message" => "Successfully updated the form"]);
-        }else{
+        } else {
             return response()->json(["success" => false, "message" => "An error has been occured."]);
         }
     }

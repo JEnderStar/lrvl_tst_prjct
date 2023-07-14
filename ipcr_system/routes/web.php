@@ -24,6 +24,7 @@ Route::post('/registeraccount', [App\Http\Controllers\RegisterController::class,
 Route::middleware(['role.access:employee'])->group(function () {
     Route::get('/employee', [App\Http\Controllers\IPCRFormController::class, 'EmployeeIPCRFormList']);
     Route::post('/employee', [App\Http\Controllers\IPCRFormController::class, 'EmployeeStoreIPCRForm']);
+    Route::post('/draft', [App\Http\Controllers\IPCRFormController::class, 'EmployeeSaveDraft']);
     Route::get('/employee/create', [App\Http\Controllers\IPCRFormController::class, 'EmployeeCreateIPCRForm']);
     Route::get('/employee/{employee}', [App\Http\Controllers\IPCRFormController::class, 'EmployeeViewIPCRForm']);
     Route::get('/employee/{employee}/edit', [App\Http\Controllers\IPCRFormController::class, 'EmployeeEditIPCRForm']);
