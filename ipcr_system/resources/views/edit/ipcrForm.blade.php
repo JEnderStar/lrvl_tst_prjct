@@ -16,6 +16,9 @@
 
                 <div class="card-header">
                     <label> Strategic Priorities </label>
+                    @if($ipcr_form->status == "Pending")
+                    <button type="button" class="btn btn-primary" id="addsp"> + </button>
+                    @endif
                 </div>
                 <div class="card-body" id="sp_table">
                     @foreach($add_input as $index => $addinput)
@@ -64,8 +67,8 @@
                         </div>
                         @endif
                         <div class="form-group col-1">
-                            <p> </p>
-                            <button type="button" class="btn btn-danger" onclick="deleteFunction_sp({{$index}})">Delete</button>
+                            <p>   </p>
+                            <button type="button" class="btn btn-danger" onclick="deleteFunction_sp({{$index}})"> ⌦ </button>
                         </div>
                     </div>
                     @endif
@@ -74,6 +77,9 @@
 
                 <div class="card-header">
                     <label> Core Functions </label>
+                    @if($ipcr_form->status == "Pending")
+                    <button type="button" class="btn btn-primary" id="addcf"> + </button>
+                    @endif
                 </div>
                 <div class="card-body" id="cf_table">
                     @foreach($add_input as $index => $addinput)
@@ -123,7 +129,7 @@
                         @endif
                         <div class="form-group col-1">
                             <p> </p>
-                            <button type="button" class="btn btn-danger" onclick="deleteFunction_cf({{$index}})">Delete</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteFunction_cf({{$index}})"> ⌦ </button>
                         </div>
                     </div>
                     @endif
@@ -132,6 +138,9 @@
 
                 <div class="card-header">
                     <label> Support Functions </label>
+                    @if($ipcr_form->status == "Pending")
+                    <button type="button" class="btn btn-primary" id="addsf"> + </button>
+                    @endif
                 </div>
                 <div class="card-body" id="sf_table">
                     @foreach($add_input as $index => $addinput)
@@ -181,7 +190,7 @@
                         @endif
                         <div class="form-group col-1">
                             <p> </p>
-                            <button type="button" class="btn btn-danger" onclick="deleteFunction_sf({{$index}})">Delete</button>
+                            <button type="button" class="btn btn-danger" onclick="deleteFunction_sf({{$index}})"> ⌦ </button>
                         </div>
                     </div>
                     @endif

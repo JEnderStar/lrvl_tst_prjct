@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('employee_id', 10);
             $table->string('code');
-            $table->string('functions')->nullable();
-            $table->string('success_indicators')->nullable();
+            $table->string('function')->nullable();
+            $table->string('success_indicator')->nullable();
             $table->string('semester', 50);
             $table->string('year', 50);
             $table->timestamps();

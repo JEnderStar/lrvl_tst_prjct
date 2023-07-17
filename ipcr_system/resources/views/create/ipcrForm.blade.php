@@ -98,64 +98,79 @@
             <label> Strategic Priorities </label>
         </div>
         <div class="card-body" id="strat_table">
-            <div class="row">
+            <div class="form-group col-2">
+                <button type="button" class="btn btn-primary" id="addsp"> + </button>
+            </div>
+            @foreach ($draftData['strategicPriorities'] as $index => $sp)
+            <div class="row addedsp">
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                    <textarea type="text" id="function_sp0" name="function_sp0" class="form-control" oninput="autoExpand(this)"></textarea>
+                    <textarea type="text" id="function_sp{{ $index }}" name="function_sp{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $sp->function }}</textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <textarea type="text" id="success_indicator_sp0" name="success_indicator_sp0" class="form-control" oninput="autoExpand(this)"></textarea>
+                    <textarea type="text" id="success_indicator_sp{{ $index }}" name="success_indicator_sp{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $sp->success_indicator }}</textarea>
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
-                    <button type="button" class="btn btn-primary" id="addsp"> + </button>
+                    <button type="button" class="btn btn-danger" id="removesp_draft"> ⌦ </button>
                 </div>
             </div>
+            @endforeach
         </div>
 
         <div class="card-header">
             <label> Core Functions </label>
         </div>
         <div class="card-body" id="core_table">
-            <div class="row">
+            <div class="form-group col-2">
+                <button type="button" class="btn btn-primary" id="addcf"> + </button>
+            </div>
+            @foreach ($draftData['coreFunctions'] as $index => $cf)
+            <div class="row addedcf">
                 <div class="form-group col-5">
-                    <p for="requested_by" class="form_label"> Core Function </p>
-                    <textarea type="text" id="function_cf0" name="function_cf0" class="form-control" oninput="autoExpand(this)"></textarea>
+                    <p for="requested_by" class="form_label"> Strategic Priorities </p>
+                    <textarea type="text" id="function_cf{{ $index }}" name="function_cf{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $cf->function }}</textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <textarea type="text" id="success_indicator_cf0" name="success_indicator_cf0" class="form-control" oninput="autoExpand(this)"></textarea>
+                    <textarea type="text" id="success_indicator_cf{{ $index }}" name="success_indicator_cf{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $cf->success_indicator }}</textarea>
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
-                    <button type="button" class="btn btn-primary" id="addcf"> + </button>
+                    <button type="button" class="btn btn-danger" id="removecf_draft"> ⌦ </button>
                 </div>
             </div>
+            @endforeach
         </div>
         <div class="card-header">
             <label> Support Functions </label>
         </div>
         <div class="card-body" id="supp_table">
-            <div class="row">
+            <div class="form-group col-2">
+                <button type="button" class="btn btn-primary" id="addsf"> + </button>
+            </div>
+            @foreach ($draftData['supportFunctions'] as $index => $sf)
+            <div class="row addedsf">
                 <div class="form-group col-5">
-                    <p for="requested_by" class="form_label"> Support Function </p>
-                    <textarea type="text" id="function_sf0" name="function_sf0" class="form-control" oninput="autoExpand(this)"></textarea>
+                    <p for="requested_by" class="form_label"> Strategic Priorities </p>
+                    <textarea type="text" id="function_sf{{ $index }}" name="function_sf{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $sf->function }}</textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <textarea type="text" id="success_indicator_sf0" name="success_indicator_sf0" class="form-control" oninput="autoExpand(this)"></textarea>
+                    <textarea type="text" id="success_indicator_sf{{ $index }}" name="success_indicator_sf{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $sf->success_indicator }}</textarea>
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
-                    <button type="button" class="btn btn-primary" id="addsf"> + </button>
+                    <button type="button" class="btn btn-danger" id="removesf_draft"> ⌦ </button>
                 </div>
             </div>
+            @endforeach
         </div>
 
         <div class="w-100">
             <div class="float-right">
-                <button type="submit" class="btn btn-secondary" id="saveDraft">Save as Draft</button>
+                <button type="button" class="btn btn-secondary" id="saveDraft">Save as Draft</button>
                 <button type="submit" class="btn btn-primary"> Submit </button>
             </div>
         </div>

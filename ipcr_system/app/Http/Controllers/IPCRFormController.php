@@ -35,9 +35,19 @@ class IPCRFormController extends Controller
     {
         // Get the schedule for performance targets
         $schedule = Schedule::where('purpose', 'Performance Targets')->first();
-        $draft = DraftIPCR::where('employee_id', Auth::user()->id)->first();
+        $draftData = [
+            'strategicPriorities' => DraftIPCR::where('employee_id', Auth::user()->id)
+                ->where('code', 'SP')
+                ->get(),
+            'coreFunctions' => DraftIPCR::where('employee_id', Auth::user()->id)
+                ->where('code', 'CF')
+                ->get(),
+            'supportFunctions' => DraftIPCR::where('employee_id', Auth::user()->id)
+                ->where('code', 'SF')
+                ->get(),
+        ];
 
-        return view("create.ipcrForm", compact('schedule', 'draft'));
+        return view("create.ipcrForm", ['draftData' => $draftData], compact('schedule'));
     }
 
     /**
@@ -126,8 +136,8 @@ class IPCRFormController extends Controller
                 $word_sp1 = "success_indicator_sp" . (string)$sp;
                 $function_sp = $request->$word_sp;
                 $si_sp = $request->$word_sp1;
+                $length1++;
                 if ($function_sp != null) {
-                    $length1++;
                     $add_input = new Input();
                     $add_input->form_id = $last_ipcr_form['id'];
                     $add_input->code = "SP";
@@ -138,7 +148,9 @@ class IPCRFormController extends Controller
                     $add_input->save();
                     $sp_noinput = false;
                 } else {
-                    break;
+                    if($sp > 100){
+                        break;
+                    }
                 }
             }
 
@@ -147,8 +159,8 @@ class IPCRFormController extends Controller
                 $word_cf1 = "success_indicator_cf" . (string)$cf;
                 $function_cf = $request->$word_cf;
                 $si_cf = $request->$word_cf1;
+                $length2++;
                 if ($function_cf != null) {
-                    $length2++;
                     $add_input = new Input();
                     $add_input->form_id = $last_ipcr_form['id'];
                     $add_input->code = "CF";
@@ -159,7 +171,9 @@ class IPCRFormController extends Controller
                     $add_input->save();
                     $cf_noinput = false;
                 } else {
-                    break;
+                    if($cf > 100){
+                        break;
+                    }
                 }
             }
 
@@ -168,8 +182,8 @@ class IPCRFormController extends Controller
                 $word_sf1 = "success_indicator_sf" . (string)$sf;
                 $function_sf = $request->$word_sf;
                 $si_sf = $request->$word_sf1;
+                $length3++;
                 if ($function_sf != null) {
-                    $length3++;
                     $add_input = new Input();
                     $add_input->form_id = $last_ipcr_form['id'];
                     $add_input->code = "SF";
@@ -180,7 +194,9 @@ class IPCRFormController extends Controller
                     $add_input->save();
                     $sf_noinput = false;
                 } else {
-                    break;
+                    if($sf > 100){
+                        break;
+                    }
                 }
             }
 
@@ -189,6 +205,10 @@ class IPCRFormController extends Controller
                 $last_ipcr_form->delete();
                 return response()->json(["status" => false, "errors" => ["No input."]]);
             } else {
+                DraftIPCR::where('employee_id', Auth::user()->id)->where('code', 'SP')->delete();
+                DraftIPCR::where('employee_id', Auth::user()->id)->where('code', 'CF')->delete();
+                DraftIPCR::where('employee_id', Auth::user()->id)->where('code', 'SF')->delete();
+
                 return response()->json(["success" => true, "message" => "Successfully created a form!"]);
             }
         } else {
@@ -209,17 +229,17 @@ class IPCRFormController extends Controller
         $sf = 0;
         $length3 = $sf + 1;
 
-        $sp_noinput = true;
-        $cf_noinput = true;
-        $sf_noinput = true;
+        DraftIPCR::where('employee_id', Auth::user()->id)->where('code', 'SP')->delete();
+        DraftIPCR::where('employee_id', Auth::user()->id)->where('code', 'CF')->delete();
+        DraftIPCR::where('employee_id', Auth::user()->id)->where('code', 'SF')->delete();
 
         for ($sp; $sp < $length1; $sp++) {
             $word_sp = "function_sp" . (string)$sp;
             $word_sp1 = "success_indicator_sp" . (string)$sp;
             $function_sp = $request->$word_sp;
             $si_sp = $request->$word_sp1;
+            $length1++;
             if ($function_sp != null) {
-                $length1++;
                 $draft = new DraftIPCR();
                 $draft->employee_id = Auth::user()->id;
                 $draft->code = "SP";
@@ -228,9 +248,10 @@ class IPCRFormController extends Controller
                 $draft->semester = $request->covered_period;
                 $draft->year = $request->year;
                 $draft->save();
-                $sp_noinput = false;
             } else {
-                break;
+                if($sp > 100){
+                    break;
+                }
             }
         }
 
@@ -239,8 +260,8 @@ class IPCRFormController extends Controller
             $word_cf1 = "success_indicator_cf" . (string)$cf;
             $function_cf = $request->$word_cf;
             $si_cf = $request->$word_cf1;
+            $length2++;
             if ($function_cf != null) {
-                $length2++;
                 $draft = new DraftIPCR();
                 $draft->employee_id = Auth::user()->id;
                 $draft->code = "CF";
@@ -249,9 +270,10 @@ class IPCRFormController extends Controller
                 $draft->semester = $request->covered_period;
                 $draft->year = $request->year;
                 $draft->save();
-                $cf_noinput = false;
             } else {
-                break;
+                if($cf > 100){
+                    break;
+                }
             }
         }
 
@@ -260,27 +282,24 @@ class IPCRFormController extends Controller
             $word_sf1 = "success_indicator_sf" . (string)$sf;
             $function_sf = $request->$word_sf;
             $si_sf = $request->$word_sf1;
+            $length3++;
             if ($function_sf != null) {
-                $length3++;
                 $draft = new DraftIPCR();
-                $draft->form_id = Auth::user()->id;
+                $draft->employee_id = Auth::user()->id;
                 $draft->code = "SF";
                 $draft->function = $function_sf;
                 $draft->success_indicator = $si_sf;
                 $draft->semester = $request->covered_period;
                 $draft->year = $request->year;
                 $draft->save();
-                $sf_noinput = false;
             } else {
-                break;
+                if($sf > 100){
+                    break;
+                }
             }
         }
 
-        if ($sp_noinput && $cf_noinput && $sf_noinput) {
-            return response()->json(["status" => false, "errors" => ["No input."]]);
-        } else {
-            return response()->json(["success" => true, "message" => "Successfully created a form!"]);
-        }
+        return response()->json(["success" => true, "message" => "Successfully created a form!"]);
     }
 
     /**
@@ -319,15 +338,14 @@ class IPCRFormController extends Controller
         // Get associated inputs for the form
         $add_input = Input::where('form_id', $id)->get();
 
-        $message_error = [];
-
         $ipcr_form = Form::find($id);
 
-        $length = 0;
-
         $sp = 0;
+        $length1 = $sp + 1;
         $cf = 0;
+        $length2 = $cf + 1;
         $sf = 0;
+        $length3 = $sf + 1;
 
         if (($request->function_sp0 == "" || $request->success_indicator_sp0 == "") && ($request->function_cf0 == "" || $request->success_indicator_cf0 == "") && ($request->function_sf0 == "" || $request->success_indicator_sf0 == "")) {
             // returns an error if one of the textbox remains empty
@@ -336,32 +354,15 @@ class IPCRFormController extends Controller
             // removes all the employee's input data that he/she submitted
             Input::where('form_id', $id)->delete();
 
-            foreach ($add_input as $addinput) {
-                // Update the form attributes from the request
-                $length++;
-
+            for ($sp; $sp < $length1; $sp++) {
                 $word_sp = "function_sp" . (string)$sp;
                 $word_sp1 = "success_indicator_sp" . (string)$sp;
                 $word_sp2 = "actual_accomplishments_sp" . (string)$sp;
                 $function_sp = $request->$word_sp;
                 $si_sp = $request->$word_sp1;
                 $aa_sp = $request->$word_sp2;
-
-                $word_cf = "function_cf" . (string)$cf;
-                $word_cf1 = "success_indicator_cf" . (string)$cf;
-                $word_cf2 = "actual_accomplishments_cf" . (string)$cf;
-                $function_cf = $request->$word_cf;
-                $si_cf = $request->$word_cf1;
-                $aa_cf = $request->$word_cf2;
-
-                $word_sf = "function_sf" . (string)$sf;
-                $word_sf1 = "success_indicator_sf" . (string)$sf;
-                $word_sf2 = "actual_accomplishments_sf" . (string)$sf;
-                $function_sf = $request->$word_sf;
-                $si_sf = $request->$word_sf1;
-                $aa_sf = $request->$word_sf2;
-
-                if ($function_sp != "") {
+                $length1++;
+                if ($function_sp != "" && $si_sp != "") {
                     $add_input = new Input();
                     $add_input->form_id = $id;
                     $add_input->code = "SP";
@@ -379,7 +380,22 @@ class IPCRFormController extends Controller
                         $add_input->graded_by = null;
                     }
                     $add_input->save();
-                } else if ($function_cf != "") {
+                } else {
+                    if($sp > 100){
+                        break;
+                    }
+                }
+            }
+
+            for ($cf; $cf < $length2; $cf++) {
+                $word_cf = "function_cf" . (string)$cf;
+                $word_cf1 = "success_indicator_cf" . (string)$cf;
+                $word_cf2 = "actual_accomplishments_cf" . (string)$cf;
+                $function_cf = $request->$word_cf;
+                $si_cf = $request->$word_cf1;
+                $aa_cf = $request->$word_cf2;
+                $length2++;
+                if ($function_cf != "" && $si_cf != "") {
                     $add_input = new Input();
                     $add_input->form_id = $id;
                     $add_input->code = "CF";
@@ -397,7 +413,22 @@ class IPCRFormController extends Controller
                         $add_input->graded_by = null;
                     }
                     $add_input->save();
-                } else if ($function_sf != "") {
+                } else {
+                    if($cf > 100){
+                        break;
+                    }
+                }
+            }
+
+            for ($sf; $sf < $length3; $sf++) {
+                $word_sf = "function_sf" . (string)$sf;
+                $word_sf1 = "success_indicator_sf" . (string)$sf;
+                $word_sf2 = "actual_accomplishments_sf" . (string)$sf;
+                $function_sf = $request->$word_sf;
+                $si_sf = $request->$word_sf1;
+                $aa_sf = $request->$word_sf2;
+                $length3++;
+                if ($function_sf != "" && $si_sf != "") {
                     $add_input = new Input();
                     $add_input->form_id = $id;
                     $add_input->code = "SF";
@@ -415,31 +446,31 @@ class IPCRFormController extends Controller
                         $add_input->graded_by = null;
                     }
                     $add_input->save();
+                } else {
+                    if($sf > 100){
+                        break;
+                    }
                 }
-
-                $sp++;
-                $cf++;
-                $sf++;
             }
-
-            // change the status of IPCR form
-            if ($ipcr_form->status == "Pending") {
-                $ipcr_form->save();
-            } else if ($ipcr_form->status == "Rejected by DC") {
-                $ipcr_form->status = "Pending";
-                $ipcr_form->save();
-            } else if ($ipcr_form->status == "Rejected by Director") {
-                $ipcr_form->status = "Pending";
-                $ipcr_form->far = null;
-                $ipcr_form->comment = null;
-                $ipcr_form->save();
-            } else {
-                $ipcr_form->status = "Grading by DC";
-                $ipcr_form->save();
-            }
-
-            return response()->json(["success" => true, "message" => "Successfully edited"]);
         }
+
+        // change the status of IPCR form
+        if ($ipcr_form->status == "Pending") {
+            $ipcr_form->save();
+        } else if ($ipcr_form->status == "Rejected by DC") {
+            $ipcr_form->status = "Pending";
+            $ipcr_form->save();
+        } else if ($ipcr_form->status == "Rejected by Director") {
+            $ipcr_form->status = "Pending";
+            $ipcr_form->far = null;
+            $ipcr_form->comment = null;
+            $ipcr_form->save();
+        } else {
+            $ipcr_form->status = "Grading by DC";
+            $ipcr_form->save();
+        }
+
+        return response()->json(["success" => true, "message" => "Successfully edited"]);
     }
 
     /**
