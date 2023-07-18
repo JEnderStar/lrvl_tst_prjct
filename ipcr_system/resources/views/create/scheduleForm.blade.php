@@ -48,12 +48,6 @@
 
         <div class="row">
             <div class="employee-list form-group col-6">
-                <!-- <div id="existing">
-                    <label> Employees </label>
-                    <select class="select2 form-control employees" name="employees[]" id="employees" required>
-                        <option value="Hazel" disabled>Nothing selected</option>
-                    </select>
-                </div> -->
                 <div id="existing">
                     <label> Employees </label>
                     <select class="select2 form-control employees" name="employees[]" id="employees" multiple required>
