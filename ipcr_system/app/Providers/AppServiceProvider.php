@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
                 // Iterate over each schedule
                 foreach ($schedules as $schedule) {
                     $startDate = Carbon::parse($schedule->duration_from);
-                    $endDate = Carbon::parse($schedule->last_submission);
+                    $endDate = Carbon::parse($schedule->duration_to);
                     $purpose = $schedule->purpose;
 
                     // Check if the current date falls within the range for each purpose

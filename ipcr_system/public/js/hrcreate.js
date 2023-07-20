@@ -2,7 +2,7 @@ $('.select2').select2({});
 
 $('#office').change(function () {
     var office = $('#office').val();
-    
+
     // Remove existing element with id 'existing'
     document.getElementById('existing')?.remove();
 
@@ -31,7 +31,7 @@ $('#office').change(function () {
             $(selectElement).append(cmiogroup);
             $('.select2').select2({});
 
-        break;
+            break;
 
         case "PSD":
 
@@ -51,7 +51,7 @@ $('#office').change(function () {
             $(selectElement).append(psdgroup);
             $('.select2').select2({});
 
-        break;
+            break;
 
         case "All":
 
@@ -86,11 +86,11 @@ $('#office').change(function () {
             $(selectElement).append(psdgroup);
             $('.select2').select2({});
 
-        break;
+            break;
 
     }// switch
 
-    $('.employee-list').on('change', 'select', function() {
+    $('.employee-list').on('change', 'select', function () {
         let selected = $(this).val();
 
         // Enable all options and optgroups
@@ -112,23 +112,53 @@ $('#office').change(function () {
 
 });
 
+// document.addEventListener('DOMContentLoaded', function () {
+//     flatpickr('#duration_from', {
+//         dateFormat: 'Y-m-d', // Set the date format (adjust as needed)
+//         minDate: 'today', // Disable past dates
+//         disable: [
+//             function (date) {
+//                 // Disable weekends
+//                 return date.getDay() === 0 || date.getDay() === 6;
+//             }
+//         ],
+//     });
+
+//     flatpickr('#duration_to', {
+//         dateFormat: 'Y-m-d', // Set the date format (adjust as needed)
+//         minDate: 'today', // Disable past dates
+//         disable: [
+//             function (date) {
+//                 // Disable weekends
+//                 return date.getDay() === 0 || date.getDay() === 6;
+//             }
+//         ],
+//     });
+
+//     flatpickr('#last_submission', {
+//         dateFormat: 'Y-m-d', // Set the date format (adjust as needed)
+//         minDate: 'today', // Disable past dates
+//         disable: [
+//             function (date) {
+//                 // Disable weekends
+//                 return date.getDay() === 0 || date.getDay() === 6;
+//             }
+//         ],
+//     });
+// });
+
+var maxDate;
 
 $('#covered_period').on('change', function () {
-    // Get today's date
-    var today = new Date().toISOString().split('T')[0];
 
     // Get current year
     var currentYear = new Date().getFullYear();
 
-    // Set minimum and maximum dates
-    var minDate_1stSemester = currentYear + '-01-01';
-    var maxDate_1stSemester = currentYear + '-06-30';
-    var minDate_2ndSemester = currentYear + '-07-01';
-    var maxDate_2ndSemester = currentYear + '-12-31';
-
     // Handle dropdown change event
     var selectedValue = $(this).val();
-    var firstDateInput = $('#duration_from');
+    var firstDateDiv = $('#startDate');
+
+    // Get Input elements
     var secondDateInput = $('#duration_to');
     var lastSubmissionInput = $('#last_submission');
 
@@ -138,33 +168,49 @@ $('#covered_period').on('change', function () {
 
     // Set min and max dates for the first date input based on selected value
     if (selectedValue == '1st Semester') {
-        firstDateInput.attr('min', minDate_1stSemester);
-        firstDateInput.attr('max', maxDate_1stSemester);
-        firstDateInput.removeAttr('readonly');
-        secondDateInput.attr('min', minDate_1stSemester);
-        secondDateInput.attr('max', maxDate_1stSemester);
-    } else if (selectedValue == '2nd Semester') {
-        firstDateInput.attr('min', minDate_2ndSemester);
-        firstDateInput.attr('max', maxDate_2ndSemester);
-        firstDateInput.removeAttr('readonly');
-        secondDateInput.attr('min', minDate_2ndSemester);
-        secondDateInput.attr('max', maxDate_2ndSemester);
-    } else {
-        firstDateInput.removeAttr('min');
-        firstDateInput.removeAttr('max');
-        firstDateInput.attr('readonly', true);
-        secondDateInput.removeAttr('min');
-        secondDateInput.removeAttr('max');
-    }
+        // Set maximum date
+        maxDate = currentYear + '-06-30';
 
-    // Disable past dates
-    firstDateInput.attr('min', today);
+        flatpickr('#duration_from', {
+            dateFormat: 'Y-m-d', // Set the date format (adjust as needed)
+            minDate: 'today', // Disable past dates
+            maxDate: maxDate, // Dates are until 1st semester
+            disable: [
+                function (date) {
+                    // Disable weekends
+                    return date.getDay() === 0 || date.getDay() === 6;
+                }
+            ],
+        });
+        firstDateDiv.removeAttr('hidden');
+    } else if (selectedValue == '2nd Semester') {
+        // Set maximum date
+        maxDate = currentYear + '-12-31';
+
+        flatpickr('#duration_from', {
+            dateFormat: 'Y-m-d', // Set the date format (adjust as needed)
+            minDate: 'today', // Disable past dates
+            maxDate: maxDate, // Dates are until 2nd semester
+            disable: [
+                function (date) {
+                    // Disable weekends
+                    return date.getDay() == 0 || date.getDay() == 6;
+                }
+            ],
+        });
+        firstDateDiv.removeAttr('hidden');
+    } else {
+        firstDateDiv.attr('hidden', true);
+    }
 });
 
 $('#duration_from').on('change', function () {
     var firstDateInput = $(this);
     var secondDateInput = $('#duration_to');
     var lastSubmissionInput = $('#last_submission');
+
+    var secondDateDiv = $('#endDate');
+    var lastSubmissionDiv = $('#lastSubmit');
 
     // Clear the values of the second date and last submission inputs
     secondDateInput.val('');
@@ -173,34 +219,51 @@ $('#duration_from').on('change', function () {
     // Update the minimum value of the second date input
     var firstDateValue = firstDateInput.val();
     if (firstDateValue) {
-        secondDateInput.attr('min', firstDateValue);
-        secondDateInput.removeAttr('readonly');
-        lastSubmissionInput.attr('min', firstDateValue);
-        lastSubmissionInput.removeAttr('max');
-        lastSubmissionInput.attr('readonly', true);
+        flatpickr('#duration_to', {
+            dateFormat: 'Y-m-d', // Set the date format (adjust as needed)
+            minDate: firstDateValue, // Disable past dates
+            maxDate: maxDate, // Use the stored maxDate
+            disable: [
+                function (date) {
+                    // Disable weekends
+                    return date.getDay() === 0 || date.getDay() === 6;
+                }
+            ],
+        });
+        secondDateDiv.removeAttr('hidden');
+        lastSubmissionDiv.attr('hidden', true);
     } else {
-        secondDateInput.removeAttr('min');
-        secondDateInput.attr('readonly', true);
-        lastSubmissionInput.removeAttr('min');
-        lastSubmissionInput.removeAttr('max');
-        lastSubmissionInput.attr('readonly', true);
+        secondDateDiv.attr('hidden', true);
+        lastSubmissionDiv.attr('hidden', true);
     }
 });
 
 $('#duration_to').on('change', function () {
-    var secondDateInput = $(this);
+    var lastSubmissionDiv = $('#lastSubmit');
     var lastSubmissionInput = $('#last_submission');
 
     // Clear the value of the last submission input
     lastSubmissionInput.val('');
 
-    var secondDateValue = secondDateInput.val();
-    if(secondDateValue){
-        lastSubmissionInput.attr('max', secondDateValue);
-        lastSubmissionInput.removeAttr('readonly');
-    }else{
-        lastSubmissionInput.removeAttr('max');
-        lastSubmissionInput.attr('readonly', true);
+    // Update the minimum and maximum value of the third date input
+    var firstDateValue = $('#duration_from').val();
+    var secondDateValue = $('#duration_to').val();
+
+    if (secondDateValue) {
+        flatpickr('#last_submission', {
+            dateFormat: 'Y-m-d', // Set the date format (adjust as needed)
+            minDate: firstDateValue, // Disable past dates
+            maxDate: maxDate, // Use the stored maxDate
+            disable: [
+                function (date) {
+                    // Disable weekends
+                    return date.getDay() === 0 || date.getDay() === 6;
+                }
+            ],
+        });
+        lastSubmissionDiv.removeAttr('hidden');
+    } else {
+        lastSubmissionDiv.attr('hidden', true);
     }
 });
 
