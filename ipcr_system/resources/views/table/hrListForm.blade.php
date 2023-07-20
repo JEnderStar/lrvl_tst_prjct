@@ -16,9 +16,33 @@
                         <th> Last Name </th>
                         <th> MI </th>
                         <th> Position </th>
-                        <th> Office </th>
-                        <th> Semester </th>
-                        <th> Year </th>
+                        <th> 
+                            Office 
+                            <select class="form-control">
+                                <option value="">All</option>
+                                <option value="CMIO">CMIO</option>
+                                <option value="PSD">PSD</option>
+                                <!-- Add options specific to "Office" column -->
+                            </select>
+                        </th>
+                        <th> 
+                            Semester 
+                            <select class="form-control">
+                                <option value="">All</option>
+                                <option value="1st Semester">1st Semester</option>
+                                <option value="2nd Semester">2nd Semester</option>
+                                <!-- Add options specific to "Covered Period" column -->
+                            </select>
+                        </th>
+                        <th> 
+                            Year
+                            <select class="form-control">
+                                <option value="">All</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <!-- Add options specific to "Date Created" column -->
+                            </select>
+                        </th>
                         <th> Status </th>
                         <th> Date Created </th>
                         <th> Action </th>
@@ -43,36 +67,6 @@
                     </tr>
                     @endforeach
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="5"> </th>
-                        <th>
-                            <select class="form-control">
-                                <option value="">All</option>
-                                <option value="CMIO">CMIO</option>
-                                <option value="PSD">PSD</option>
-                                <!-- Add options specific to "Office" column -->
-                            </select>
-                        </th>
-                        <th>
-                            <select class="form-control">
-                                <option value="">All</option>
-                                <option value="1st Semester">1st Semester</option>
-                                <option value="2nd Semester">2nd Semester</option>
-                                <!-- Add options specific to "Covered Period" column -->
-                            </select>
-                        </th>
-                        <th>
-                            <select class="form-control">
-                                <option value="">All</option>
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <!-- Add options specific to "Date Created" column -->
-                            </select>
-                        </th>
-                        <th colspan="3"> </th>
-                    </tr>
-                </tfoot>
             </table>
         </div>
     </div>
@@ -91,7 +85,7 @@
         });
 
         // Custom filters for "covered_period," "date_created," and "office" columns
-        $('#ipcr_form_table tfoot th').each(function() {
+        $('#ipcr_form_table thead th').each(function() {
             var title = $(this).text();
             if (title == 'Office' || title == 'Semester' || title == 'Year') {
                 $(this).html('<select class="form-control"><option value="">All</option></select>');
@@ -101,7 +95,7 @@
         dataTable.columns().every(function() {
             var that = this;
 
-            $('select', this.footer()).on('change', function() {
+            $('select', this.header()).on('change', function() {
                 var value = $.fn.dataTable.util.escapeRegex($(this).val());
                 that.search(value != '' ? '^' + value + '$' : '', true, false).draw();
             });
