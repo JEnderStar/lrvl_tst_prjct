@@ -2,16 +2,18 @@ $('.select2').select2({});
 
 $('#office').change(function () {
     var office = $('#office').val();
+    
+    // Remove existing element with id 'existing'
+    document.getElementById('existing')?.remove();
+
+    // Append a new element with id 'existing' and label 'Employees'
+    $('.employee-list').append('<div id="existing"><label> Employees </label><select class="select2 form-control employees" name="employees[]" id="employees" multiple required></select></div>');
+
+    var selectElement = $('.select2')[0];
+
     switch (office) {
 
         case "CMIO":
-            // Remove existing element with id 'existing'
-            document.getElementById('existing')?.remove();
-
-            // Append a new element with id 'existing' and label 'Employees'
-            $('.employee-list').append('<div id="existing"><label> Employees </label><select class="select2 form-control employees" name="employees[]" id="employees" multiple required></select></div>');
-
-            var selectElement = $('.select2')[0];
 
             // Create optgroup for CMIO employees
             var cmiogroup = $("<optgroup label='CMIO'></optgroup>");
@@ -20,7 +22,7 @@ $('#office').change(function () {
             for (var i = 0; i < accountData.length; i++) {
                 var account = accountData[i];
                 if (account.office == "CMIO" && account.position == "Employee") {
-                    cmiogroup.append('<option value="' + account.first_name + '">' + account.first_name + '</option>');
+                    cmiogroup.append('<option value="' + account.first_name + ' ' + account.last_name + '">' + account.first_name + ' ' + account.last_name + '</option>');
                 }
             }
 
@@ -33,14 +35,6 @@ $('#office').change(function () {
 
         case "PSD":
 
-            // Remove existing element with id 'existing'
-            document.getElementById('existing')?.remove();
-
-            // Append a new element with id 'existing' and label 'Employees'
-            $('.employee-list').append('<div id="existing"><label> Employees </label><select class="select2 form-control employees" name="employees[]" id="employees" multiple required></select></div>');
-
-            var selectElement = $('.select2')[0];
-
             // Create optgroup for PSD employees
             var psdgroup = $("<optgroup label='PSD'></optgroup>");
 
@@ -48,7 +42,7 @@ $('#office').change(function () {
             for (var i = 0; i < accountData.length; i++) {
                 var account = accountData[i];
                 if (account.office == "PSD" && account.position == "Employee") {
-                    psdgroup.append('<option value="' + account.first_name + '">' + account.first_name + '</option>');
+                    psdgroup.append('<option value="' + account.first_name + ' ' + account.last_name + '">' + account.first_name + ' ' + account.last_name + '</option>');
                 }
             }
 
@@ -60,13 +54,6 @@ $('#office').change(function () {
         break;
 
         case "All":
-            // Remove existing element with id 'existing'
-            document.getElementById('existing')?.remove();
-
-            // Append a new element with id 'existing' and label 'Employees'
-            $('.employee-list').append('<div id="existing"><label> Employees </label><select class="select2 form-control employees" name="employees[]" id="employees" multiple required></select></div>');
-
-            var selectElement = $('.select2')[0];
 
             // Create optgroup for CMIO employees
             var cmiogroup = $("<optgroup label='CMIO'></optgroup>");
@@ -75,7 +62,7 @@ $('#office').change(function () {
             for (var i = 0; i < accountData.length; i++) {
                 var account = accountData[i];
                 if (account.office == "CMIO" && account.position == "Employee") {
-                    cmiogroup.append('<option value="' + account.first_name + '">' + account.first_name + '</option>');
+                    cmiogroup.append('<option value="' + account.first_name + ' ' + account.last_name + '">' + account.first_name + ' ' + account.last_name + '</option>');
                 }
             }
 
@@ -90,7 +77,7 @@ $('#office').change(function () {
             for (var i = 0; i < accountData.length; i++) {
                 var account = accountData[i];
                 if (account.office == "PSD" && account.position == "Employee") {
-                    psdgroup.append('<option value="' + account.first_name + '">' + account.first_name + '</option>');
+                    psdgroup.append('<option value="' + account.first_name + ' ' + account.last_name + '">' + account.first_name + ' ' + account.last_name + '</option>');
                 }
             }
 
@@ -103,39 +90,24 @@ $('#office').change(function () {
 
     }// switch
 
-    $('.employee-list select').on('change', function() {
-        
+    $('.employee-list').on('change', 'select', function() {
         let selected = $(this).val();
-        let option_count = $('.employee-list option').length;
 
-        switch(true) {
+        // Enable all options and optgroups
+        $('.employee-list option').prop('disabled', false);
+        $('.employee-list optgroup').prop('disabled', false);
 
-            case selected.includes('CMIO_All'):
-            case selected.includes('PSD_All'):
-
-                for(i = 0; i < option_count - 1; i++) {
-                    $($('.employee-list option')[i]).prop('disabled', true)
-                }
-
-            break;
-
-            default:
-
-                if(selected == '') {
-                    
-                    for(i = 0; i < option_count; i++) {
-                        $($('.employee-list option')[i]).prop('disabled', false)
-                    }
-                    
-                }
-                else {
-                    $($('.employee-list option')[option_count - 1]).prop('disabled', true)
-                }
-
-            break;
-
-        }// switch
-
+        if (selected.includes('CMIO_All')) {
+            // Disable all CMIO options except for "All CMIO Members"
+            $('.employee-list optgroup[label="CMIO"] option:not([value="CMIO_All"])').prop('disabled', true);
+        } else if (selected.includes('PSD_All')) {
+            // Disable all PSD options except for "All PSD Members"
+            $('.employee-list optgroup[label="PSD"] option:not([value="PSD_All"])').prop('disabled', true);
+        } else if (selected.includes('CMIO') && selected.includes('PSD')) {
+            // Disable the "All" option for both CMIO and PSD
+            $('.employee-list option[value="CMIO_All"]').prop('disabled', true);
+            $('.employee-list option[value="PSD_All"]').prop('disabled', true);
+        }
     });
 
 });
