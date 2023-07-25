@@ -90,23 +90,78 @@ $('#office').change(function () {
 
     }// switch
 
+    // Attach the event handler using event delegation to the parent '.employee-list' element
     $('.employee-list').on('change', 'select', function () {
         let selected = $(this).val();
+        let officeSelected = $('#office').val();
 
         // Enable all options and optgroups
         $('.employee-list option').prop('disabled', false);
         $('.employee-list optgroup').prop('disabled', false);
 
-        if (selected.includes('CMIO_All')) {
-            // Disable all CMIO options except for "All CMIO Members"
-            $('.employee-list optgroup[label="CMIO"] option:not([value="CMIO_All"])').prop('disabled', true);
-        } else if (selected.includes('PSD_All')) {
-            // Disable all PSD options except for "All PSD Members"
-            $('.employee-list optgroup[label="PSD"] option:not([value="PSD_All"])').prop('disabled', true);
-        } else if (selected.includes('CMIO') && selected.includes('PSD')) {
-            // Disable the "All" option for both CMIO and PSD
-            $('.employee-list option[value="CMIO_All"]').prop('disabled', true);
-            $('.employee-list option[value="PSD_All"]').prop('disabled', true);
+        // Check if any individual employee is selected within the office
+        if (selected.length > 0) {
+            if (officeSelected === 'CMIO') {
+                let cmioAllDisabled = $('.employee-list option[value="CMIO_All"]').prop('disabled');
+                if (!cmioAllDisabled) {
+                    if (selected.includes('CMIO_All')) {
+                        // Disable all CMIO options except for "All CMIO Members"
+                        $('.employee-list optgroup[label="CMIO"] option:not([value="CMIO_All"])').prop('disabled', true);
+                    } else {
+                        $('.employee-list option[value="CMIO_All"]').prop('disabled', true);
+                    }
+                }
+            } else if (officeSelected === 'PSD') {
+                let psdAllDisabled = $('.employee-list option[value="PSD_All"]').prop('disabled');
+                if (!psdAllDisabled) {
+                    if (selected.includes('PSD_All')) {
+                        // Disable all PSD options except for "All PSD Members"
+                        $('.employee-list optgroup[label="PSD"] option:not([value="PSD_All"])').prop('disabled', true);
+                    } else {
+                        $('.employee-list option[value="PSD_All"]').prop('disabled', true);
+                    }
+                }
+            }
+        }
+
+        // Handle the "All" option in the office selection
+        if (officeSelected == 'All') {
+            let allCMIOSelected = selected.includes('CMIO_All');
+            let allPSDSelected = selected.includes('PSD_All');
+
+            let selectedCMIOEmployees = $('.employee-list optgroup[label="CMIO"] option:not([value="CMIO_All"])').map(function() {return $(this).attr("value");}).get();
+            let selectedPSDEmployees = $('.employee-list optgroup[label="PSD"] option:not([value="PSD_All"])').map(function(){return $(this).attr("value");}).get();
+            
+            let lengthCMIOEmployees = $('.employee-list optgroup[label="CMIO"] option:not([value="CMIO_All"])').length;
+            let lengthPSDEmployees = $('.employee-list optgroup[label="PSD"] option:not([value="PSD_All"])').length;
+
+            if (selected.length > 0 && allCMIOSelected) {
+                // Disable all CMIO options except for "All CMIO Members"
+                $('.employee-list optgroup[label="CMIO"] option:not([value="CMIO_All"])').prop('disabled', true);
+            } else {
+                for(var i = 0; i < lengthCMIOEmployees; i++){
+                    if (selected.length > 0 && selected.includes(selectedCMIOEmployees[i])){
+                        $('.employee-list optgroup[label="CMIO"] option[value="CMIO_All"]').prop('disabled', true);
+                        break;
+                    } else {
+                        $('.employee-list optgroup[label="CMIO"] option[value="CMIO_All"]').removeAttr('disabled');
+                    }
+                }
+            }
+
+            if (selected.length > 0 && allPSDSelected) {
+                // Disable all PSD options except for "All PSD Members"
+                $('.employee-list optgroup[label="PSD"] option:not([value="PSD_All"])').prop('disabled', true);
+            } else {
+                for(var i = 0; i < lengthPSDEmployees; i++){
+                    if (selected.length > 0 && selected.includes(selectedPSDEmployees[i])){
+                        $('.employee-list optgroup[label="PSD"] option[value="PSD_All"]').prop('disabled', true);
+                        break;
+                    } else {
+                        $('.employee-list optgroup[label="PSD"] option[value="PSD_All"]').removeAttr('disabled');
+                    }
+                }
+            }
         }
     });
 
