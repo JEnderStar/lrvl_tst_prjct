@@ -4,7 +4,7 @@
              alt="AdminLTE Logo"
              class="brand-image img-circle elevation-3">
         <!-- <span class="brand-text font-weight-light">{{ config('app.name') }}</span> -->
-        <span class="brand-text font-weight-light">IPCR System</span>
+        <span class="brand-text font-weight-light">SPMS System</span>
     </a>
 
     <div class="sidebar">

@@ -2,8 +2,8 @@
 
     <body class="hold-transition register-page">
         <div class="register-box">
-            <div class="register-logo">
-                <a href="{{ url('/home') }}"><b> Online IPCR Filling System </b></a>
+            <div>
+                <p style="font-size:35px; text-align:center;"><b> {{ config('app.name') }} </b> </p>
             </div>
 
             <div class="card">

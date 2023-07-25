@@ -13,7 +13,7 @@
                     <div style="text-align: center;">
                         <img src="/images/DOF-LOGO-circle.png" style="height: 150px; width: 150px;" />
                     </div>
-                    <p style="font-size:35px; text-align:center;"><b>Online IPCR Filling System</b></p>
+                    <p style="font-size:35px; text-align:center;"><b>{{ config('app.name') }}</b></p>
 
                     <form method="post" action="{{ url('/login') }}">
                         @csrf

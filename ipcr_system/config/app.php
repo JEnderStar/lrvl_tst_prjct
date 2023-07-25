@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'IPCR System'),
+    'name' => env('APP_NAME', 'SPMS System'),
 
     /*
     |--------------------------------------------------------------------------
