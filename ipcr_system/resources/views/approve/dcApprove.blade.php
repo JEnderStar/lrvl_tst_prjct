@@ -150,7 +150,7 @@
                 <div class="float-right">
                     <form action="/approvedc/{{$id}}" data-id="{{$id}}" id="approve_form" method="POST">
                         @METHOD('PUT')
-                        <button type="submit" name="status" value="Rejected by DC" class="btn btn-danger"> Reject </button>
+                        <button type="submit" name="status" value="Rejected by DC" class="btn btn-danger"> For Revision </button>
                         <button type="submit" name="status" value="Approved by DC" class="btn btn-success"> Approve </button>
                     </form>
                 </div>

@@ -308,7 +308,7 @@
                         <p>   </p>
                         <form action="/approvedir/{{$id}}" data-id="{{$id}}" id="approve_form" method="POST">
                             @METHOD('PUT')
-                            <button type="submit" name="status" value="Rejected by Director" class="btn btn-danger"> Reject </button>
+                            <button type="submit" name="status" value="Rejected by Director" class="btn btn-danger"> For Revision </button>
                             <button type="submit" name="status" value="Approved by Director" class="btn btn-success"> Approve </button>
                         </form>
                     </div>

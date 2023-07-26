@@ -52,7 +52,7 @@
                                 <div class="dropdown-menu">
                                     <a href="/employee/{{$ipcrform['id']}}" class="dropdown-item">            👁 View </a>
                                     @if($ipcrform["status"] == "Pending" || $ipcrform["status"] == "Approved by DC" || $ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Grading by DC" || $ipcrform["status"] == "Rejected by Director")
-                                    <a href="/employee/{{$ipcrform['id']}}/edit" class="dropdown-item">              Edit </a>
+                                    <a href="/employee/{{$ipcrform['id']}}/edit" class="dropdown-item">            ✏ Edit </a>
                                     @endif
                                     <!-- @if($ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Rejected by Director")
                                     <button type="button" id="delete_form" data-product-id="{{$ipcrform['id']}}" class="dropdown-item">            Delete </button>
@@ -60,7 +60,7 @@
                                     @if($ipcrform["status"] == "Approved by Director" || $ipcrform["status"] == "Verified")
                                     <form action="/printform/{{$ipcrform['id']}}" id="print_form" data-product-id="{{$ipcrform['id']}}" method="POST">
                                         @CSRF
-                                        <button type="submit" id="print_ipcr" class="dropdown-item">              Print </button>
+                                        <button type="submit" id="print_ipcr" class="dropdown-item">            🖨 Print </button>
                                     </form>
                                     @endif
                                 </div>
