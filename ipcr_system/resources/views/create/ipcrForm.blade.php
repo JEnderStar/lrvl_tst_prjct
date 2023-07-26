@@ -99,21 +99,21 @@
         </div>
         <div class="card-body" id="strat_table">
             <div class="form-group col-2">
-                <button type="button" class="btn btn-primary" id="addsp"> + </button>
+                <button type="button" class="btn btn-primary" id="addsp" title="Add a Strategic Priorities Input"> + </button>
             </div>
             @foreach ($draftData['strategicPriorities'] as $index => $sp)
             <div class="row addedsp">
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                    <textarea type="text" id="function_sp{{ $index }}" name="function_sp{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $sp->function }}</textarea>
+                    <textarea type="text" id="function_sp{{ $index }}" name="function_sp{{ $index }}" class="form-control" title="Place your Strategic Priorities here" oninput="autoExpand(this)">{{ $sp->function }}</textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <textarea type="text" id="success_indicator_sp{{ $index }}" name="success_indicator_sp{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $sp->success_indicator }}</textarea>
+                    <textarea type="text" id="success_indicator_sp{{ $index }}" name="success_indicator_sp{{ $index }}" class="form-control" title="Place your Success Indicator of your Strategic Priorities here" oninput="autoExpand(this)">{{ $sp->success_indicator }}</textarea>
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
-                    <button type="button" class="btn btn-danger" id="removesp_draft"> ⌦ </button>
+                    <button type="button" class="btn btn-danger" id="removesp_draft" title="Remove the line of this Strategic Priorities"> ⌦ </button>
                 </div>
             </div>
             @endforeach
@@ -124,21 +124,21 @@
         </div>
         <div class="card-body" id="core_table">
             <div class="form-group col-2">
-                <button type="button" class="btn btn-primary" id="addcf"> + </button>
+                <button type="button" class="btn btn-primary" id="addcf" title="Add a Core Functions Input"> + </button>
             </div>
             @foreach ($draftData['coreFunctions'] as $index => $cf)
             <div class="row addedcf">
                 <div class="form-group col-5">
-                    <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                    <textarea type="text" id="function_cf{{ $index }}" name="function_cf{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $cf->function }}</textarea>
+                    <p for="requested_by" class="form_label"> Core Function </p>
+                    <textarea type="text" id="function_cf{{ $index }}" name="function_cf{{ $index }}" class="form-control" title="Place your Core function here" oninput="autoExpand(this)">{{ $cf->function }}</textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <textarea type="text" id="success_indicator_cf{{ $index }}" name="success_indicator_cf{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $cf->success_indicator }}</textarea>
+                    <textarea type="text" id="success_indicator_cf{{ $index }}" name="success_indicator_cf{{ $index }}" class="form-control" title="Place your Success Indicator of your Core function here" oninput="autoExpand(this)">{{ $cf->success_indicator }}</textarea>
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
-                    <button type="button" class="btn btn-danger" id="removecf_draft"> ⌦ </button>
+                    <button type="button" class="btn btn-danger" id="removecf_draft" title="Remove the line of this Core Function"> ⌦ </button>
                 </div>
             </div>
             @endforeach
@@ -148,21 +148,21 @@
         </div>
         <div class="card-body" id="supp_table">
             <div class="form-group col-2">
-                <button type="button" class="btn btn-primary" id="addsf"> + </button>
+                <button type="button" class="btn btn-primary" id="addsf" title="Add a Support Functions Input"> + </button>
             </div>
             @foreach ($draftData['supportFunctions'] as $index => $sf)
             <div class="row addedsf">
                 <div class="form-group col-5">
-                    <p for="requested_by" class="form_label"> Strategic Priorities </p>
-                    <textarea type="text" id="function_sf{{ $index }}" name="function_sf{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $sf->function }}</textarea>
+                    <p for="requested_by" class="form_label"> Support Function </p>
+                    <textarea type="text" id="function_sf{{ $index }}" name="function_sf{{ $index }}" class="form-control" title="Place your Support function here" oninput="autoExpand(this)">{{ $sf->function }}</textarea>
                 </div>
                 <div class="form-group col-5">
                     <p for="requested_by" class="form_label"> Success Indicator </p>
-                    <textarea type="text" id="success_indicator_sf{{ $index }}" name="success_indicator_sf{{ $index }}" class="form-control" oninput="autoExpand(this)">{{ $sf->success_indicator }}</textarea>
+                    <textarea type="text" id="success_indicator_sf{{ $index }}" name="success_indicator_sf{{ $index }}" title="Place your Success Indicator of your Support function here" class="form-control" oninput="autoExpand(this)">{{ $sf->success_indicator }}</textarea>
                 </div>
                 <div class="form-group col-2">
                     <p>   </p>
-                    <button type="button" class="btn btn-danger" id="removesf_draft"> ⌦ </button>
+                    <button type="button" class="btn btn-danger" id="removesf_draft" title="Remove the line of this Support Function"> ⌦ </button>
                 </div>
             </div>
             @endforeach

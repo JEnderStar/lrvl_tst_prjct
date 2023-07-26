@@ -22,7 +22,7 @@ $('#office').change(function () {
             for (var i = 0; i < accountData.length; i++) {
                 var account = accountData[i];
                 if (account.office == "CMIO" && account.position == "Employee") {
-                    cmiogroup.append('<option value="' + account.first_name + ' ' + account.last_name + '">' + account.first_name + ' ' + account.last_name + '</option>');
+                    cmiogroup.append('<option value="' + account.id + '">' + account.first_name + ' ' + account.last_name + '</option>');
                 }
             }
 
@@ -42,7 +42,7 @@ $('#office').change(function () {
             for (var i = 0; i < accountData.length; i++) {
                 var account = accountData[i];
                 if (account.office == "PSD" && account.position == "Employee") {
-                    psdgroup.append('<option value="' + account.first_name + ' ' + account.last_name + '">' + account.first_name + ' ' + account.last_name + '</option>');
+                    psdgroup.append('<option value="' + account.id + '">' + account.first_name + ' ' + account.last_name + '</option>');
                 }
             }
 
@@ -62,7 +62,7 @@ $('#office').change(function () {
             for (var i = 0; i < accountData.length; i++) {
                 var account = accountData[i];
                 if (account.office == "CMIO" && account.position == "Employee") {
-                    cmiogroup.append('<option value="' + account.first_name + ' ' + account.last_name + '">' + account.first_name + ' ' + account.last_name + '</option>');
+                    cmiogroup.append('<option value="' + account.id + '">' + account.first_name + ' ' + account.last_name + '</option>');
                 }
             }
 
@@ -77,7 +77,7 @@ $('#office').change(function () {
             for (var i = 0; i < accountData.length; i++) {
                 var account = accountData[i];
                 if (account.office == "PSD" && account.position == "Employee") {
-                    psdgroup.append('<option value="' + account.first_name + ' ' + account.last_name + '">' + account.first_name + ' ' + account.last_name + '</option>');
+                    psdgroup.append('<option value="' + account.id + '">' + account.first_name + ' ' + account.last_name + '</option>');
                 }
             }
 

@@ -14,9 +14,9 @@
                 <label for="requested_by" class="form_label"> Type </label>
                 <select class="form-control" name="type" id="type" required>
                     <option value="" selected disabled>Select Type</option>
-                    <option value="IPCR">IPCR</option>
-                    <option value="OPCR">OPCR</option>
-                    <option value="DPCR">DPCR</option>
+                    <option value="IPCR">  Individual Performance Commitment and Review (IPCR) </option>
+                    <option value="OPCR">  Office Performance Commitment and Review (OPCR) </option>
+                    <option value="DPCR"> Division Performance Commitment and Review (DPCR) </option>
                 </select>
             </div>
             <div class="form-group col-3">
@@ -50,7 +50,7 @@
             <div class="employee-list form-group col-6">
                 <div id="existing">
                     <label> Employees </label>
-                    <select class="select2 form-control employees" name="employees[]" id="employees" multiple required>
+                    <select class="select2 form-control employees" name="employees[]" id="employees" title="Select which employees are you going to email" multiple required>
                         <optgroup label="No results"> </optgroup>
                     </select>
                 </div>
@@ -70,7 +70,7 @@
             <div class="form-group col-2" id="lastSubmit" hidden>
                 <label>   </label>
                 <br>
-                <label for="requested_by" class="form_label"> Last Submission Date </label>
+                <label for="requested_by" class="form_label"> Deadline </label>
                 <input type="text" id="last_submission" name="last_submission" class="form-control" placeholder="🗓" required>
             </div>
         </div>

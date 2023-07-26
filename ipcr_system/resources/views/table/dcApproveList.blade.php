@@ -12,12 +12,10 @@
                 <thead>
                     <tr>
                         <th> ID </th>
-                        <th> First Name </th>
-                        <th> Last Name </th>
-                        <th> MI </th>
+                        <th> Name </th>
                         <th> Position </th>
-                        <th> 
-                            Office 
+                        <th>
+                            Office
                             <select class="form-control">
                                 <option value="">All</option>
                                 <option value="CMIO">CMIO</option>
@@ -25,8 +23,8 @@
                                 <!-- Add options specific to "Office" column -->
                             </select>
                         </th>
-                        <th> 
-                            Semester 
+                        <th>
+                            Semester
                             <select class="form-control">
                                 <option value="">All</option>
                                 <option value="1st Semester">1st Semester</option>
@@ -34,7 +32,7 @@
                                 <!-- Add options specific to "Covered Period" column -->
                             </select>
                         </th>
-                        <th> 
+                        <th>
                             Year
                             <select class="form-control">
                                 <option value="">All</option>
@@ -52,9 +50,7 @@
                     @foreach($ipcr_form as $ipcrform)
                     <tr>
                         <td> {{$ipcrform["id"]}} </td>
-                        <td> {{$ipcrform["first_name"]}} </td>
-                        <td> {{$ipcrform["last_name"]}} </td>
-                        <td> {{$ipcrform["mi"]}} </td>
+                        <td> {{$ipcrform["first_name"]}} {{$ipcrform["mi"]}}. {{$ipcrform["last_name"]}}</td>
                         <td> {{$ipcrform["position"]}} </td>
                         <td> {{$ipcrform["office"]}} </td>
                         <td> {{$ipcrform["covered_period"]}} </td>
@@ -63,6 +59,10 @@
                         <td> {{$ipcrform["covered_period"]}} </td>
                         <td>
                             <a href="/approvedc/{{$ipcrform['id']}}/edit" class="btn btn-primary"> View </a>
+                            <form action="/printform/{{$ipcrform['id']}}" id="print_form" data-product-id="{{$ipcrform['id']}}" method="POST">
+                                @CSRF
+                                <button type="submit" id="print_ipcr" class="btn btn-secondary"> Print </button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -99,6 +99,38 @@
                 var value = $.fn.dataTable.util.escapeRegex($(this).val());
                 that.search(value != '' ? '^' + value + '$' : '', true, false).draw();
             });
+        });
+    });
+
+    $('#print_form').on('submit', function(e) {
+        let errorMessages = '';
+        let formData = new FormData($("#print_form")[0]);
+        $.ajax({
+            url: '/printform/' + $(this).attr("data-product-id"),
+            method: "POST",
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: formData,
+            success: function(response) {
+                if (response.success) {
+                    window.location.href = '/printform/' + $(this).attr("data-product-id");
+                } else {
+                    for (let i = 0; i < response.errors.length; i++) {
+                        errorMessages += "-" + response.errors[i] + "\n";
+                    }
+                    Swal.fire({
+                        html: '<pre>' + errorMessages + '</pre>',
+                        customClass: {
+                            popup: 'format-pre'
+                        },
+                        title: 'Error!',
+                        icon: 'error',
+                        confirmButtonText: 'Okay'
+                    })
+                    errorMessages = "";
+                }
+            }
         });
     });
 </script>

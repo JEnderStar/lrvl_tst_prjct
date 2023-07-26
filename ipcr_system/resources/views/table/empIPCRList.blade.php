@@ -12,9 +12,7 @@
                 <thead>
                     <tr>
                         <th> Form ID </th>
-                        <th> First Name </th>
-                        <th> Last Name </th>
-                        <th> MI </th>
+                        <th> Name </th>
                         <th>
                             Semester
                             <select class="form-control">
@@ -34,6 +32,7 @@
                             </select>
                         </th>
                         <th> Status </th>
+                        <th> Remarks </th>
                         <th> Action </th>
                     </tr>
                 </thead>
@@ -42,23 +41,22 @@
                     @if($ipcrform["employee_id"] == Auth::user()->id)
                     <tr>
                         <td> {{$ipcrform["id"]}} </td>
-                        <td> {{$ipcrform["first_name"]}} </td>
-                        <td> {{$ipcrform["last_name"]}} </td>
-                        <td> {{$ipcrform["mi"]}} </td>
+                        <td> {{$ipcrform["first_name"]}} {{$ipcrform["mi"]}}. {{$ipcrform["last_name"]}} </td>
                         <td> {{$ipcrform["covered_period"]}} </td>
                         <td> {{$ipcrform["date_created"]}} </td>
                         <td> {{$ipcrform["status"]}} </td>
+                        <td> {{$ipcrform["comment"]}} </td>
                         <td>
                             <div class="btn-group">
                                 <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split dropdown-icon" data-toggle="dropdown"> Action </button>
                                 <div class="dropdown-menu">
-                                    <a href="/employee/{{$ipcrform['id']}}" class="dropdown-item">              View </a>
+                                    <a href="/employee/{{$ipcrform['id']}}" class="dropdown-item">            👁 View </a>
                                     @if($ipcrform["status"] == "Pending" || $ipcrform["status"] == "Approved by DC" || $ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Grading by DC" || $ipcrform["status"] == "Rejected by Director")
                                     <a href="/employee/{{$ipcrform['id']}}/edit" class="dropdown-item">              Edit </a>
                                     @endif
-                                    @if($ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Rejected by Director")
+                                    <!-- @if($ipcrform["status"] == "Rejected by DC" || $ipcrform["status"] == "Rejected by Director")
                                     <button type="button" id="delete_form" data-product-id="{{$ipcrform['id']}}" class="dropdown-item">            Delete </button>
-                                    @endif
+                                    @endif -->
                                     @if($ipcrform["status"] == "Approved by Director" || $ipcrform["status"] == "Verified")
                                     <form action="/printform/{{$ipcrform['id']}}" id="print_form" data-product-id="{{$ipcrform['id']}}" method="POST">
                                         @CSRF
@@ -192,7 +190,8 @@
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true
+            "responsive": true,
+            order: [[0, 'desc']],
         });
 
         // Custom filters for "covered_period," "date_created," and "office" columns

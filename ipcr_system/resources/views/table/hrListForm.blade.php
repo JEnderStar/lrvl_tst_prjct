@@ -12,9 +12,7 @@
                 <thead>
                     <tr>
                         <th> Form ID </th>
-                        <th> First Name </th>
-                        <th> Last Name </th>
-                        <th> MI </th>
+                        <th> Name </th>
                         <th> Position </th>
                         <th> 
                             Office 
@@ -52,9 +50,7 @@
                     @foreach($ipcr_form as $ipcrform)
                     <tr>
                         <td> {{$ipcrform["id"]}} </td>
-                        <td> {{$ipcrform["first_name"]}} </td>
-                        <td> {{$ipcrform["last_name"]}} </td>
-                        <td> {{$ipcrform["mi"]}} </td>
+                        <td> {{$ipcrform["first_name"]}} {{$ipcrform["mi"]}}. {{$ipcrform["last_name"]}} </td>
                         <td> {{$ipcrform["position"]}} </td>
                         <td> {{$ipcrform["office"]}} </td>
                         <td> {{$ipcrform["covered_period"]}} </td>

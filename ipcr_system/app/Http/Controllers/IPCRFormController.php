@@ -824,9 +824,10 @@ class IPCRFormController extends Controller
      */
     public function DirectorListGradedIPCRForm()
     {
-        $ipcr_form = Form::where('status', 'Graded by DC')->get();
+        $ipcr_form_art = Form::where('status', 'Graded by DC')->get();
+        $ipcr_form_pt = Form::where('status', 'Approved by DC')->get();
 
-        return view('table.directorApproveList', compact('ipcr_form'));
+        return view('table.directorApproveList', compact(['ipcr_form_art', 'ipcr_form_pt']));
     }
 
     /**

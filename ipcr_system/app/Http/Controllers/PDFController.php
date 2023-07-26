@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ipcrform as Form;
 use App\Models\Schedule;
 use App\Models\Input;
+use Carbon\Carbon;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use PDF;
@@ -32,7 +33,9 @@ class PDFController extends Controller
         $data = [
             'Form' => $ipcr_form,
             'Schedule' => $schedule,
-            'Add_inputs' => $add_inputs
+            'Add_inputs' => $add_inputs,
+            'startDate' => Carbon::createFromFormat('Y-m-d', $schedule->duration_from)->format('F d, Y'),
+            'endDate' => Carbon::createFromFormat('Y-m-d', $schedule->duration_to)->format('F d, Y'),
         ];
 
         // import data to the blade

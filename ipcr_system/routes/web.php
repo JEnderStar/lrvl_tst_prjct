@@ -20,6 +20,9 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/registeraccount', [App\Http\Controllers\RegisterController::class, 'createAccount']);
 
+//print
+Route::post("/printform/{id}", [App\Http\Controllers\PDFController::class, "printform"])->name("printform");
+
 // For Employee View
 Route::middleware(['role.access:employee'])->group(function () {
     Route::get('/employee', [App\Http\Controllers\IPCRFormController::class, 'EmployeeIPCRFormList']);
@@ -31,8 +34,6 @@ Route::middleware(['role.access:employee'])->group(function () {
     Route::match(['put', 'patch'], '/employee/{employee}', [App\Http\Controllers\IPCRFormController::class, 'EmployeeUpdateIPCRForm']);
     Route::post('/deleteform/{id}', [App\Http\Controllers\IPCRFormController::class, 'EmployeeDeleteIPCRForm']);
 
-    //print
-    Route::post("/printform/{id}", [App\Http\Controllers\PDFController::class, "printform"])->name("printform");
 });
 
 // For HR View

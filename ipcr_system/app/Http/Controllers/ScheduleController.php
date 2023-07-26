@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Schedule;
 use App\Models\Accounts as User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -51,11 +52,17 @@ class ScheduleController extends Controller
         ], $message_error);
 
         if ($validator->passes()) {
+            // check purposeType for Mailing
+            if ($request->purpose == "Performance Targets") {
+                $purposeType = "Performance Targets";
+            } else if ($request->purpose == "Accomplished & rated IPCR") {
+                $purposeType = "Accomplished & rated IPCR";
+            }
             // Check the selected office
+            $director = User::where('office', 'CMIO')->where('position', 'Director')->first();
             if ($request->office == "CMIO") {
                 // Get the division chief and director for CMIO office
                 $division_chief = User::where('office', 'CMIO')->where('position', 'Division Chief')->first();
-                $director = User::where('office', 'CMIO')->where('position', 'Director')->first();
 
                 // Extract relevant information from retrieved data
                 $division_chief_name = $division_chief->first_name . " " . $division_chief->last_name;
@@ -80,7 +87,7 @@ class ScheduleController extends Controller
                 // Retrieve selected employee options
                 $selectedOptions = $request->input('employees');
 
-                foreach ($request->input('employees') as $first_name) {
+                foreach ($request->input('employees') as $id) {
                     if (in_array('CMIO_All', $selectedOptions)) {
                         // "CMIO_All" is selected
                         // Perform the desired logic for "CMIO_All"
@@ -89,18 +96,18 @@ class ScheduleController extends Controller
                             $email = $users['email'];
                             // Prepare data for email template
                             $data = [
-                                'duration_from' => $request->duration_from,
-                                'duration_to' => $request->duration_to,
-                                'last_submission' => $request->last_submission,
+                                'duration_from' => Carbon::createFromFormat('Y-m-d', $request->duration_from)->format('F d, Y'),
+                                'duration_to' => Carbon::createFromFormat('Y-m-d', $request->duration_to)->format('F d, Y'),
+                                'last_submission' => Carbon::createFromFormat('Y-m-d', $request->last_submission)->format('F d, Y'),
                                 'purpose' => $request->purpose,
                                 'covered_period' => $request->covered_period,
                                 'hr_firstName' => Auth::user()->first_name,
                                 'hr_lastName' => Auth::user()->last_name
                             ];
                             // Send the email
-                            Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                            Mail::send('mail.schedule', $data, function ($message) use ($data, $email, $purposeType) {
                                 $message->to($email);
-                                $message->subject('Notification for Scheduling');
+                                $message->subject($purposeType . ' - ' . $data['duration_from'] . ' to ' . $data['duration_to'] . '.');
                                 $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                             });
                         }
@@ -108,20 +115,20 @@ class ScheduleController extends Controller
                     } else {
                         // Other options are selected
                         // Perform the logic for other options
-                        $user = User::where('first_name', $first_name)->first();
+                        $user = User::where('id', $id)->first();
                         $email = $user['email'];
                         $data = [
-                            'duration_from' => $request->duration_from,
-                            'duration_to' => $request->duration_to,
-                            'last_submission' => $request->last_submission,
+                            'duration_from' => Carbon::createFromFormat('Y-m-d', $request->duration_from)->format('F d, Y'),
+                            'duration_to' => Carbon::createFromFormat('Y-m-d', $request->duration_to)->format('F d, Y'),
+                            'last_submission' => Carbon::createFromFormat('Y-m-d', $request->last_submission)->format('F d, Y'),
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
                             'hr_firstName' => Auth::user()->first_name,
                             'hr_lastName' => Auth::user()->last_name
                         ];
-                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email, $purposeType) {
                             $message->to($email);
-                            $message->subject('Notification for Scheduling');
+                            $message->subject($purposeType . ' - ' . $data['duration_from'] . ' to ' . $data['duration_to'] . '.');
                             $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                         });
                     }
@@ -147,7 +154,7 @@ class ScheduleController extends Controller
 
                 $selectedOptions = $request->input('employees');
 
-                foreach ($request->input('employees') as $first_name) {
+                foreach ($request->input('employees') as $id) {
                     if (in_array('PSD_All', $selectedOptions)) {
                         // "CMIO_All" is selected
                         // Perform the desired logic for "PSD_All"
@@ -155,17 +162,17 @@ class ScheduleController extends Controller
                         foreach ($user as $users) {
                             $email = $users['email'];
                             $data = [
-                                'duration_from' => $request->duration_from,
-                                'duration_to' => $request->duration_to,
-                                'last_submission' => $request->last_submission,
+                                'duration_from' => Carbon::createFromFormat('Y-m-d', $request->duration_from)->format('F d, Y'),
+                                'duration_to' => Carbon::createFromFormat('Y-m-d', $request->duration_to)->format('F d, Y'),
+                                'last_submission' => Carbon::createFromFormat('Y-m-d', $request->last_submission)->format('F d, Y'),
                                 'purpose' => $request->purpose,
                                 'covered_period' => $request->covered_period,
                                 'hr_firstName' => Auth::user()->first_name,
                                 'hr_lastName' => Auth::user()->last_name
                             ];
-                            Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                            Mail::send('mail.schedule', $data, function ($message) use ($data, $email, $purposeType) {
                                 $message->to($email);
-                                $message->subject('Notification for Scheduling');
+                                $message->subject($purposeType . ' - ' . $data['duration_from'] . ' to ' . $data['duration_to'] . '.');
                                 $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                             });
                         }
@@ -173,20 +180,20 @@ class ScheduleController extends Controller
                     } else {
                         // Other options are selected
                         // Perform the logic for other options
-                        $user = User::where('first_name', $first_name)->first();
+                        $user = User::where('id', $id)->first();
                         $email = $user['email'];
                         $data = [
-                            'duration_from' => $request->duration_from,
-                            'duration_to' => $request->duration_to,
-                            'last_submission' => $request->last_submission,
+                            'duration_from' => Carbon::createFromFormat('Y-m-d', $request->duration_from)->format('F d, Y'),
+                            'duration_to' => Carbon::createFromFormat('Y-m-d', $request->duration_to)->format('F d, Y'),
+                            'last_submission' => Carbon::createFromFormat('Y-m-d', $request->last_submission)->format('F d, Y'),
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
                             'hr_firstName' => Auth::user()->first_name,
                             'hr_lastName' => Auth::user()->last_name
                         ];
-                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email, $purposeType) {
                             $message->to($email);
-                            $message->subject('Notification for Scheduling');
+                            $message->subject($purposeType . ' - ' . $data['duration_from'] . ' to ' . $data['duration_to'] . '.');
                             $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                         });
                     }
@@ -209,23 +216,23 @@ class ScheduleController extends Controller
 
                 $selectedOptions = $request->input('employees');
 
-                foreach ($request->input('employees') as $first_name) {
+                foreach ($request->input('employees') as $id) {
                     if (in_array('CMIO_All', $selectedOptions) && in_array('PSD_All', $selectedOptions)) {
                         $user = User::where('Position', 'Employee')->get();
                         foreach ($user as $users) {
                             $email = $users['email'];
                             $data = [
-                                'duration_from' => $request->duration_from,
-                                'duration_to' => $request->duration_to,
-                                'last_submission' => $request->last_submission,
+                                'duration_from' => Carbon::createFromFormat('Y-m-d', $request->duration_from)->format('F d, Y'),
+                                'duration_to' => Carbon::createFromFormat('Y-m-d', $request->duration_to)->format('F d, Y'),
+                                'last_submission' => Carbon::createFromFormat('Y-m-d', $request->last_submission)->format('F d, Y'),
                                 'purpose' => $request->purpose,
                                 'covered_period' => $request->covered_period,
                                 'hr_firstName' => Auth::user()->first_name,
                                 'hr_lastName' => Auth::user()->last_name
                             ];
-                            Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                            Mail::send('mail.schedule', $data, function ($message) use ($data, $email, $purposeType) {
                                 $message->to($email);
-                                $message->subject('Notification for Scheduling');
+                                $message->subject($purposeType . ' - ' . $data['duration_from'] . ' to ' . $data['duration_to'] . '.');
                                 $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                             });
                         }
@@ -237,17 +244,17 @@ class ScheduleController extends Controller
                         foreach ($user as $users) {
                             $email = $users['email'];
                             $data = [
-                                'duration_from' => $request->duration_from,
-                                'duration_to' => $request->duration_to,
-                                'last_submission' => $request->last_submission,
+                                'duration_from' => Carbon::createFromFormat('Y-m-d', $request->duration_from)->format('F d, Y'),
+                                'duration_to' => Carbon::createFromFormat('Y-m-d', $request->duration_to)->format('F d, Y'),
+                                'last_submission' => Carbon::createFromFormat('Y-m-d', $request->last_submission)->format('F d, Y'),
                                 'purpose' => $request->purpose,
                                 'covered_period' => $request->covered_period,
                                 'hr_firstName' => Auth::user()->first_name,
                                 'hr_lastName' => Auth::user()->last_name
                             ];
-                            Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                            Mail::send('mail.schedule', $data, function ($message) use ($data, $email, $purposeType) {
                                 $message->to($email);
-                                $message->subject('Notification for Scheduling');
+                                $message->subject($purposeType . ' - ' . $data['duration_from'] . ' to ' . $data['duration_to'] . '.');
                                 $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                             });
                         }
@@ -259,17 +266,17 @@ class ScheduleController extends Controller
                         foreach ($user as $users) {
                             $email = $users['email'];
                             $data = [
-                                'duration_from' => $request->duration_from,
-                                'duration_to' => $request->duration_to,
-                                'last_submission' => $request->last_submission,
+                                'duration_from' => Carbon::createFromFormat('Y-m-d', $request->duration_from)->format('F d, Y'),
+                                'duration_to' => Carbon::createFromFormat('Y-m-d', $request->duration_to)->format('F d, Y'),
+                                'last_submission' => Carbon::createFromFormat('Y-m-d', $request->last_submission)->format('F d, Y'),
                                 'purpose' => $request->purpose,
                                 'covered_period' => $request->covered_period,
                                 'hr_firstName' => Auth::user()->first_name,
                                 'hr_lastName' => Auth::user()->last_name
                             ];
-                            Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                            Mail::send('mail.schedule', $data, function ($message) use ($data, $email, $purposeType) {
                                 $message->to($email);
-                                $message->subject('Notification for Scheduling');
+                                $message->subject($purposeType . ' - ' . $data['duration_from'] . ' to ' . $data['duration_to'] . '.');
                                 $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                             });
                         }
@@ -277,20 +284,20 @@ class ScheduleController extends Controller
                     } else {
                         // Other options are selected
                         // Perform the logic for other options
-                        $user = User::where('first_name', $first_name)->first();
+                        $user = User::where('id', $id)->first();
                         $email = $user['email'];
                         $data = [
-                            'duration_from' => $request->duration_from,
-                            'duration_to' => $request->duration_to,
-                            'last_submission' => $request->last_submission,
+                            'duration_from' => Carbon::createFromFormat('Y-m-d', $request->duration_from)->format('F d, Y'),
+                            'duration_to' => Carbon::createFromFormat('Y-m-d', $request->duration_to)->format('F d, Y'),
+                            'last_submission' => Carbon::createFromFormat('Y-m-d', $request->last_submission)->format('F d, Y'),
                             'purpose' => $request->purpose,
                             'covered_period' => $request->covered_period,
                             'hr_firstName' => Auth::user()->first_name,
                             'hr_lastName' => Auth::user()->last_name
                         ];
-                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email) {
+                        Mail::send('mail.schedule', $data, function ($message) use ($data, $email, $purposeType) {
                             $message->to($email);
-                            $message->subject('Notification for Scheduling');
+                            $message->subject($purposeType . ' - ' . $data['duration_from'] . ' to ' . $data['duration_to'] . '.');
                             $message->from('jcuevas@finance.gov.ph', 'Notification for Scheduling'); // Get HR email when?
                         });
                     }
