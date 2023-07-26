@@ -47,7 +47,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($ipcr_form as $ipcrform)
+                    @foreach($ipcr_form_pt as $ipcrform)
+                    <tr>
+                        <td> {{$ipcrform["id"]}} </td>
+                        <td> {{$ipcrform["first_name"]}} {{$ipcrform["mi"]}}. {{$ipcrform["last_name"]}}</td>
+                        <td> {{$ipcrform["position"]}} </td>
+                        <td> {{$ipcrform["office"]}} </td>
+                        <td> {{$ipcrform["covered_period"]}} </td>
+                        <td> {{$ipcrform["date_created"]}} </td>
+                        <td> {{$ipcrform["status"]}} </td>
+                        <td> {{$ipcrform["covered_period"]}} </td>
+                        <td>
+                            <a href="/approvedc/{{$ipcrform['id']}}/edit" class="btn btn-primary"> View </a>
+                            <form action="/printform/{{$ipcrform['id']}}" id="print_form" data-product-id="{{$ipcrform['id']}}" method="POST">
+                                @CSRF
+                                <button type="submit" id="print_ipcr" class="btn btn-secondary"> Print </button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                    @foreach($ipcr_form_art as $ipcrform)
                     <tr>
                         <td> {{$ipcrform["id"]}} </td>
                         <td> {{$ipcrform["first_name"]}} {{$ipcrform["mi"]}}. {{$ipcrform["last_name"]}}</td>
@@ -81,7 +100,8 @@
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true
+            "responsive": true,
+            order: [[0, 'desc']],
         });
 
         // Custom filters for "covered_period," "date_created," and "office" columns

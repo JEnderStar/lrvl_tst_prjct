@@ -32,7 +32,7 @@ $("#employee_form").on("submit", function (e) {
                     if (response.success) {
                         Swal.fire({
                             title: 'Success!',
-                            text: 'Successfully edited a profile!',
+                            text: 'Successfully edited a form!',
                             icon: 'success',
                             confirmButtonText: 'Okay'
                         }).then((result) => {

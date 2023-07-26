@@ -67,6 +67,20 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                    @if($ipcr_form['status'] == "Grading by DC")
+                    <div class="col-4">
+                        <label> Strategic Priorities </label>
+                        <p> </p>
+                    </div>
+                    <div class="col-4">
+                        <label> Success Indicator </label>
+                        <p> </p>
+                    </div>
+                    <div class="col-4">
+                        <label> Actual Accomplishment </label>
+                        <p> </p>
+                    </div>
+                    @else
                     <div class="col-6">
                         <label> Strategic Priorities </label>
                         <p> </p>
@@ -75,16 +89,29 @@
                         <label> Success Indicator </label>
                         <p> </p>
                     </div>
+                    @endif
                 </div>
                 @foreach($add_input as $addinput)
                 @if($addinput->code == "SP")
                 <div class="row">
+                    @if($ipcr_form['status'] == "Grading by DC")
+                    <div class="col-4">
+                        <p> {{$addinput['function']}} </p>
+                    </div>
+                    <div class="col-4">
+                        <p> {{$addinput['success_indicator']}} </p>
+                    </div>
+                    <div class="col-4">
+                        <p> {{$addinput['actual_accomplishments']}} </p>
+                    </div>
+                    @else
                     <div class="col-6">
                         <p> {{$addinput['function']}} </p>
                     </div>
                     <div class="col-6">
                         <p> {{$addinput['success_indicator']}} </p>
                     </div>
+                    @endif
                 </div>
                 @endif
                 @endforeach
@@ -95,6 +122,20 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                    @if($ipcr_form['status'] == "Grading by DC")
+                    <div class="col-4">
+                        <label> Core Function </label>
+                        <p> </p>
+                    </div>
+                    <div class="col-4">
+                        <label> Success Indicator </label>
+                        <p> </p>
+                    </div>
+                    <div class="col-4">
+                        <label> Actual Accomplishment </label>
+                        <p> </p>
+                    </div>
+                    @else
                     <div class="col-6">
                         <label> Core Function </label>
                         <p> </p>
@@ -103,16 +144,29 @@
                         <label> Success Indicator </label>
                         <p> </p>
                     </div>
+                    @endif
                 </div>
                 @foreach($add_input as $addinput)
                 @if($addinput->code == "CF")
                 <div class="row">
+                    @if($ipcr_form['status'] == "Grading by DC")
+                    <div class="col-4">
+                        <p> {{$addinput['function']}} </p>
+                    </div>
+                    <div class="col-4">
+                        <p> {{$addinput['success_indicator']}} </p>
+                    </div>
+                    <div class="col-4">
+                        <p> {{$addinput['actual_accomplishments']}} </p>
+                    </div>
+                    @else
                     <div class="col-6">
                         <p> {{$addinput['function']}} </p>
                     </div>
                     <div class="col-6">
                         <p> {{$addinput['success_indicator']}} </p>
                     </div>
+                    @endif
                 </div>
                 @endif
                 @endforeach
@@ -123,6 +177,20 @@
             </div>
             <div class="card-body">
                 <div class="row">
+                    @if($ipcr_form['status'] == "Grading by DC")
+                    <div class="col-4">
+                        <label> Support Function </label>
+                        <p> </p>
+                    </div>
+                    <div class="col-4">
+                        <label> Success Indicator </label>
+                        <p> </p>
+                    </div>
+                    <div class="col-4">
+                        <label> Actual Accomplishment </label>
+                        <p> </p>
+                    </div>
+                    @else
                     <div class="col-6">
                         <label> Support Function </label>
                         <p> </p>
@@ -131,16 +199,29 @@
                         <label> Success Indicator </label>
                         <p> </p>
                     </div>
+                    @endif
                 </div>
                 @foreach($add_input as $addinput)
                 @if($addinput->code == "SF")
                 <div class="row">
+                @if($ipcr_form['status'] == "Grading by DC")
+                    <div class="col-4">
+                        <p> {{$addinput['function']}} </p>
+                    </div>
+                    <div class="col-4">
+                        <p> {{$addinput['success_indicator']}} </p>
+                    </div>
+                    <div class="col-4">
+                        <p> {{$addinput['actual_accomplishments']}} </p>
+                    </div>
+                    @else
                     <div class="col-6">
                         <p> {{$addinput['function']}} </p>
                     </div>
                     <div class="col-6">
                         <p> {{$addinput['success_indicator']}} </p>
                     </div>
+                    @endif
                 </div>
                 @endif
                 @endforeach

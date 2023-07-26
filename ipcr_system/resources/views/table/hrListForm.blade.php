@@ -77,7 +77,8 @@
             "ordering": true,
             "info": true,
             "autoWidth": false,
-            "responsive": true
+            "responsive": true,
+            order: [[0, 'desc']],
         });
 
         // Custom filters for "covered_period," "date_created," and "office" columns

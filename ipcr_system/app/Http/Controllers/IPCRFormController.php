@@ -548,9 +548,10 @@ class IPCRFormController extends Controller
     public function DCListPendingIPCRForm()
     {
         // Find the IPCR form where the status is Pending
-        $ipcr_form = Form::where('status', 'Pending')->get();
+        $ipcr_form_pt = Form::where('status', 'Pending')->get();
+        $ipcr_form_art = Form::where('status', 'Grading by DC')->get();
 
-        return view('table.dcApproveList', compact('ipcr_form'));
+        return view('table.dcApproveList', compact(['ipcr_form_pt', 'ipcr_form_art']));
     }
 
     /**
@@ -634,7 +635,7 @@ class IPCRFormController extends Controller
      */
     public function DCListGradingIPCRForm()
     {
-        $ipcr_form = Form::where('status', 'Grading by DC')->get();
+        $ipcr_form = Form::where('status', 'Approved by DC')->get();
 
         return view('table.dcGradeList', compact('ipcr_form'));
     }
